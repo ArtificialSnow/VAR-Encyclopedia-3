@@ -69,7 +69,13 @@
                      </children>
                   </HBox>
                   <Region prefHeight="14.0" prefWidth="378.0" />
-                  <ListView fx:id="_wikipediaText" prefHeight="372.0" prefWidth="371.0" />
+                  <ListView fx:id="_wikipediaText" prefHeight="372.0" prefWidth="359.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding></ListView>
                </children>
                <opaqueInsets>
                   <Insets />
@@ -96,7 +102,7 @@
          <right>
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.85" prefHeight="419.0" prefWidth="474.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="280.0">
+                  <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="457.0">
                      <children>
                         <Label fx:id="_wordLimit" prefHeight="26.0" prefWidth="104.0" style="-fx-font-weight: bold; -fx-text-fill: black; -fx-background-color: white;" text="40 word limit" textFill="WHITE" />
                         <Region prefHeight="30.0" prefWidth="182.0" />
@@ -104,10 +110,10 @@
                      </children>
                   </HBox>
                   <Region maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="11.0" prefWidth="275.0" />
-                  <TextArea fx:id="_editor" onKeyPressed="#checkTextLength" prefHeight="318.0" prefWidth="448.0" />
+                  <TextArea fx:id="_editor" minWidth="-Infinity" onKeyPressed="#checkTextLength" prefHeight="317.0" prefWidth="449.0" />
                   <Region prefHeight="15.0" prefWidth="280.0" />
                   <Region maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="471.0" />
-                  <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="450.0">
+                  <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="447.0">
                      <children>
                         <Region maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="49.0" />
                         <TextField fx:id="_fileNameTextArea" prefHeight="26.0" prefWidth="221.0" promptText="File Name" />

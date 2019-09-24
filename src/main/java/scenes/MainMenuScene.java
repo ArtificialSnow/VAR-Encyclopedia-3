@@ -13,7 +13,8 @@ public class MainMenuScene extends ApplicationScene {
     @FXML private Button _quitButton;
     @FXML private Button _createCreationButton;
     @FXML private Button _createAudioChunksButton;
-    @FXML private Button _viewButton;
+    @FXML private Button _viewCreationsButton;
+    @FXML private Button _viewAudioChunksButton;
 
     @FXML
     public void quitButtonHandler() {
@@ -21,14 +22,18 @@ public class MainMenuScene extends ApplicationScene {
     }
 
     public void createCreationButtonHandler(ActionEvent event) throws IOException {
-        changeScene(SceneType.GetCreationTextScene, event);
+        changeScene(SceneType.CombineAudioChunksScene, event);
     }
 
     public void createAudioChunkButtonHandler(ActionEvent event) throws IOException {
         changeScene(SceneType.CreateAudioChunksScene, event);
     }
 
-    public void viewButtonHandler(ActionEvent event) throws IOException {
+    public void viewCreationsButtonHandler(ActionEvent event) throws IOException {
         changeScene(SceneType.ViewExistingCreationsScene, event);
+    }
+
+    public void viewAudioChunksButtonHandler(ActionEvent event) throws IOException {
+        changeScene(SceneType.ViewAudioChunksScene, event);
     }
 }

@@ -5,9 +5,10 @@ import main.java.scenes.CreateAudioChunksScene;
 public enum SceneType {
 
     MainMenuScene("/main/resources/scenes/MainMenuScene.fxml"),
-    GetCreationTextScene("/main/resources/scenes/GetCreationTextScene.fxml"),
     CreateAudioChunksScene("/main/resources/scenes/CreateAudioChunksScene.fxml"),
-    ViewExistingCreationsScene("/main/resources/scenes/ViewExistingCreationsScene.fxml");
+    ViewExistingCreationsScene("/main/resources/scenes/ViewExistingCreationsScene.fxml"),
+    ViewAudioChunksScene("/main/resources/scenes/ViewAudioChunksScene.fxml"),
+    CombineAudioChunksScene("/main/resources/scenes/CombineAudioChunksScene.fxml");
 
 
     private String _filePath;

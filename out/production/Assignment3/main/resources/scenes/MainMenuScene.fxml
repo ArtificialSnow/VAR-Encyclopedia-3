@@ -15,9 +15,10 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Button fx:id="_viewButton" mnemonicParsing="false" onAction="#viewButtonHandler" text="View Existing Creations" />
             <Button fx:id="_createCreationButton" mnemonicParsing="false" onAction="#createCreationButtonHandler" text="Create New Creation" />
+            <Button fx:id="_viewCreationsButton" mnemonicParsing="false" onAction="#viewCreationsButtonHandler" text="View Existing Creations" />
             <Button fx:id="_createAudioChunksButton" mnemonicParsing="false" onAction="#createAudioChunkButtonHandler" text="Create Audio Chunks" />
+            <Button fx:id="_viewAudioChunksButton" mnemonicParsing="false" onAction="#viewAudioChunksButtonHandler" text="View Existing Audio Chunks" />
             <Button fx:id="_quitButton" mnemonicParsing="false" onAction="#quitButtonHandler" text="Quit" />
          </children>
       </VBox>

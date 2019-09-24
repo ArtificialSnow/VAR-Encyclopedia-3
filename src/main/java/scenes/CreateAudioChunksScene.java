@@ -34,6 +34,8 @@ public class CreateAudioChunksScene extends ApplicationScene {
     public void initialize() {
         _audioFactory = new AudioFactory();
         _editor.setWrapText(true);
+        _voiceSynthesizerSelection.getItems().addAll(new VoiceSynthesizerType[]{ VoiceSynthesizerType.Default });
+        _voiceSynthesizerSelection.getSelectionModel().selectFirst();
     }
 
     public void homeButtonHandler(ActionEvent event) throws IOException {
