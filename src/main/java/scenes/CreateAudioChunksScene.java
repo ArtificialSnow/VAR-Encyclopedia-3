@@ -15,6 +15,7 @@ import java.io.IOException;
 public class CreateAudioChunksScene extends ApplicationScene {
 
     @FXML private Button _homeButton;
+    @FXML private Button _quitButton;
     @FXML private TextField _searchBar;
     @FXML private Button _searchButton;
     @FXML private ListView<String> _wikipediaText;
@@ -50,6 +51,14 @@ public class CreateAudioChunksScene extends ApplicationScene {
         }
     }
 
+    public void quitButtonHandler() {
+        if (_editor.getText().length() != 0) {
+            createQuitAlert();
+        } else {
+            System.exit(0);
+        }
+    }
+
     public void searchButtonHandler() {
         _searchTerm = _searchBar.getText();
 
@@ -57,7 +66,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
             createInformationAlert("No Search Term", "Please enter a Search Term");
         } else {
             if (_editor.getText().length() != 0) {
-                Alert searchAlert = createConfirmationAlert("Are you sure you wish to search? You will lose your existing progress.");
+                Alert searchAlert = createConfirmationAlert("Are you sure you wish to search? You will lose all existing progress.");
 
                 if (searchAlert.getResult() == ButtonType.YES) {
                     searchWikipedia();
@@ -109,9 +118,9 @@ public class CreateAudioChunksScene extends ApplicationScene {
     public void checkTextLength() {
         Platform.runLater( () -> {
             if (_editor.getText().split("\\s").length >= 40) {
-                _wordLimit.setStyle("-fx-font-weight: bold; -fx-text-fill: red; -fx-background-color: white;");
+                _wordLimit.setStyle("-fx-font-weight: bold; -fx-text-fill: red; -fx-background-color: silver;");
             } else {
-                _wordLimit.setStyle("-fx-font-weight: bold; -fx-text-fill: black; -fx-background-color: white;");
+                _wordLimit.setStyle("-fx-font-weight: bold; -fx-text-fill: black; -fx-background-color: silver;");
             }
 
             if (_editor.getText().matches("\\s+")) {

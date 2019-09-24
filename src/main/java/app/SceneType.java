@@ -8,7 +8,8 @@ public enum SceneType {
     CreateAudioChunksScene("/main/resources/scenes/CreateAudioChunksScene.fxml"),
     ViewExistingCreationsScene("/main/resources/scenes/ViewExistingCreationsScene.fxml"),
     ViewAudioChunksScene("/main/resources/scenes/ViewAudioChunksScene.fxml"),
-    CombineAudioChunksScene("/main/resources/scenes/CombineAudioChunksScene.fxml");
+    CombineAudioChunksScene("/main/resources/scenes/CombineAudioChunksScene.fxml"),
+    SelectImagesScene("/main/resources/scenes/SelectImagesScene.fxml");
 
 
     private String _filePath;

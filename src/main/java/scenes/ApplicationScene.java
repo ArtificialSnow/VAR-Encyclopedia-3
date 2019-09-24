@@ -37,4 +37,12 @@ public abstract class ApplicationScene {
 
         return overrideAlert;
     }
+
+    public void createQuitAlert() {
+        Alert searchAlert = createConfirmationAlert("Are you sure you wish quit? You will lose all existing progress.");
+
+        if (searchAlert.getResult() == ButtonType.YES) {
+            System.exit(0);
+        }
+    }
 }

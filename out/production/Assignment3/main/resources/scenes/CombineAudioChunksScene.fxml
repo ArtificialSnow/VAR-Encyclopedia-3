@@ -22,13 +22,23 @@
       </ImageView>
       <BorderPane layoutX="200.0" layoutY="89.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <ToolBar maxHeight="-Infinity" minHeight="-Infinity" opacity="0.85" prefHeight="31.0" prefWidth="200.0" style="-fx-background-color: c85b8e;" BorderPane.alignment="CENTER">
+            <ToolBar maxHeight="-Infinity" minHeight="-Infinity" opacity="0.85" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
               <items>
-                <Button fx:id="_homeButton" mnemonicParsing="false" onAction="#homeButtonHandler" style="-fx-background-color: c85b8e;">
+                <Button fx:id="_homeButton" minHeight="-Infinity" mnemonicParsing="false" onAction="#homeButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: silver;">
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/HomeButton.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Region prefHeight="22.0" prefWidth="917.0" />
+                  <Button fx:id="_quitButton" minHeight="-Infinity" mnemonicParsing="false" onAction="#quitButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: silver;">
+                     <graphic>
+                        <ImageView fitHeight="14.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/CloseButton.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -41,7 +51,7 @@
                <children>
                   <Region prefHeight="19.0" prefWidth="245.0" />
                   <Label alignment="CENTER" prefHeight="30.0" prefWidth="207.0" text="Select a Search Term" textFill="WHITE" />
-                  <ListView prefHeight="260.0" prefWidth="270.0" />
+                  <ListView maxWidth="-Infinity" prefHeight="260.0" prefWidth="280.0" />
                </children>
                <BorderPane.margin>
                   <Insets left="20.0" />
@@ -49,11 +59,11 @@
             </VBox>
          </left>
          <center>
-            <VBox alignment="CENTER" opacity="0.85" prefHeight="59.0" prefWidth="273.0" BorderPane.alignment="TOP_CENTER">
+            <VBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" opacity="0.85" prefHeight="466.0" prefWidth="378.0" BorderPane.alignment="TOP_CENTER">
                <children>
                   <Region prefHeight="21.0" prefWidth="296.0" />
                   <Label alignment="CENTER" prefHeight="30.0" prefWidth="207.0" text="Select Audio Chunks" textFill="WHITE" />
-                  <ListView prefHeight="260.0" prefWidth="300.0" />
+                  <ListView minWidth="-Infinity" prefHeight="260.0" prefWidth="280.0" />
                </children>
                <BorderPane.margin>
                   <Insets />
@@ -64,18 +74,18 @@
             </VBox>
          </center>
          <right>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.85" prefHeight="458.0" prefWidth="321.0" BorderPane.alignment="CENTER">
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.85" prefHeight="466.0" prefWidth="300.0" BorderPane.alignment="CENTER">
                <children>
-                  <Region prefHeight="179.0" prefWidth="311.0" />
-                  <ListView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="300.0">
+                  <Region prefHeight="182.0" prefWidth="311.0" />
+                  <ListView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="280.0">
                      <VBox.margin>
                         <Insets bottom="2.0" />
                      </VBox.margin></ListView>
                   <Region minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="321.0" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Region prefHeight="26.0" prefWidth="100.0" />
-                        <Button mnemonicParsing="false" text="Continue to Image Selection" />
+                        <Region prefHeight="49.0" prefWidth="77.0" />
+                        <Button fx:id="_nextSceneButton" mnemonicParsing="false" onAction="#nextSceneButtonHandler" style="-fx-background-color: silver;" text="Continue to Image Selection" />
                      </children>
                   </HBox>
                </children>
