@@ -39,7 +39,15 @@ public class CreateAudioChunksScene extends ApplicationScene {
     }
 
     public void homeButtonHandler(ActionEvent event) throws IOException {
-        changeScene(SceneType.MainMenuScene, event);
+        if (_editor.getText().length() != 0) {
+            Alert searchAlert = createConfirmationAlert("Are you sure you wish to go back to the main menu? You will lose your existing progress.");
+
+            if (searchAlert.getResult() == ButtonType.YES) {
+                changeScene(SceneType.MainMenuScene, event);
+            }
+        } else {
+            changeScene(SceneType.MainMenuScene, event);
+        }
     }
 
     public void searchButtonHandler() {
