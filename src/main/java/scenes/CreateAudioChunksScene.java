@@ -5,10 +5,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import main.java.app.AudioFactory;
-import main.java.app.SceneType;
-import main.java.app.VoiceSynthesizerType;
-import main.java.app.WikipediaSearch;
+import main.java.app.*;
 
 import java.io.IOException;
 
@@ -21,7 +18,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
     @FXML private ListView<String> _wikipediaText;
     @FXML private Button _addTextToEditorButton;
     @FXML private TextArea _editor;
-    @FXML private ChoiceBox<VoiceSynthesizerType> _voiceSynthesizerSelection;
+    @FXML private ChoiceBox<String> _voiceSynthesizerSelection;
     @FXML private Label _wordLimit;
     @FXML private Button _previewAudioChunk;
     @FXML private TextField _fileNameTextArea;
@@ -30,12 +27,17 @@ public class CreateAudioChunksScene extends ApplicationScene {
     private String _searchTerm;
     private WikipediaSearch _wikipediaSearch;
     private AudioFactory _audioFactory;
+    private VoiceSynthesizer _voiceSynthesizer;
 
     @FXML
     public void initialize() {
         _audioFactory = new AudioFactory();
         _editor.setWrapText(true);
-        _voiceSynthesizerSelection.getItems().addAll(new VoiceSynthesizerType[]{ VoiceSynthesizerType.Default });
+
+        _voiceSynthesizer = new VoiceSynthesizer();
+        for (String voice : _voiceSynthesizer.getVoices()){
+            _voiceSynthesizerSelection.getItems().add(voice);
+        }
         _voiceSynthesizerSelection.getSelectionModel().selectFirst();
     }
 

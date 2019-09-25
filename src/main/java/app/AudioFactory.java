@@ -4,9 +4,9 @@ import java.util.List;
 
 public class AudioFactory {
 
-    public void previewAudioChunk(String audioChunk, VoiceSynthesizerType voiceSynthesizerType) {
+    public void previewAudioChunk(String audioChunk, String voiceSynthesizerType) {
 
-        String[] createAudioCommands = { "/bin/bash", "-c", "espeak " + voiceSynthesizerType.getFlag() + " " + audioChunk };
+        String[] createAudioCommands = { "/bin/bash", "-c", "espeak " + voiceSynthesizerType + " " + audioChunk };
         ProcessBuilder createAudioBuilder = new ProcessBuilder(createAudioCommands);
 
         try {
@@ -16,7 +16,7 @@ public class AudioFactory {
         }
     }
 
-    public void saveAudioChunk(String audioChunk, VoiceSynthesizerType voiceSynthesizerType, String searchTerm, String chunkName) {
+    public void saveAudioChunk(String audioChunk, String voiceSynthesizerType, String searchTerm, String chunkName) {
 
     }
 
