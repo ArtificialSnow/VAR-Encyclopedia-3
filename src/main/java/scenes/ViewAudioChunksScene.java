@@ -9,10 +9,14 @@ import java.io.IOException;
 
 public class ViewAudioChunksScene extends ApplicationScene {
 
-    @FXML
-    private Button _homeButton;
+    @FXML private Button _homeButton;
+    @FXML private Button _quitButton;
 
     public void homeButtonHandler(ActionEvent event) throws IOException {
         changeScene(SceneType.MainMenuScene, event);
+    }
+
+    public void quitButtonHandler() {
+        System.exit(0);
     }
 }
