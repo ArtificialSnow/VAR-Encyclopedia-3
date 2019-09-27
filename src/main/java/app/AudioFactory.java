@@ -5,12 +5,14 @@ import java.util.List;
 public class AudioFactory {
 
     public void previewAudioChunk(String audioChunk, String voiceSynthesizerType) {
-
-        String[] createAudioCommands = { "/bin/bash", "-c", "espeak " + voiceSynthesizerType + " " + audioChunk };
+        String[] createAudioCommands = { "sh", "-c", "./src/main/resources/shellscripts/previewAudioChunk.sh" + " \"" + voiceSynthesizerType + "\" \"" + audioChunk +"\"" };
         ProcessBuilder createAudioBuilder = new ProcessBuilder(createAudioCommands);
 
         try {
-            createAudioBuilder.start();
+            Process createAudioProcess = createAudioBuilder.start();
+            int exitStatus = createAudioProcess.waitFor();
+            System.out.println(exitStatus);
+
         } catch (Exception e) {
             System.out.print("Error previewing audio chunk");
         }

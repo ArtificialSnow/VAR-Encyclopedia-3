@@ -133,7 +133,23 @@ public class CreateAudioChunksScene extends ApplicationScene {
 
     public void previewAudioChunkButtonHandler() {
         if (validAudioChunk()) {
-            _audioFactory.previewAudioChunk(_editor.getText(), _voiceSynthesizerSelection.getSelectionModel().getSelectedItem());
+            _previewAudioChunk.setDisable(true);
+
+            new Thread( new Task<Void>(){
+
+                @Override
+                protected Void call() throws Exception {
+                    _audioFactory.previewAudioChunk(_editor.getText(), _voiceSynthesizerSelection.getSelectionModel().getSelectedItem());
+                    return null;
+                }
+
+                @Override
+                protected void done() {
+                    Platform.runLater( () -> {
+                        _previewAudioChunk.setDisable(false);
+                    });
+                }
+            }).start();
         }
     }
 

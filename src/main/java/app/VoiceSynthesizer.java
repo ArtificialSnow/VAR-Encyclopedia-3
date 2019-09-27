@@ -29,7 +29,7 @@ public class VoiceSynthesizer {
         BufferedReader stdout = null;
 
         try {
-            ProcessBuilder getVoicesBuilder = new ProcessBuilder("sh", "-c", "./src/main/resources/shellscripts/getSynthesizerVoices.sh ");
+            ProcessBuilder getVoicesBuilder = new ProcessBuilder("sh", "-c", "./src/main/resources/shellscripts/getSynthesizerVoices.sh");
             Process getVoicesProcess = getVoicesBuilder.start();
             int exitStatus = getVoicesProcess.waitFor();
             stdout = new BufferedReader(new InputStreamReader(getVoicesProcess.getInputStream()));

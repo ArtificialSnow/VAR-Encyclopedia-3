@@ -33,7 +33,7 @@ public class FileDirectory {
 
             if (exitStatus == 0) {
 
-                String[] createFilesCommands = { pathToBash, "-c", makeCreationsFolder + makeAudioChunksFolder + makeCreationsFolder + makeTempFolder };
+                String[] createFilesCommands = { pathToBash, "-c", makeMainFolder + makeCreationsFolder + makeAudioChunksFolder + makeTempFolder };
                 ProcessBuilder createFilesBuilder = new ProcessBuilder(createFilesCommands);
 
                 Process createFilesProcess = createFilesBuilder.start();
