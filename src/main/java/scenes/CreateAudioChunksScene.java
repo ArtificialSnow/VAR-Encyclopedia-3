@@ -122,7 +122,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
             if (_editor.getText().split("\\s").length >= 40) {
                 _wordLimit.setStyle("-fx-font-weight: bold; -fx-text-fill: red; -fx-background-color: silver;");
             } else {
-                _wordLimit.setStyle("-fx-font-weight: bold; -fx-text-fill: black; -fx-background-color: silver;");
+                _wordLimit.setStyle("-fx-font-weight: bold; -fx-text-fill: #4c7450; -fx-background-color: silver;");
             }
 
             if (_editor.getText().matches("\\s+")) {
