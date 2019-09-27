@@ -16,7 +16,6 @@ public class MainMenuScene extends ApplicationScene {
     @FXML private Button _viewCreationsButton;
     @FXML private Button _viewAudioChunksButton;
 
-    @FXML
     public void quitButtonHandler() {
         System.exit(0);
     }
