@@ -135,7 +135,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
         if (validAudioChunk()) {
             _previewAudioChunk.setDisable(true);
 
-            new Thread( new Task<Void>(){
+            new Thread( new Task<Void>() {
 
                 @Override
                 protected Void call() throws Exception {
@@ -156,8 +156,42 @@ public class CreateAudioChunksScene extends ApplicationScene {
     public void saveButtonHandler() {
         String chunkName = _fileNameTextArea.getText();
         if (validAudioChunk()) {
-            _audioFactory.saveAudioChunk(_editor.getText(), _voiceSynthesizerSelection.getSelectionModel().getSelectedItem(), _searchTerm, chunkName);
+            String audioChunkText = _editor.getText();
+
+            if (_audioFactory.chunkAlreadyExists(_searchTerm, chunkName)) {
+                Alert overrideAlert = createConfirmationAlert("Audio Chunk " + chunkName + " already exists. Would you like to override?");
+
+                if (overrideAlert.getResult() == ButtonType.YES) {
+                    saveAudioChunk(chunkName, audioChunkText);
+                }
+            } else {
+                saveAudioChunk(chunkName, audioChunkText);
+            }
         }
+    }
+
+    private void saveAudioChunk(String chunkName, String audioChunkText) {
+        _saveButton.setDisable(true);
+
+        new Thread( new Task<Void>() {
+
+            @Override
+            protected Void call() throws Exception {
+                _audioFactory.saveAudioChunk(audioChunkText, _voiceSynthesizerSelection.getSelectionModel().getSelectedItem(), _searchTerm, chunkName);
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                Platform.runLater( () -> {
+                    _editor.clear();
+                    _fileNameTextArea.clear();
+                    _saveButton.setDisable(false);
+
+                    createInformationAlert("New Audio Chunk Created", "Audio Chunk " + chunkName + " has been created.");
+                });
+            }
+        }).start();
     }
 
     private boolean validAudioChunk() {
