@@ -24,3 +24,7 @@ hs_err_pid*
 
 #Files created by program
 VAR-Encyclopedia*
+.metadata
+.idea
+out
+Assignment3.iml
