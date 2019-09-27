@@ -9,9 +9,12 @@ import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
+    FileDirectory _fileDirectory;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        _fileDirectory = new FileDirectory();
+        _fileDirectory.create();
 
         Parent root = FXMLLoader.load(getClass().getResource("/main/resources/scenes/MainMenuScene.fxml"));
         primaryStage.setScene(new Scene(root, 1000, 500));
