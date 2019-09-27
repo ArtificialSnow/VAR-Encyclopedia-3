@@ -5,6 +5,30 @@ import java.util.List;
 
 public class AudioFactory {
 
+    public void playAudioChunk(String searchTerm, String audioChunkName) {
+        String[] playAudioChunkCommands = { "sh", "-c", "./src/main/resources/shellscripts/playAudioChunk.sh" + " \"" + searchTerm + "\" \"" + audioChunkName +"\"" };
+        ProcessBuilder playAudioChunkBuilder = new ProcessBuilder(playAudioChunkCommands);
+
+        try {
+            Process playAudioChunkProcess = playAudioChunkBuilder.start();
+            playAudioChunkProcess.waitFor();
+        } catch (Exception e) {
+            System.out.print("Error playing audio chunk");
+        }
+    }
+
+    public void deleteAudioChunk(String searchTerm, String audioChunkName) {
+        String[] deleteAudioChunkCommands = { "sh", "-c", "./src/main/resources/shellscripts/deleteAudioChunk.sh" + " \"" + searchTerm + "\" \"" + audioChunkName +"\"" };
+        ProcessBuilder deleteAudioChunkBuilder = new ProcessBuilder(deleteAudioChunkCommands);
+
+        try {
+            Process deleteAudioChunkProcess = deleteAudioChunkBuilder.start();
+            deleteAudioChunkProcess.waitFor();
+        } catch (Exception e) {
+            System.out.print("Error deleting audio chunk");
+        }
+    }
+
     public void previewAudioChunk(String audioChunk, String voiceSynthesizerType) {
         String[] previewAudioCommands = { "sh", "-c", "./src/main/resources/shellscripts/previewAudioChunk.sh" + " \"" + voiceSynthesizerType + "\" \"" + audioChunk +"\"" };
         ProcessBuilder previewAudioBuilder = new ProcessBuilder(previewAudioCommands);
