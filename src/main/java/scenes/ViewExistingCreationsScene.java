@@ -1,6 +1,5 @@
 package main.java.scenes;
 
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +11,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.media.Media;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import main.java.app.AudioFactory;
 import main.java.app.CreationFactory;
 import main.java.app.FileDirectory;
