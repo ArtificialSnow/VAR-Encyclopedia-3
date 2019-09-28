@@ -76,7 +76,7 @@ public class ViewExistingCreationsScene extends ApplicationScene {
         } else {
             Alert deleteConfirmation = createConfirmationAlert("Are you sure you want to delete " + creation + "?");
             if (deleteConfirmation.getResult() == ButtonType.YES) {
-                //delete creation
+                //call to deleteCreation.sh
             }
         }
     }
