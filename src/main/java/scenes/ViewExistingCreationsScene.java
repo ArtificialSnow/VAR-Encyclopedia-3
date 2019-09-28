@@ -14,6 +14,7 @@ import javafx.scene.media.Media;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.app.AudioFactory;
+import main.java.app.CreationFactory;
 import main.java.app.FileDirectory;
 import main.java.app.SceneType;
 
@@ -31,11 +32,13 @@ public class ViewExistingCreationsScene extends ApplicationScene {
 
     AudioFactory _audioFactory;
     FileDirectory _fileDirectory;
+    CreationFactory _creationFactory;
 
     @FXML
     public void initialize() {
         _audioFactory = new AudioFactory();
         _fileDirectory = new FileDirectory();
+        _creationFactory = new CreationFactory();
 
         updateCreationsList();
     }
@@ -89,7 +92,9 @@ public class ViewExistingCreationsScene extends ApplicationScene {
         } else {
             Alert deleteConfirmation = createConfirmationAlert("Are you sure you want to delete " + creation + "?");
             if (deleteConfirmation.getResult() == ButtonType.YES) {
-                //call to deleteCreation.sh
+                _creationFactory.deleteCreation(creation);
+
+                updateCreationsList();
             }
         }
     }
