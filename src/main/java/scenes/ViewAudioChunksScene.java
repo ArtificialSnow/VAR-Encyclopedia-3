@@ -7,12 +7,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import main.java.app.AudioFactory;
 import main.java.app.FileDirectory;
 import main.java.app.SceneType;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class ViewAudioChunksScene extends ApplicationScene {
 
@@ -25,6 +28,7 @@ public class ViewAudioChunksScene extends ApplicationScene {
 
     AudioFactory _audioFactory;
     FileDirectory _fileDirectory;
+    MediaPlayer _mediaPlayer;
 
     @FXML
     public void initialize() {
@@ -80,14 +84,18 @@ public class ViewAudioChunksScene extends ApplicationScene {
             createInformationAlert("No Audio Chunk Selected", "Please select an audio chunk");
 
         } else {
-            new Thread( new Task<Void>() {
+            if (_mediaPlayer == null) {
+                _playButton.setText("Stop");
 
-                @Override
-                protected Void call() throws Exception {
-                    _audioFactory.playAudioChunk(searchTerm, audioChunk);
-                    return null;
-                }
-            }).start();
+                Media audioChunkMedia = new Media(Paths.get("./VAR-Encyclopedia/AudioChunks/" + searchTerm + "/" + audioChunk + ".wav").toUri().toString());
+                _mediaPlayer = new MediaPlayer(audioChunkMedia);
+                _mediaPlayer.play();
+            } else {
+                _playButton.setText("Play");
+
+                _mediaPlayer.stop();
+                _mediaPlayer = null;
+            }
         }
     }
 
