@@ -65,16 +65,17 @@ public class ViewExistingCreationsScene extends ApplicationScene {
             createInformationAlert("No Creation Selected", "Please select a Creation");
 
         } else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/resources/scenes/MediaPlayer.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/resources/scenes/CreationsViewer.fxml"));
             Parent parentScene = loader.load();
             CreationsViewer viewer = loader.getController();
 
-            Media audioChunkMedia = new Media(Paths.get("./VAR-Encyclopedia/Creations/" + creation + ".wav").toUri().toString());
+            Media audioChunkMedia = new Media(Paths.get("./VAR-Encyclopedia/Creations/" + creation + ".mp4").toUri().toString());
             viewer.setMedia(audioChunkMedia);
 
             Stage mediaPlayerStage = new Stage();
             mediaPlayerStage.setScene(new Scene(parentScene));
             mediaPlayerStage.setResizable(false);
+            mediaPlayerStage.setTitle(creation);
             mediaPlayerStage.show();
         }
     }
