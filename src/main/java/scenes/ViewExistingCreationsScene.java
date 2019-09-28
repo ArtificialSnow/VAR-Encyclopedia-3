@@ -61,6 +61,7 @@ public class ViewExistingCreationsScene extends ApplicationScene {
 
                 @Override
                 protected Void call() throws Exception {
+                    //play mediaPlayer
                     return null;
                 }
             }).start();

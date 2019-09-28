@@ -41,7 +41,28 @@
                     </items>
                 </ToolBar>
             </top>
-            <right>
+            <left>
+                <VBox alignment="TOP_CENTER" prefHeight="466.0" prefWidth="273.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label text="Creations" />
+                        <ListView fx:id="_creationsList" prefHeight="402.0" prefWidth="135.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </ListView>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets left="10.0" right="10.0" />
+                    </BorderPane.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="40.0" />
+               </padding>
+                </VBox>
+            </left>
+         <center>
                 <VBox prefHeight="466.0" prefWidth="177.0" BorderPane.alignment="CENTER">
                     <children>
                         <Region prefHeight="16.0" prefWidth="185.0" />
@@ -49,22 +70,11 @@
                         <Region prefHeight="13.0" prefWidth="185.0" />
                         <Button fx:id="_deleteButton" mnemonicParsing="false" onAction="#deleteButtonHandler" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: silver;" text="Delete" />
                     </children>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
                 </VBox>
-            </right>
-            <left>
-                <VBox alignment="TOP_CENTER" prefHeight="466.0" prefWidth="238.0" BorderPane.alignment="CENTER">
-                    <children>
-                        <Label text="Creations" />
-                        <ListView fx:id="_creationsList" prefHeight="402.0" prefWidth="135.0" />
-                    </children>
-                    <BorderPane.margin>
-                        <Insets left="10.0" right="10.0" />
-                    </BorderPane.margin>
-                </VBox>
-            </left>
-            <center>
-                <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="428.0" BorderPane.alignment="CENTER" />
-            </center>
+         </center>
         </BorderPane>
     </children>
 </AnchorPane>
