@@ -3,7 +3,9 @@ package main.java.scenes;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import main.java.app.AudioFactory;
 import main.java.app.FileDirectory;
@@ -97,8 +99,11 @@ public class ViewAudioChunksScene extends ApplicationScene {
             createInformationAlert("No Audio Chunk Selected", "Please select an audio chunk");
 
         } else {
-            _audioFactory.deleteAudioChunk(searchTerm, audioChunk);
-            updateAudioChunksList();
+            Alert deleteConfirmation = createConfirmationAlert("Are you sure you want to delete " + audioChunk + "?");
+            if (deleteConfirmation.getResult() == ButtonType.YES) {
+                _audioFactory.deleteAudioChunk(searchTerm, audioChunk);
+                updateAudioChunksList();
+            }
         }
     }
 }
