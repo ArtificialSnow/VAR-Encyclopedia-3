@@ -1,6 +1,5 @@
 package main.java.scenes;
 
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -86,15 +85,26 @@ public class ViewAudioChunksScene extends ApplicationScene {
         } else {
             if (_mediaPlayer == null) {
                 _playButton.setText("Stop");
+                _deleteButton.setDisable(true);
 
                 Media audioChunkMedia = new Media(Paths.get("./VAR-Encyclopedia/AudioChunks/" + searchTerm + "/" + audioChunk + ".wav").toUri().toString());
                 _mediaPlayer = new MediaPlayer(audioChunkMedia);
-                _mediaPlayer.play();
-            } else {
-                _playButton.setText("Play");
 
+                _mediaPlayer.setOnEndOfMedia( () -> {
+                    _mediaPlayer = null;
+                    
+                    _playButton.setText("Play");
+                    _deleteButton.setDisable(false);
+                });
+
+                _mediaPlayer.play();
+
+            } else {
                 _mediaPlayer.stop();
                 _mediaPlayer = null;
+
+                _playButton.setText("Play");
+                _deleteButton.setDisable(false);
             }
         }
     }
