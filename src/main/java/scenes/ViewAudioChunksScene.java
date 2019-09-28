@@ -92,7 +92,7 @@ public class ViewAudioChunksScene extends ApplicationScene {
 
                 _mediaPlayer.setOnEndOfMedia( () -> {
                     _mediaPlayer = null;
-                    
+
                     _playButton.setText("Play");
                     _deleteButton.setDisable(false);
                 });

@@ -3,16 +3,23 @@ package main.java.scenes;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import javafx.scene.media.Media;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import main.java.app.AudioFactory;
 import main.java.app.FileDirectory;
 import main.java.app.SceneType;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class ViewExistingCreationsScene extends ApplicationScene {
 
@@ -51,21 +58,24 @@ public class ViewExistingCreationsScene extends ApplicationScene {
         System.exit(0);
     }
 
-    public void playButtonHandler() {
+    public void playButtonHandler() throws IOException {
         String creation = _creationsList.getSelectionModel().getSelectedItem();
 
         if (creation == null) {
             createInformationAlert("No Creation Selected", "Please select a Creation");
 
         } else {
-            new Thread( new Task<Void>() {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/resources/scenes/MediaPlayer.fxml"));
+            Parent parentScene = loader.load();
+            CreationsViewer viewer = loader.getController();
 
-                @Override
-                protected Void call() throws Exception {
-                    //play mediaPlayer
-                    return null;
-                }
-            }).start();
+            Media audioChunkMedia = new Media(Paths.get("./VAR-Encyclopedia/Creations/" + creation + ".wav").toUri().toString());
+            viewer.setMedia(audioChunkMedia);
+
+            Stage mediaPlayerStage = new Stage();
+            mediaPlayerStage.setScene(new Scene(parentScene));
+            mediaPlayerStage.setResizable(false);
+            mediaPlayerStage.show();
         }
     }
 
