@@ -38,7 +38,8 @@ public class ViewExistingCreationsScene extends ApplicationScene {
 
         File[] creationsList = new File("./VAR-Encyclopedia/Creations").listFiles();
         for (File creation : creationsList) {
-            _creationsList.getItems().add(creation.getName());
+            String creationName = creation.getName();
+            _creationsList.getItems().add(creationName.substring(0, creationName.length() - 4));
         }
     }
 
