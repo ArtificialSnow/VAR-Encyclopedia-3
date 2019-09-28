@@ -19,7 +19,8 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/main/resources/scenes/MainMenuScene.fxml"));
         primaryStage.setScene(new Scene(root, 1000, 500));
         primaryStage.setResizable(false);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        //primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setTitle("VAR-Encyclopedia");
         primaryStage.show();
     }
 
