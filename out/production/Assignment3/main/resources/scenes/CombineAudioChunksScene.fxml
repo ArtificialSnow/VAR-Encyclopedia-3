@@ -47,41 +47,29 @@
             </ToolBar>
          </top>
          <left>
-            <VBox alignment="CENTER" opacity="0.85" prefHeight="49.0" prefWidth="273.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" opacity="0.85" prefHeight="49.0" prefWidth="273.0" BorderPane.alignment="TOP_CENTER">
                <children>
-                  <Region prefHeight="19.0" prefWidth="245.0" />
                   <Label alignment="CENTER" prefHeight="30.0" prefWidth="207.0" text="Select a Search Term" textFill="WHITE" />
-                  <ListView maxWidth="-Infinity" prefHeight="260.0" prefWidth="280.0" />
+                  <ListView fx:id="_searchTermsListView" maxWidth="-Infinity" onMouseClicked="#updateAudioChunksList" prefHeight="365.0" prefWidth="270.0" />
                </children>
                <BorderPane.margin>
                   <Insets left="20.0" />
                </BorderPane.margin>
             </VBox>
          </left>
-         <center>
-            <VBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" opacity="0.85" prefHeight="466.0" prefWidth="378.0" BorderPane.alignment="TOP_CENTER">
-               <children>
-                  <Region prefHeight="21.0" prefWidth="296.0" />
-                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="207.0" text="Select Audio Chunks" textFill="WHITE" />
-                  <ListView minWidth="-Infinity" prefHeight="260.0" prefWidth="280.0" />
-               </children>
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
-               <padding>
-                  <Insets left="45.0" right="45.0" />
-               </padding>
-            </VBox>
-         </center>
          <right>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.85" prefHeight="466.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.85" prefHeight="466.0" prefWidth="300.0" BorderPane.alignment="CENTER">
                <children>
-                  <Region prefHeight="182.0" prefWidth="311.0" />
-                  <ListView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="280.0">
+                  <Region prefHeight="200.0" prefWidth="290.0" />
+                  <Label prefHeight="26.0" prefWidth="150.0" style="-fx-text-fill: white;" text="Selected Audio Chunks">
+                     <padding>
+                        <Insets bottom="7.0" />
+                     </padding></Label>
+                  <ListView fx:id="_selectedAudioChunksListView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="355.0" prefWidth="270.0">
                      <VBox.margin>
                         <Insets bottom="2.0" />
                      </VBox.margin></ListView>
-                  <Region minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="321.0" />
+                  <Region minHeight="-Infinity" minWidth="-Infinity" prefHeight="7.0" prefWidth="321.0" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Region prefHeight="49.0" prefWidth="77.0" />
@@ -90,10 +78,48 @@
                   </HBox>
                </children>
                <padding>
-                  <Insets right="10.0" />
+                  <Insets bottom="10.0" right="10.0" />
                </padding>
             </VBox>
          </right>
+         <center>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" opacity="0.85" prefHeight="466.0" prefWidth="330.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="207.0" text="Select Audio Chunks" textFill="WHITE" />
+                        <ListView fx:id="_audioChunksListView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefWidth="270.0" />
+                     </children>
+                     <padding>
+                        <Insets left="45.0" right="45.0" />
+                     </padding>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="466.0" prefWidth="41.0">
+                     <children>
+                        <Button fx:id="_addChunkButton" mnemonicParsing="false" onAction="#addChunkButtonHandler" style="-fx-background-color: silver;">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/RightArrow.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Region prefHeight="20.0" prefWidth="77.0" />
+                        <Button fx:id="_removeChunkButton" mnemonicParsing="false" onAction="#removeChunkButtonHandler" style="-fx-background-color: silver;">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                 <image>
+                                    <Image url="@../images/RightArrow.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>

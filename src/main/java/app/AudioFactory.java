@@ -77,7 +77,17 @@ public class AudioFactory {
         return false;
     }
 
-    public void combineAudioChunks(List<String> audioChunksList) {
-        //to do
+    public void combineAudioChunks(String searchTerm, String audioChunksString) {
+        System.out.println(searchTerm);
+        System.out.println(audioChunksString);
+        String[] combineAudioChunkCommands = { "sh", "-c", "./src/main/resources/shellscripts/combineAudioChunks.sh" + " \"" + searchTerm + "\" \"" + audioChunksString +"\"" };
+        ProcessBuilder combineAudioChunkBuilder = new ProcessBuilder(combineAudioChunkCommands);
+
+        try {
+            Process combineAudioChunkProcess = combineAudioChunkBuilder.start();
+            combineAudioChunkProcess.waitFor();
+        } catch (Exception e) {
+            System.out.print("Error combining audio chunks");
+        }
     }
 }
