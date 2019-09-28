@@ -51,7 +51,7 @@
                <children>
                   <Region prefHeight="19.0" prefWidth="245.0" />
                   <Label alignment="CENTER" prefHeight="30.0" prefWidth="207.0" text="Select a Search Term" textFill="WHITE" />
-                  <ListView fx:id="_searchTermsListView" maxWidth="-Infinity" prefHeight="260.0" prefWidth="280.0" />
+                  <ListView maxWidth="-Infinity" prefHeight="260.0" prefWidth="280.0" />
                </children>
                <BorderPane.margin>
                   <Insets left="20.0" />
@@ -63,7 +63,7 @@
                <children>
                   <Region prefHeight="21.0" prefWidth="296.0" />
                   <Label alignment="CENTER" prefHeight="30.0" prefWidth="207.0" text="Select Audio Chunks" textFill="WHITE" />
-                  <ListView fx:id="_audioChunksListView" minWidth="-Infinity" prefHeight="260.0" prefWidth="280.0" />
+                  <ListView minWidth="-Infinity" prefHeight="260.0" prefWidth="280.0" />
                </children>
                <BorderPane.margin>
                   <Insets />
@@ -77,7 +77,7 @@
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.85" prefHeight="466.0" prefWidth="300.0" BorderPane.alignment="CENTER">
                <children>
                   <Region prefHeight="182.0" prefWidth="311.0" />
-                  <ListView fx:id="_selectedAudioChunksListView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="280.0">
+                  <ListView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="280.0">
                      <VBox.margin>
                         <Insets bottom="2.0" />
                      </VBox.margin></ListView>

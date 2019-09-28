@@ -1,8 +1,6 @@
 package main.java.scenes;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,21 +24,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
     @FXML private TextField _fileNameTextArea;
     @FXML private Button _saveButton;
 
-    private static CreateAudioChunksScene CACS;
-
-    public static CreateAudioChunksScene getInstance(){
-        if (CACS == null){
-            CACS = new CreateAudioChunksScene();
-        }
-        return CACS;
-    }
-
-    public ObservableList<String> get_listofSearchTerm() {
-        return _listofSearchTerm;
-    }
-
     private String _searchTerm;
-    private ObservableList<String> _listofSearchTerm;
     private WikipediaSearch _wikipediaSearch;
     private AudioFactory _audioFactory;
     private VoiceSynthesizer _voiceSynthesizer;
@@ -49,14 +33,12 @@ public class CreateAudioChunksScene extends ApplicationScene {
     public void initialize() {
         _audioFactory = new AudioFactory();
         _editor.setWrapText(true);
-        _listofSearchTerm = FXCollections.observableArrayList();
 
         _voiceSynthesizer = new VoiceSynthesizer();
         for (String voice : _voiceSynthesizer.getVoices()){
             _voiceSynthesizerSelection.getItems().add(voice);
         }
         _voiceSynthesizerSelection.getSelectionModel().selectFirst();
-        CACS = this;
     }
 
     public void homeButtonHandler(ActionEvent event) throws IOException {
@@ -81,7 +63,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
 
     public void searchButtonHandler() {
         _searchTerm = _searchBar.getText();
-        _listofSearchTerm.add(_searchTerm);
+
         if (_searchTerm == null || _searchTerm.length() == 0) {
             createInformationAlert("No Search Term", "Please enter a Search Term");
         } else {

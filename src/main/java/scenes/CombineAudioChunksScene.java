@@ -19,14 +19,11 @@ public class CombineAudioChunksScene extends ApplicationScene {
     @FXML private ListView<String> _audioChunksListView;
     @FXML private ListView<String> _selectedAudioChunksListView;
 
-    private CreateAudioChunksScene CAC;
-
     @FXML
     public void initialize() {
-//        _searchTermsListView = new ListView<String>();
-//        _audioChunksListView = new ListView<String>();
-//        _selectedAudioChunksListView = new ListView<String>();
-        listSearchTerm();
+        _searchTermsListView = new ListView<String>();
+        _audioChunksListView = new ListView<String>();
+        _selectedAudioChunksListView = new ListView<String>();
     }
 
     public void homeButtonHandler(ActionEvent event) throws IOException {
@@ -51,15 +48,5 @@ public class CombineAudioChunksScene extends ApplicationScene {
 
     public void nextSceneButtonHandler(ActionEvent event) throws IOException {
         changeScene(SceneType.SelectImagesScene, event);
-    }
-
-    public void listSearchTerm() {
-
-//        _searchTermsListView.getItems().add(term);
-        _searchTermsListView.getItems().setAll(CreateAudioChunksScene.getInstance().get_listofSearchTerm());
-    }
-
-    public void listAudioChunk(String chunck) {
-        _audioChunksListView.getItems().add(chunck);
     }
 }
