@@ -3,7 +3,6 @@ package main.java.scenes;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -141,17 +140,22 @@ public class CombineAudioChunksScene extends ApplicationScene {
                     }
 
                     _audioFactory.combineAudioChunks(searchTerm, audioChunksString);
+
+                    DownloadImage downloadImage = new DownloadImage(searchTerm,10);
+                    downloadImage.run();
                     return null;
                 }
+
+                @Override
+                protected void done() {
+                    try {
+                        ApplicationScene selectImagesSceneController = changeScene(SceneType.SelectImagesScene, event);
+                        ((SelectImagesScene) selectImagesSceneController).setSearchTerm(searchTerm);
+                    } catch (Exception e) {
+                        System.out.println("Error changing to SelectImagesScene");
+                    }
+                }
             }).start();
-            //
-            DownloadImage downloadImage = new DownloadImage(searchTerm,10);
-            downloadImage.run();
-            //
-            ApplicationScene selectImagesSceneController = changeScene(SceneType.SelectImagesScene, event);
-            ((SelectImagesScene)selectImagesSceneController).setSearchTerm(searchTerm);
-
-
         }
     }
 }

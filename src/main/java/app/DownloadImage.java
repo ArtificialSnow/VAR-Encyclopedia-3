@@ -17,8 +17,7 @@ import com.flickr4java.flickr.photos.*;
 public class DownloadImage extends Task<Object> {
 	private String _searchTerm;
 	private int _numOfImage;
-	
-	
+
 
 	public DownloadImage(String _searchTerm, int _numOfImage) {
 		this._searchTerm = _searchTerm;
