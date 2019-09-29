@@ -24,8 +24,8 @@ public class SelectImagesScene extends ApplicationScene {
     @FXML private Button _shiftImageDownButton;
     @FXML private Button _createCreationButton;
     @FXML private TextField _creationName;
-    @FXML private ListView<String> _imageDownloand;
-    @FXML private ListView<String> _imageSelected;
+    @FXML private ListView<String> _downloadedImagesListView;
+    @FXML private ListView<String> _selectedImagesListView;
 
     private String _searchTerm;
     private CreationFactory _creationFactory;
@@ -41,7 +41,7 @@ public class SelectImagesScene extends ApplicationScene {
         ArrayList<String> nameOfImages = new ArrayList<String>();
         for (File searchTermDirectory : downloadList) {
            nameOfImages.add(searchTermDirectory.getName());
-            _imageDownloand.getItems().add(searchTermDirectory.getName());
+            _downloadedImagesListView.getItems().add(searchTermDirectory.getName());
         }
 
         Image[] imageList = new Image[downloadList.length];
@@ -52,7 +52,7 @@ public class SelectImagesScene extends ApplicationScene {
             imageList[i]=fxImage;
         }
 
-        _imageDownloand.setCellFactory(param -> new ListCell<String>(){
+        _downloadedImagesListView.setCellFactory(param -> new ListCell<String>(){
             private ImageView imageview = new ImageView();
             @Override
             public void updateItem(String name, boolean empty){
@@ -81,7 +81,7 @@ public class SelectImagesScene extends ApplicationScene {
     public void updateDownloadList(){
         File[] downloadList = new File("./downloads").listFiles();
         for(File fileToDelete : downloadList){
-            if(_imageDownloand.getItems().contains(fileToDelete.getName()) && _imageSelected.getItems().contains(fileToDelete.getName())){
+            if(_downloadedImagesListView.getItems().contains(fileToDelete.getName()) && _selectedImagesListView.getItems().contains(fileToDelete.getName())){
 
             }else{
                 fileToDelete.delete();
@@ -89,57 +89,57 @@ public class SelectImagesScene extends ApplicationScene {
         }
     }
     public void addImageButtonHandler() {
-        String imageToAdd = _imageDownloand.getSelectionModel().getSelectedItem();
+        String imageToAdd = _downloadedImagesListView.getSelectionModel().getSelectedItem();
 
         if (imageToAdd == null) {
             createInformationAlert("No image Selected", "Please select a image");
         } else {
-            if (_imageSelected.getItems().contains(imageToAdd)) {
+            if (_selectedImagesListView.getItems().contains(imageToAdd)) {
                 createInformationAlert("image already added", "Image " + imageToAdd + " already added");
             } else {
-                _imageSelected.getItems().add(imageToAdd);
+                _selectedImagesListView.getItems().add(imageToAdd);
             }
         }
     }
 
-    public void removeImageButtonHandler() { String imageToAdd = _imageDownloand.getSelectionModel().getSelectedItem();
-        String imageToRemove = _imageDownloand.getSelectionModel().getSelectedItem();
+    public void removeImageButtonHandler() { String imageToAdd = _downloadedImagesListView.getSelectionModel().getSelectedItem();
+        String imageToRemove = _downloadedImagesListView.getSelectionModel().getSelectedItem();
         if (imageToRemove == null) {
             createInformationAlert("No Audio Chunk Selected", "Please select an Audio Chunk");
         } else {
-            _imageSelected.getItems().remove(imageToRemove);
+            _selectedImagesListView.getItems().remove(imageToRemove);
         }
     }
 
     public void shiftImageUpButtonHandler() {
-        int selectedImage = _imageSelected.getSelectionModel().getSelectedIndex();
+        int selectedImage = _selectedImagesListView.getSelectionModel().getSelectedIndex();
         if (selectedImage == -1) {
             createInformationAlert("No Image selected", "Please select a image");
         } else if (selectedImage == 0){
             createInformationAlert("Cannot shift image up further", "Cannot shift image up further");
         } else {
-            String audioChunk = _imageSelected.getItems().get(selectedImage);
-            _imageSelected.getItems().remove(selectedImage);
-            _imageSelected.getItems().add((selectedImage - 1), audioChunk);
+            String audioChunk = _selectedImagesListView.getItems().get(selectedImage);
+            _selectedImagesListView.getItems().remove(selectedImage);
+            _selectedImagesListView.getItems().add((selectedImage - 1), audioChunk);
         }
     }
 
     public void shiftImageDownButtonHandler() {
-        int selectedImage = _imageSelected.getSelectionModel().getSelectedIndex();
+        int selectedImage = _selectedImagesListView.getSelectionModel().getSelectedIndex();
         if (selectedImage == -1) {
             createInformationAlert("No Image selected", "Please select a image");
-        } else if (selectedImage == _imageSelected.getItems().size() - 1){
+        } else if (selectedImage == _selectedImagesListView.getItems().size() - 1){
             createInformationAlert("Cannot shift image down further", "Cannot shift image down further");
         } else {
-            String audioChunk = _imageSelected.getItems().get(selectedImage);
-            _imageSelected.getItems().remove(selectedImage);
-            _imageSelected.getItems().add((selectedImage + 1), audioChunk);
+            String audioChunk = _selectedImagesListView.getItems().get(selectedImage);
+            _selectedImagesListView.getItems().remove(selectedImage);
+            _selectedImagesListView.getItems().add((selectedImage + 1), audioChunk);
         }
     }
 
     public void createCreationButtonHandler(ActionEvent event) throws IOException {
         updateDownloadList();
-        _creationFactory.combineImagesToVideo(_imageSelected.getItems().size());
+        _creationFactory.combineImagesToVideo(_selectedImagesListView.getItems().size());
         System.out.println("finish combine images");
         _creationFactory.combineVideoAndText(_searchTerm);
         System.out.println("finish combine video and text");
