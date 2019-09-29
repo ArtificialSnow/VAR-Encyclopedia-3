@@ -31,8 +31,6 @@ public class SelectImagesScene extends ApplicationScene {
     private CreationFactory _creationFactory;
 
 
-    //"./VAR-Encyclopedia/.temp/tempCombinedChunks.wav"
-    //"./VAR-Encyclopedia/downloads"
     @FXML
     public void initialize() {
         _creationFactory = new CreationFactory();
@@ -40,20 +38,12 @@ public class SelectImagesScene extends ApplicationScene {
         File[] downloadList = new File("./VAR-Encyclopedia/.temp/Images").listFiles();
         ArrayList<String> nameOfImages = new ArrayList<String>();
         for (File searchTermDirectory : downloadList) {
-           nameOfImages.add(searchTermDirectory.getName());
+            nameOfImages.add(searchTermDirectory.getName());
             _downloadedImagesListView.getItems().add(searchTermDirectory.getName());
         }
 
-        Image[] imageList = new Image[downloadList.length];
-        for (int i = 0; i < downloadList.length;i++ ) {
-            File image = new File("./VAR-Encyclopedia/.temp/Images/"+downloadList[i].getName());
-            String filelocation = image.toURI().toString();
-            Image fxImage = new Image(filelocation);
-            imageList[i]=fxImage;
-        }
-
         _downloadedImagesListView.setCellFactory(param -> new ListCell<String>(){
-            private ImageView imageview = new ImageView();
+            private ImageView imageView = new ImageView();
             @Override
             public void updateItem(String name, boolean empty){
                 super.updateItem(name,empty);
@@ -62,13 +52,26 @@ public class SelectImagesScene extends ApplicationScene {
                     setGraphic(null);
                 }
                 else {
-                    for (int i = 0; i < downloadList.length;i++ ) {
-                        if (name.equals(nameOfImages.get(i))){
-                        imageview.setImage(imageList[i]);
-                    }
-                        setText(name);
-                        setGraphic(imageview);
-                    }
+                    File image = new File("./VAR-Encyclopedia/.temp/Images/" + name);
+                    imageView.setImage(new Image(image.toURI().toString()));
+                    setGraphic(imageView);
+                }
+            }
+        });
+
+        _selectedImagesListView.setCellFactory(param -> new ListCell<String>(){
+            private ImageView imageView = new ImageView();
+            @Override
+            public void updateItem(String name, boolean empty){
+                super.updateItem(name, empty);
+
+                if(empty){
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    File image = new File("./VAR-Encyclopedia/.temp/Images/" + name);
+                    imageView.setImage(new Image(image.toURI().toString()));
+                    setGraphic(imageView);
                 }
             }
         });
@@ -78,34 +81,24 @@ public class SelectImagesScene extends ApplicationScene {
         _searchTerm = searchTerm;
     }
 
-    public void updateDownloadList(){
-        File[] downloadList = new File("./downloads").listFiles();
-        for(File fileToDelete : downloadList){
-            if(_downloadedImagesListView.getItems().contains(fileToDelete.getName()) && _selectedImagesListView.getItems().contains(fileToDelete.getName())){
-
-            }else{
-                fileToDelete.delete();
-            }
-        }
-    }
     public void addImageButtonHandler() {
         String imageToAdd = _downloadedImagesListView.getSelectionModel().getSelectedItem();
 
         if (imageToAdd == null) {
-            createInformationAlert("No image Selected", "Please select a image");
+            createInformationAlert("No Image Selected", "Please select a Image");
         } else {
             if (_selectedImagesListView.getItems().contains(imageToAdd)) {
-                createInformationAlert("image already added", "Image " + imageToAdd + " already added");
+                createInformationAlert("Image already added", "Image " + imageToAdd + " already added");
             } else {
                 _selectedImagesListView.getItems().add(imageToAdd);
             }
         }
     }
 
-    public void removeImageButtonHandler() { String imageToAdd = _downloadedImagesListView.getSelectionModel().getSelectedItem();
-        String imageToRemove = _downloadedImagesListView.getSelectionModel().getSelectedItem();
+    public void removeImageButtonHandler() {
+        String imageToRemove = _selectedImagesListView.getSelectionModel().getSelectedItem();
         if (imageToRemove == null) {
-            createInformationAlert("No Audio Chunk Selected", "Please select an Audio Chunk");
+            createInformationAlert("No Image Selected", "Please select an Image");
         } else {
             _selectedImagesListView.getItems().remove(imageToRemove);
         }
@@ -114,9 +107,9 @@ public class SelectImagesScene extends ApplicationScene {
     public void shiftImageUpButtonHandler() {
         int selectedImage = _selectedImagesListView.getSelectionModel().getSelectedIndex();
         if (selectedImage == -1) {
-            createInformationAlert("No Image selected", "Please select a image");
+            createInformationAlert("No Image selected", "Please select a Image");
         } else if (selectedImage == 0){
-            createInformationAlert("Cannot shift image up further", "Cannot shift image up further");
+            createInformationAlert("Cannot shift Image up further", "Cannot shift Image up further");
         } else {
             String audioChunk = _selectedImagesListView.getItems().get(selectedImage);
             _selectedImagesListView.getItems().remove(selectedImage);
@@ -127,9 +120,9 @@ public class SelectImagesScene extends ApplicationScene {
     public void shiftImageDownButtonHandler() {
         int selectedImage = _selectedImagesListView.getSelectionModel().getSelectedIndex();
         if (selectedImage == -1) {
-            createInformationAlert("No Image selected", "Please select a image");
+            createInformationAlert("No Image selected", "Please select a Image");
         } else if (selectedImage == _selectedImagesListView.getItems().size() - 1){
-            createInformationAlert("Cannot shift image down further", "Cannot shift image down further");
+            createInformationAlert("Cannot shift Image down further", "Cannot shift Image down further");
         } else {
             String audioChunk = _selectedImagesListView.getItems().get(selectedImage);
             _selectedImagesListView.getItems().remove(selectedImage);
@@ -138,13 +131,18 @@ public class SelectImagesScene extends ApplicationScene {
     }
 
     public void createCreationButtonHandler(ActionEvent event) throws IOException {
-        updateDownloadList();
-        _creationFactory.combineImagesToVideo(_selectedImagesListView.getItems().size());
-        System.out.println("finish combine images");
+        String creationName = _creationName.getText();
+        int numberOfImages = _selectedImagesListView.getItems().size();
+
+        String imageNames = "";
+        for (String imageName : _selectedImagesListView.getItems()) {
+            imageNames += imageName + " ";
+        }
+
+        System.out.println(imageNames);
+        _creationFactory.combineImagesToVideo(imageNames, numberOfImages);
         _creationFactory.combineVideoAndText(_searchTerm);
-        System.out.println("finish combine video and text");
-        _creationFactory.combineVideoAndAudio(_creationName.getText());
-        System.out.println("finish combine video and audio");
+        _creationFactory.combineVideoAndAudio(creationName);
 
         changeScene(SceneType.MainMenuScene, event);
     }
