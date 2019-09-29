@@ -138,6 +138,7 @@ public class SelectImagesScene extends ApplicationScene {
     }
 
     public void createCreationButtonHandler(ActionEvent event) throws IOException {
+        boolean fileAlreadyExists = false;
         String creationName = _creationName.getText().replaceAll("(^\\s+)|(\\s+$)", "");
         int numberOfImages = _selectedImagesListView.getItems().size();
 
@@ -151,30 +152,40 @@ public class SelectImagesScene extends ApplicationScene {
             for (File previousCreation : previousCreations) {
                 String previousCreationName = previousCreation.getName();
                 if (previousCreationName.substring(0, previousCreationName.length() - 4).equals(creationName)) {
-                    Alert overrideAlert = createConfirmationAlert("A Creation with that name already exists. Would you like to override " + creationName + "?");
-
-                    if (overrideAlert.getResult() == ButtonType.YES) {
-                        createCreation(creationName, numberOfImages, event);
-                    }
+                    fileAlreadyExists = true;
+                    break;
                 }
+            }
+        }
+
+        if (fileAlreadyExists) {
+            Alert overrideAlert = createConfirmationAlert("A Creation with that name already exists. Would you like to override " + creationName + "?");
+            if (overrideAlert.getResult() == ButtonType.YES) {
                 createCreation(creationName, numberOfImages, event);
             }
         }
+
+        createCreation(creationName, numberOfImages, event);
     }
 
     public void createCreation(String creationName, int numberOfImages, ActionEvent event) {
         String imageNames = "";
         for (String imageName : _selectedImagesListView.getItems()) {
-            imageNames += imageName + " ";
+            imageNames += "./VAR-Encyclopedia/.temp/Images/" + imageName + " ";
         }
+        imageNames = imageNames.trim();
+        System.out.println(imageNames);
 
+        _createCreationButton.setDisable(true);
+
+        String searchTerm = _searchTerm;
         String finalImageNames = imageNames;
         new Thread(new Task<Void>() {
 
             @Override
             protected Void call() throws Exception {
                 _creationFactory.combineImagesToVideo(finalImageNames, numberOfImages);
-                _creationFactory.combineVideoAndText(_searchTerm);
+                _creationFactory.combineVideoAndText(searchTerm);
                 _creationFactory.combineVideoAndAudio(creationName);
                 return null;
             }
@@ -183,13 +194,14 @@ public class SelectImagesScene extends ApplicationScene {
             protected void done() {
                 Platform.runLater( () -> {
                     try {
+                        _createCreationButton.setDisable(false);
                         changeScene(SceneType.MainMenuScene, event);
                     } catch (Exception e){
                         System.out.println("Error changing back to MainMenu Scene");
                     }
                 });
             }
-        });
+        }).start();
     }
 
     public void homeButtonHandler(ActionEvent event) throws IOException {

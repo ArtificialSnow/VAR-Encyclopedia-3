@@ -132,6 +132,8 @@ public class CombineAudioChunksScene extends ApplicationScene {
         if (_selectedAudioChunksListView.getItems().size() == 0) {
             createInformationAlert("No Audio Chunks selected", "Please select Audio Chunks to combine for creation");
         } else {
+            _nextSceneButton.setDisable(true);
+
             new Thread( new Task<Void>() {
 
                 @Override
@@ -153,6 +155,8 @@ public class CombineAudioChunksScene extends ApplicationScene {
                 protected void done() {
                     Platform.runLater( () -> {
                         try {
+                            _nextSceneButton.setDisable(true);
+
                             ApplicationScene selectImagesSceneController = changeScene(SceneType.SelectImagesScene, event);
                             ((SelectImagesScene) selectImagesSceneController).setSearchTerm(searchTerm);
                         } catch (Exception e) {
