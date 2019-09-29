@@ -2,6 +2,7 @@ package main.java.scenes;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -54,6 +55,7 @@ public class SelectImagesScene extends ApplicationScene {
                 else {
                     File image = new File("./VAR-Encyclopedia/.temp/Images/" + name);
                     imageView.setImage(new Image(image.toURI().toString()));
+                    setAlignment(Pos.CENTER);
                     setGraphic(imageView);
                 }
             }
@@ -71,6 +73,7 @@ public class SelectImagesScene extends ApplicationScene {
                 } else {
                     File image = new File("./VAR-Encyclopedia/.temp/Images/" + name);
                     imageView.setImage(new Image(image.toURI().toString()));
+                    setAlignment(Pos.CENTER);
                     setGraphic(imageView);
                 }
             }
@@ -139,7 +142,6 @@ public class SelectImagesScene extends ApplicationScene {
             imageNames += imageName + " ";
         }
 
-        System.out.println(imageNames);
         _creationFactory.combineImagesToVideo(imageNames, numberOfImages);
         _creationFactory.combineVideoAndText(_searchTerm);
         _creationFactory.combineVideoAndAudio(creationName);
