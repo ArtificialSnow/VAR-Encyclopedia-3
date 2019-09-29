@@ -22,8 +22,8 @@ public class CreationFactory {
             ProcessBuilder combineImagesToVideoBuilder = new ProcessBuilder("bash", "-c", combineImageFile);
 
             Process combineImagesToVideoProcess = combineImagesToVideoBuilder.start();
-            combineImagesToVideoProcess.waitFor();
-
+            int exitStatus = combineImagesToVideoProcess.waitFor();
+            System.out.println(exitStatus);
         } catch(Exception e) {
             e.printStackTrace();
             System.out.println("Error combing image to video");

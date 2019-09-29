@@ -78,6 +78,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
             String audioChunk = _selectedAudioChunksListView.getItems().get(selectedChunk);
             _selectedAudioChunksListView.getItems().remove(selectedChunk);
             _selectedAudioChunksListView.getItems().add((selectedChunk - 1), audioChunk);
+            _selectedAudioChunksListView.getSelectionModel().select(selectedChunk - 1);
         }
     }
 
@@ -91,6 +92,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
             String audioChunk = _selectedAudioChunksListView.getItems().get(selectedChunk);
             _selectedAudioChunksListView.getItems().remove(selectedChunk);
             _selectedAudioChunksListView.getItems().add((selectedChunk + 1), audioChunk);
+            _selectedAudioChunksListView.getSelectionModel().select(selectedChunk + 1);
         }
     }
 

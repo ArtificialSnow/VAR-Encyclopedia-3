@@ -1,5 +1,7 @@
 package main.java.scenes;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -117,6 +119,7 @@ public class SelectImagesScene extends ApplicationScene {
             String audioChunk = _selectedImagesListView.getItems().get(selectedImage);
             _selectedImagesListView.getItems().remove(selectedImage);
             _selectedImagesListView.getItems().add((selectedImage - 1), audioChunk);
+            _selectedImagesListView.getSelectionModel().select(selectedImage - 1);
         }
     }
 
@@ -130,6 +133,7 @@ public class SelectImagesScene extends ApplicationScene {
             String audioChunk = _selectedImagesListView.getItems().get(selectedImage);
             _selectedImagesListView.getItems().remove(selectedImage);
             _selectedImagesListView.getItems().add((selectedImage + 1), audioChunk);
+            _selectedImagesListView.getSelectionModel().select(selectedImage + 1);
         }
     }
 
@@ -142,11 +146,28 @@ public class SelectImagesScene extends ApplicationScene {
             imageNames += imageName + " ";
         }
 
-        _creationFactory.combineImagesToVideo(imageNames, numberOfImages);
-        _creationFactory.combineVideoAndText(_searchTerm);
-        _creationFactory.combineVideoAndAudio(creationName);
+        String finalImageNames = imageNames;
+        new Thread(new Task<Void>() {
 
-        changeScene(SceneType.MainMenuScene, event);
+            @Override
+            protected Void call() throws Exception {
+                _creationFactory.combineImagesToVideo(finalImageNames, numberOfImages);
+                _creationFactory.combineVideoAndText(_searchTerm);
+                _creationFactory.combineVideoAndAudio(creationName);
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                Platform.runLater( () -> {
+                    try {
+                        changeScene(SceneType.MainMenuScene, event);
+                    } catch (Exception e){
+                        System.out.println("Error changing back to MainMenu Scene");
+                    }
+                });
+            }
+        });
     }
 
     public void homeButtonHandler(ActionEvent event) throws IOException {
