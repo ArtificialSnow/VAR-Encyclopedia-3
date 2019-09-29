@@ -77,7 +77,7 @@
                      <children>
                         <Label text="Images Generated" />
                         <Region maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0" prefWidth="40.0" />
-                        <ListView prefHeight="429.0" prefWidth="400.0" />
+                        <ListView fx:id="_imageDownloand" prefHeight="429.0" prefWidth="400.0" />
                      </children>
                   </VBox>
                </children>
@@ -90,7 +90,7 @@
                      <children>
                         <Label text="Selected Images" />
                         <Region maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0" prefWidth="40.0" />
-                        <ListView maxWidth="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="400.0" />
+                        <ListView fx:id="_imageSelected" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="400.0" />
                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <TextField fx:id="_creationName" promptText="Name Your Creation" />
