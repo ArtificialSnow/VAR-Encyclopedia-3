@@ -64,7 +64,6 @@ public class SelectImagesScene extends ApplicationScene {
                     for (int i = 0; i < downloadList.length;i++ ) {
                         if (name.equals(nameOfImages.get(i))){
                         imageview.setImage(imageList[i]);
-
                     }
                         setText(name);
                         setGraphic(imageview);
@@ -78,6 +77,16 @@ public class SelectImagesScene extends ApplicationScene {
         _searchTerm = searchTerm;
     }
 
+    public void updateDownloadList(){
+        File[] downloadList = new File("./downloads").listFiles();
+        for(File fileToDelete : downloadList){
+            if(_imageDownloand.getItems().contains(fileToDelete.getName()) && _imageSelected.getItems().contains(fileToDelete.getName())){
+
+            }else{
+                fileToDelete.delete();
+            }
+        }
+    }
     public void addImageButtonHandler() {
         String imageToAdd = _imageDownloand.getSelectionModel().getSelectedItem();
 
@@ -128,6 +137,7 @@ public class SelectImagesScene extends ApplicationScene {
     }
 
     public void createCreationButtonHandler() {
+        updateDownloadList();
         _creationFactory.combineImagesToVideo(_imageSelected.getItems().size());
         _creationFactory.combineVideoAndText(_searchTerm);
         _creationFactory.combineVideoAndAudio(_creationName.getText());
