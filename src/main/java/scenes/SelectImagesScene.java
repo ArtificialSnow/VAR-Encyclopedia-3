@@ -11,11 +11,14 @@ public class SelectImagesScene extends ApplicationScene {
 
     @FXML private Button _homeButton;
     @FXML private Button _quitButton;
+    @FXML private Button _shiftImageUpButton;
+    @FXML private Button get_shiftImageDownButton;
 
     private String _searchTerm;
 
     public void setSearchTerm(String searchTerm) {
         _searchTerm = searchTerm;
+        System.out.println(_searchTerm);
     }
 
     public void addImageButtonHandler() {
@@ -23,6 +26,14 @@ public class SelectImagesScene extends ApplicationScene {
     }
 
     public void removeImageButtonHandler() {
+
+    }
+
+    public void shiftImageUpButtonHandler() {
+
+    }
+
+    public void shiftImageDownButtonHandler() {
 
     }
 

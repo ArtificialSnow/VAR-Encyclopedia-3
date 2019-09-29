@@ -14,12 +14,15 @@ import java.io.IOException;
 
 public abstract class ApplicationScene {
 
-    public void changeScene(SceneType sceneType, ActionEvent event) throws IOException {
-        Parent viewExistingCreationsParent = FXMLLoader.load(getClass().getResource(sceneType.getPath()));
-        Scene viewExistingCreationsScene = new Scene(viewExistingCreationsParent);
+    public ApplicationScene changeScene(SceneType sceneType, ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneType.getPath()));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
 
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(viewExistingCreationsScene);
+        stage.setScene(scene);
+
+        return loader.getController();
     }
 
     public void createInformationAlert(String alertTitle, String alertMessage) {

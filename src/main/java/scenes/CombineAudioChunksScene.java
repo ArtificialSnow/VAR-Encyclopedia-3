@@ -144,9 +144,8 @@ public class CombineAudioChunksScene extends ApplicationScene {
                 }
             }).start();
 
-            changeScene(SceneType.SelectImagesScene, event);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(SceneType.SelectImagesScene.getPath()));
-            ((SelectImagesScene)loader.getController()).setSearchTerm(searchTerm);
+            ApplicationScene selectImagesSceneController = changeScene(SceneType.SelectImagesScene, event);
+            ((SelectImagesScene)selectImagesSceneController).setSearchTerm(searchTerm);
         }
     }
 }

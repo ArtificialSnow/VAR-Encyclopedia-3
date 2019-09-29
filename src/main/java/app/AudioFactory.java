@@ -78,8 +78,6 @@ public class AudioFactory {
     }
 
     public void combineAudioChunks(String searchTerm, String audioChunksString) {
-        System.out.println(searchTerm);
-        System.out.println(audioChunksString);
         String[] combineAudioChunkCommands = { "sh", "-c", "./src/main/resources/shellscripts/combineAudioChunks.sh" + " \"" + searchTerm + "\" \"" + audioChunksString +"\"" };
         ProcessBuilder combineAudioChunkBuilder = new ProcessBuilder(combineAudioChunkCommands);
 
