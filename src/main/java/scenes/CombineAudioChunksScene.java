@@ -1,5 +1,6 @@
 package main.java.scenes;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -148,12 +149,14 @@ public class CombineAudioChunksScene extends ApplicationScene {
 
                 @Override
                 protected void done() {
-                    try {
-                        ApplicationScene selectImagesSceneController = changeScene(SceneType.SelectImagesScene, event);
-                        ((SelectImagesScene) selectImagesSceneController).setSearchTerm(searchTerm);
-                    } catch (Exception e) {
-                        System.out.println("Error changing to SelectImagesScene");
-                    }
+                    Platform.runLater( () -> {
+                        try {
+                            ApplicationScene selectImagesSceneController = changeScene(SceneType.SelectImagesScene, event);
+                            ((SelectImagesScene) selectImagesSceneController).setSearchTerm(searchTerm);
+                        } catch (Exception e) {
+                            System.out.println("Error changing to SelectImagesScene");
+                        }
+                    });
                 }
             }).start();
         }
