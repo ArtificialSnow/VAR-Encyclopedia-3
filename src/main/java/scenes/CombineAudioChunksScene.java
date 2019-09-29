@@ -3,6 +3,7 @@ package main.java.scenes;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -20,6 +21,8 @@ public class CombineAudioChunksScene extends ApplicationScene {
     @FXML private Button _quitButton;
     @FXML private Button _addChunkButton;
     @FXML private Button _removeChunkButton;
+    @FXML private Button _shiftChunkUp;
+    @FXML private Button _shiftChunkDown;
     @FXML private ListView<String> _searchTermsListView;
     @FXML private ListView<String> _audioChunksListView;
     @FXML private ListView<String> _selectedAudioChunksListView;
@@ -32,7 +35,6 @@ public class CombineAudioChunksScene extends ApplicationScene {
 
         File[] searchTermList = new File("./VAR-Encyclopedia/AudioChunks").listFiles();
         for (File searchTermDirectory : searchTermList) {
-            System.out.println(searchTermDirectory.getName());
             _searchTermsListView.getItems().add(searchTermDirectory.getName());
         }
     }
@@ -62,6 +64,32 @@ public class CombineAudioChunksScene extends ApplicationScene {
             } else {
                 _selectedAudioChunksListView.getItems().add(audioChunkToAdd);
             }
+        }
+    }
+
+    public void shiftChunkUpButtonHandler() {
+        int selectedChunk = _selectedAudioChunksListView.getSelectionModel().getSelectedIndex();
+        if (selectedChunk == -1) {
+            createInformationAlert("No Audio Chunk selected", "Please select an Audio Chunk");
+        } else if (selectedChunk == 0){
+            createInformationAlert("Cannot shift chunk up further", "Cannot shift chunk up further");
+        } else {
+            String audioChunk = _selectedAudioChunksListView.getItems().get(selectedChunk);
+            _selectedAudioChunksListView.getItems().remove(selectedChunk);
+            _selectedAudioChunksListView.getItems().add((selectedChunk - 1), audioChunk);
+        }
+    }
+
+    public void shiftChunkDownButtonHandler() {
+        int selectedChunk = _selectedAudioChunksListView.getSelectionModel().getSelectedIndex();
+        if (selectedChunk == -1) {
+            createInformationAlert("No Audio Chunk selected", "Please select an Audio Chunk");
+        } else if (selectedChunk == (_selectedAudioChunksListView.getItems().size() - 1)){
+            createInformationAlert("Cannot shift chunk down further", "Cannot shift chunk down further");
+        } else {
+            String audioChunk = _selectedAudioChunksListView.getItems().get(selectedChunk);
+            _selectedAudioChunksListView.getItems().remove(selectedChunk);
+            _selectedAudioChunksListView.getItems().add((selectedChunk + 1), audioChunk);
         }
     }
 
@@ -117,6 +145,8 @@ public class CombineAudioChunksScene extends ApplicationScene {
             }).start();
 
             changeScene(SceneType.SelectImagesScene, event);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(SceneType.SelectImagesScene.getPath()));
+            ((SelectImagesScene)loader.getController()).setSearchTerm(searchTerm);
         }
     }
 }
