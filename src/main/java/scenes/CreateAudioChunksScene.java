@@ -62,7 +62,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
     }
 
     public void searchButtonHandler() {
-        _searchTerm = _searchBar.getText();
+        _searchTerm = _searchBar.getText().replaceAll("(^\\s+)|(\\s+$)", "");
 
         if (_searchTerm == null || _searchTerm.length() == 0) {
             createInformationAlert("No Search Term", "Please enter a Search Term");
