@@ -27,19 +27,18 @@ public class DownloadImage extends Task<Object> {
 
 	@Override
 	protected Object call() throws Exception {
-		// delete all previous image
-		String cmd = "rm -f ./downloads/*.jpg";
-		ProcessBuilder pb = new ProcessBuilder("bash","-c",cmd);
+		// delete previous images
+		String removePreviousImagesCommands = "rm -f ./VAR-Encyclopedia/.temp/Images/*.jpg";
+		ProcessBuilder pb = new ProcessBuilder("bash", "-c", removePreviousImagesCommands);
 		Process process = pb.start();
 		process.waitFor();
 		
-		// get new image..
+		// get new images
 		try {
 			String apiKey = getAPIKey("apiKey");
 			String sharedSecret = getAPIKey("sharedSecret");
 
 			Flickr flickr = new Flickr(apiKey, sharedSecret, new REST());
-			
 			int page = 0;
 			
 	        PhotosInterface photos = flickr.getPhotosInterface();
@@ -49,20 +48,17 @@ public class DownloadImage extends Task<Object> {
 	        params.setText(_searchTerm);
 	        
 	        PhotoList<Photo> results = photos.search(params, _numOfImage, page);
-	        System.out.println("Retrieving " + results.size()+ " results");
-	        
 	        for (Photo photo: results) {
 	        	try {
 	        		Image image = photos.getImage(photo,Size.LARGE);
 		        	String filename = _searchTerm.trim().replace(' ', '-')+"-"+System.currentTimeMillis()+"-"+photo.getId()+".jpg";
-		        	//
-		        	File outputfile = new File("downloads",filename);
-		        	outputfile.getParentFile().mkdir();
-		        	outputfile.createNewFile();
-		        	//
+
+		        	File outputFile = new File("VAR-Encyclopedia/.temp/Images",filename);
+					outputFile.getParentFile().mkdir();
+					outputFile.createNewFile();
+
 		        	BufferedImage resizedImage = resizeImage(image,200,200);// need to edit
-		        	ImageIO.write(resizedImage, "jpg", outputfile);
-		        	System.out.println("Downloaded "+filename);
+		        	ImageIO.write(resizedImage, "jpg", outputFile);
 	        	} catch (FlickrException fe) {
 	        		System.err.println("Ignoring image " +photo.getId() +": "+ fe.getMessage());
 				}
@@ -74,8 +70,7 @@ public class DownloadImage extends Task<Object> {
 	}
 	
 	public static String getAPIKey(String key) throws Exception {
-		String config = System.getProperty("user.dir") 
-				+ System.getProperty("file.separator")+ "flickr-api-keys.txt"; 
+		String config = System.getProperty("user.dir") + System.getProperty("file.separator") + "flickr-api-keys.txt";
 		
 		File file = new File(config); 
 		BufferedReader br = new BufferedReader(new FileReader(file)); 
@@ -88,7 +83,7 @@ public class DownloadImage extends Task<Object> {
 			}
 		}
 		br.close();
-		throw new RuntimeException("Couldn't find " + key +" in config file "+file.getName());
+		throw new RuntimeException("Couldn't find " + key + " in config file "+ file.getName());
 	}
 	
 	public static BufferedImage resizeImage(final Image image, int width, int height) {
@@ -99,15 +94,5 @@ public class DownloadImage extends Task<Object> {
 		g.drawImage(image, 0, 0, width, height, null);//need to edit
 		g.dispose();
 		return BI;
-	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		DownloadImage image = new DownloadImage("bicycle", 5);
-		try {
-			image.call();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }

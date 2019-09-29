@@ -37,7 +37,7 @@ public class SelectImagesScene extends ApplicationScene {
     public void initialize() {
         _creationFactory = new CreationFactory();
 
-        File[] downloadList = new File("./downloads").listFiles();
+        File[] downloadList = new File("./VAR-Encyclopedia/.temp/Images").listFiles();
         ArrayList<String> nameOfImages = new ArrayList<String>();
         for (File searchTermDirectory : downloadList) {
            nameOfImages.add(searchTermDirectory.getName());
@@ -46,7 +46,7 @@ public class SelectImagesScene extends ApplicationScene {
 
         Image[] imageList = new Image[downloadList.length];
         for (int i = 0; i < downloadList.length;i++ ) {
-            File image = new File("./downloads/"+downloadList[i].getName());
+            File image = new File("./VAR-Encyclopedia/.temp/Images/"+downloadList[i].getName());
             String filelocation = image.toURI().toString();
             Image fxImage = new Image(filelocation);
             imageList[i]=fxImage;
