@@ -138,9 +138,31 @@ public class SelectImagesScene extends ApplicationScene {
     }
 
     public void createCreationButtonHandler(ActionEvent event) throws IOException {
-        String creationName = _creationName.getText();
+        String creationName = _creationName.getText().replaceAll("(^\\s+)|(\\s+$)", "");
         int numberOfImages = _selectedImagesListView.getItems().size();
 
+        if (creationName == null || creationName.length() == 0) {
+            createInformationAlert("No Creation Name entered", "Please enter a name for your creation.");
+        } else if (numberOfImages == 0) {
+            createInformationAlert("No Images selected", "Please select Images for your Creation");
+        } else {
+
+            File[] previousCreations = new File("./VAR-Encyclopedia/Creations").listFiles();
+            for (File previousCreation : previousCreations) {
+                String previousCreationName = previousCreation.getName();
+                if (previousCreationName.substring(0, previousCreationName.length() - 4).equals(creationName)) {
+                    Alert overrideAlert = createConfirmationAlert("A Creation with that name already exists. Would you like to override " + creationName + "?");
+
+                    if (overrideAlert.getResult() == ButtonType.YES) {
+                        createCreation(creationName, numberOfImages, event);
+                    }
+                }
+                createCreation(creationName, numberOfImages, event);
+            }
+        }
+    }
+
+    public void createCreation(String creationName, int numberOfImages, ActionEvent event) {
         String imageNames = "";
         for (String imageName : _selectedImagesListView.getItems()) {
             imageNames += imageName + " ";

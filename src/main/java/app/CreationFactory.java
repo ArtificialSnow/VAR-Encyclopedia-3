@@ -18,7 +18,7 @@ public class CreationFactory {
 //            ffmpeg -y -framerate $((${1}/${2})) -pattern_type glob -i './downloads/*.jpg' -c:v libx264 -vf fps=25 -pix_fmt yuv420p combinedImages.mp4
 
 //            String combineImageFile = "./src/main/resources/shellscripts/combineImageFile.sh " + duration + " " + numberOfImages;
-            String combineImageFile = "ffmpeg -y -framerate "+numberOfImages/duration + imageNames + " -c:v libx264 -vf fps=25 -pix_fmt yuv420p ./VAR-Encyclopedia/.temp/combinedImages.mp4";
+            String combineImageFile = "ffmpeg -y -framerate "+numberOfImages/duration + " " + imageNames + " -c:v libx264 -vf fps=25 -pix_fmt yuv420p ./VAR-Encyclopedia/.temp/combinedImages.mp4";
             ProcessBuilder combineImagesToVideoBuilder = new ProcessBuilder("bash", "-c", combineImageFile);
 
             Process combineImagesToVideoProcess = combineImagesToVideoBuilder.start();
