@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import main.java.app.AudioFactory;
+import main.java.app.DownloadImage;
 import main.java.app.SceneType;
 
 import java.io.File;
@@ -143,9 +144,14 @@ public class CombineAudioChunksScene extends ApplicationScene {
                     return null;
                 }
             }).start();
-
+            //
+            DownloadImage downloadImage = new DownloadImage(searchTerm,10);
+            downloadImage.run();
+            //
             ApplicationScene selectImagesSceneController = changeScene(SceneType.SelectImagesScene, event);
             ((SelectImagesScene)selectImagesSceneController).setSearchTerm(searchTerm);
+
+
         }
     }
 }

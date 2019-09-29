@@ -60,7 +60,7 @@ public class DownloadImage extends Task<Object> {
 		        	outputfile.getParentFile().mkdir();
 		        	outputfile.createNewFile();
 		        	//
-		        	BufferedImage resizedImage = resizeImage(image,800,600);// need to edit
+		        	BufferedImage resizedImage = resizeImage(image,200,200);// need to edit
 		        	ImageIO.write(resizedImage, "jpg", outputfile);
 		        	System.out.println("Downloaded "+filename);
 	        	} catch (FlickrException fe) {
@@ -74,8 +74,6 @@ public class DownloadImage extends Task<Object> {
 	}
 	
 	public static String getAPIKey(String key) throws Exception {
-		// TODO fix the following based on where you will have your config file stored
-
 		String config = System.getProperty("user.dir") 
 				+ System.getProperty("file.separator")+ "flickr-api-keys.txt"; 
 		
@@ -112,6 +110,4 @@ public class DownloadImage extends Task<Object> {
 			e.printStackTrace();
 		}
 	}
-
-
 }

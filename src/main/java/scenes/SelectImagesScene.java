@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import main.java.app.CreationFactory;
 import main.java.app.SceneType;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -136,11 +137,16 @@ public class SelectImagesScene extends ApplicationScene {
         }
     }
 
-    public void createCreationButtonHandler() {
+    public void createCreationButtonHandler(ActionEvent event) throws IOException {
         updateDownloadList();
         _creationFactory.combineImagesToVideo(_imageSelected.getItems().size());
+        System.out.println("finish combine images");
         _creationFactory.combineVideoAndText(_searchTerm);
+        System.out.println("finish combine video and text");
         _creationFactory.combineVideoAndAudio(_creationName.getText());
+        System.out.println("finish combine video and audio");
+
+        changeScene(SceneType.MainMenuScene, event);
     }
 
     public void homeButtonHandler(ActionEvent event) throws IOException {
