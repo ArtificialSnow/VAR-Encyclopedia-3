@@ -170,9 +170,9 @@ public class SelectImagesScene extends ApplicationScene {
                 if (overrideAlert.getResult() == ButtonType.YES) {
                     createCreation(creationName, numberOfImages, event);
                 }
+            } else {
+                createCreation(creationName, numberOfImages, event);
             }
-
-            createCreation(creationName, numberOfImages, event);
         }
     }
 

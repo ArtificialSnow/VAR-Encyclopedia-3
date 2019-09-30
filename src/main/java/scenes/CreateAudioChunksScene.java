@@ -124,7 +124,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
 
     public void checkTextLength() {
         Platform.runLater( () -> {
-            if (_editor.getText().split("\\s").length >= 40) {
+            if (_editor.getText().split("\\s").length > 40) {
                 _wordLimit.setStyle("-fx-font-weight: bold; -fx-text-fill: red; -fx-background-color: silver;");
             } else {
                 _wordLimit.setStyle("-fx-font-weight: bold; -fx-text-fill: #4c7450; -fx-background-color: silver;");
@@ -205,11 +205,17 @@ public class CreateAudioChunksScene extends ApplicationScene {
     }
 
     private boolean validAudioChunk() {
-        if (_editor.getText().split("\\s").length >= 40) {
+        if (_editor.getText().split("\\s").length > 40) {
             createInformationAlert("Audio chunk too long", "Maximum if 40 words per audio chunk");
             return false;
         } else if (_editor.getText().length() == 0) {
             createInformationAlert("No content in Audio Chunk", "Please add the text for the audio chunk into the editor");
+            return false;
+        } else if (_searchTerm == null) {
+            createInformationAlert("No search term for Audio Chunk", "Please enter a search term for the Audio Chunk");
+            return false;
+        } else if (_wikipediaSearch.contentDoesNotExist()) {
+            createInformationAlert("This is not a valid Search Term", "No content exists on Wikipedia for this search term");
             return false;
         }
         return true;
