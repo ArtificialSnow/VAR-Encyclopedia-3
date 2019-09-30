@@ -38,7 +38,12 @@ public class CreateAudioChunksScene extends ApplicationScene {
         for (String voice : _voiceSynthesizer.getVoices()){
             _voiceSynthesizerSelection.getItems().add(voice);
         }
-        _voiceSynthesizerSelection.getSelectionModel().selectFirst();
+
+        if (_voiceSynthesizerSelection.getItems().contains("kal_diphone")) {
+            _voiceSynthesizerSelection.getSelectionModel().select("kal_diphone");
+        } else {
+            _voiceSynthesizerSelection.getSelectionModel().selectFirst();
+        }
     }
 
     public void homeButtonHandler(ActionEvent event) throws IOException {

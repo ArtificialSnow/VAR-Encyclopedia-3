@@ -77,6 +77,9 @@ public class ViewExistingCreationsScene extends ApplicationScene {
             mediaPlayerStage.setScene(new Scene(parentScene));
             mediaPlayerStage.setResizable(false);
             mediaPlayerStage.setTitle(creation);
+            mediaPlayerStage.setOnCloseRequest( closeStage -> {
+                viewer.stopMedia();
+            });
             mediaPlayerStage.show();
         }
     }

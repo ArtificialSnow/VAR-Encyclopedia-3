@@ -63,7 +63,11 @@ public class CombineAudioChunksScene extends ApplicationScene {
             if (_selectedAudioChunksListView.getItems().contains(audioChunkToAdd)) {
                 createInformationAlert("Audio Chunk already added", "Audio Chunk " + audioChunkToAdd + " already added");
             } else {
+                int index = _audioChunksListView.getItems().indexOf(audioChunkToAdd);
                 _selectedAudioChunksListView.getItems().add(audioChunkToAdd);
+                if (index < (_audioChunksListView.getItems().size() - 1)) {
+                    _audioChunksListView.getSelectionModel().select(index + 1);
+                }
             }
         }
     }
@@ -102,7 +106,11 @@ public class CombineAudioChunksScene extends ApplicationScene {
         if (audioChunkToRemove == null) {
             createInformationAlert("No Audio Chunk Selected", "Please select an Audio Chunk");
         } else {
+            int index = _selectedAudioChunksListView.getItems().indexOf(audioChunkToRemove);
             _selectedAudioChunksListView.getItems().remove(audioChunkToRemove);
+            if (index > 0) {
+                _selectedAudioChunksListView.getSelectionModel().select(index - 1);
+            }
         }
     }
 

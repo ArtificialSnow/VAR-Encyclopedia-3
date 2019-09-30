@@ -95,7 +95,11 @@ public class SelectImagesScene extends ApplicationScene {
             if (_selectedImagesListView.getItems().contains(imageToAdd)) {
                 createInformationAlert("Image already added", "Image " + imageToAdd + " already added");
             } else {
+                int index = _downloadedImagesListView.getItems().indexOf(imageToAdd);
                 _selectedImagesListView.getItems().add(imageToAdd);
+                if (index < (_downloadedImagesListView.getItems().size() - 1)) {
+                    _downloadedImagesListView.getSelectionModel().select(index + 1);
+                }
             }
         }
     }
@@ -105,7 +109,11 @@ public class SelectImagesScene extends ApplicationScene {
         if (imageToRemove == null) {
             createInformationAlert("No Image Selected", "Please select an Image");
         } else {
+            int index = _selectedImagesListView.getItems().indexOf(imageToRemove);
             _selectedImagesListView.getItems().remove(imageToRemove);
+            if (index > 0) {
+                _selectedImagesListView.getSelectionModel().select(index - 1);
+            }
         }
     }
 
@@ -156,16 +164,16 @@ public class SelectImagesScene extends ApplicationScene {
                     break;
                 }
             }
-        }
 
-        if (fileAlreadyExists) {
-            Alert overrideAlert = createConfirmationAlert("A Creation with that name already exists. Would you like to override " + creationName + "?");
-            if (overrideAlert.getResult() == ButtonType.YES) {
-                createCreation(creationName, numberOfImages, event);
+            if (fileAlreadyExists) {
+                Alert overrideAlert = createConfirmationAlert("A Creation with that name already exists. Would you like to override " + creationName + "?");
+                if (overrideAlert.getResult() == ButtonType.YES) {
+                    createCreation(creationName, numberOfImages, event);
+                }
             }
-        }
 
-        createCreation(creationName, numberOfImages, event);
+            createCreation(creationName, numberOfImages, event);
+        }
     }
 
     public void createCreation(String creationName, int numberOfImages, ActionEvent event) {
@@ -174,7 +182,6 @@ public class SelectImagesScene extends ApplicationScene {
             imageNames += "./VAR-Encyclopedia/.temp/Images/" + imageName + " ";
         }
         imageNames = imageNames.trim();
-        System.out.println(imageNames);
 
         _createCreationButton.setDisable(true);
 

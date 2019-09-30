@@ -83,4 +83,10 @@ public class CreationsViewer {
             _mediaPlayer.seek(Duration.ZERO);
         }
     }
+
+    public void stopMedia() {
+        if (_mediaPlayer != null) {
+            _mediaPlayer.stop();
+        }
+    }
 }
