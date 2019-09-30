@@ -159,18 +159,23 @@ public class CreateAudioChunksScene extends ApplicationScene {
     }
 
     public void saveButtonHandler() {
-        String chunkName = _fileNameTextArea.getText();
-        if (validAudioChunk()) {
-            String audioChunkText = _editor.getText();
+        String chunkName = _fileNameTextArea.getText().replaceAll("(^\\s+)|(\\s+$)", "");;
 
-            if (_audioFactory.chunkAlreadyExists(_searchTerm, chunkName)) {
-                Alert overrideAlert = createConfirmationAlert("Audio Chunk " + chunkName + " already exists. Would you like to override?");
+        if (chunkName == null || chunkName.length() == 0) {
+            createInformationAlert("No Chunk Name specified", "Please enter a name for the Audio Chunk");
+        } else {
+            if (validAudioChunk()) {
+                String audioChunkText = _editor.getText();
 
-                if (overrideAlert.getResult() == ButtonType.YES) {
+                if (_audioFactory.chunkAlreadyExists(_searchTerm, chunkName)) {
+                    Alert overrideAlert = createConfirmationAlert("Audio Chunk " + chunkName + " already exists. Would you like to override?");
+
+                    if (overrideAlert.getResult() == ButtonType.YES) {
+                        saveAudioChunk(chunkName, audioChunkText);
+                    }
+                } else {
                     saveAudioChunk(chunkName, audioChunkText);
                 }
-            } else {
-                saveAudioChunk(chunkName, audioChunkText);
             }
         }
     }
