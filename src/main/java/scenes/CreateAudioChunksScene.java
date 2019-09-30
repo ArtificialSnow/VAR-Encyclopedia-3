@@ -76,9 +76,13 @@ public class CreateAudioChunksScene extends ApplicationScene {
                 Alert searchAlert = createConfirmationAlert("Are you sure you wish to search? You will lose all existing progress.");
 
                 if (searchAlert.getResult() == ButtonType.YES) {
+                    _editor.clear();
+                    _fileNameTextArea.clear();
                     searchWikipedia();
                 }
             } else {
+                _editor.clear();
+                _fileNameTextArea.clear();
                 searchWikipedia();
             }
         }
