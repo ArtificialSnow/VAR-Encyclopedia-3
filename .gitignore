@@ -23,9 +23,9 @@
 hs_err_pid*
 
 #Files created by program
-VAR-Encyclopedia*
+VAR-Encyclopedia/
 .metadata
 .idea
-out
+out/
 Assignment3.iml
 src/META-INF
