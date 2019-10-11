@@ -27,16 +27,26 @@ public class SelectImagesScene extends ApplicationScene {
     @FXML private Button _shiftImageDownButton;
     @FXML private Button _createCreationButton;
     @FXML private TextField _creationName;
+    @FXML private ChoiceBox<String> _backgroundMusicSelection;
     @FXML private ListView<String> _downloadedImagesListView;
     @FXML private ListView<String> _selectedImagesListView;
 
     private String _searchTerm;
+    private String _nameOfMusic;
     private CreationFactory _creationFactory;
 
 
     @FXML
     public void initialize() {
         _creationFactory = new CreationFactory();
+
+        File[] BGMList = new File("./VAR-Encyclopedia/.temp/BGM").listFiles();
+        for (File BGMDirectory : BGMList) {
+            _backgroundMusicSelection.getItems().add(BGMDirectory.getName().substring(0,BGMDirectory.getName().length() - 4));
+        }
+        _backgroundMusicSelection.getSelectionModel().selectFirst();
+
+        _nameOfMusic = _backgroundMusicSelection.getSelectionModel().getSelectedItem();
 
         File[] downloadList = new File("./VAR-Encyclopedia/.temp/Images").listFiles();
         ArrayList<String> nameOfImages = new ArrayList<String>();
@@ -193,7 +203,9 @@ public class SelectImagesScene extends ApplicationScene {
             protected Void call() throws Exception {
                 _creationFactory.combineImagesToVideo(finalImageNames, numberOfImages);
                 _creationFactory.combineVideoAndText(searchTerm);
+                _creationFactory.addBGMToVideo(_nameOfMusic);
                 _creationFactory.combineVideoAndAudio(creationName);
+
                 return null;
             }
 
