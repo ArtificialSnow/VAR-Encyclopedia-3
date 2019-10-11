@@ -42,6 +42,17 @@ public class CreationFactory {
 
     }
 
+    public void addBGMToVideo(String nameOfMusic){
+        String addBGMToVideoCommand = "ffmpeg -i ./VAR-Encyclopedia/.temp/BGM/"+nameOfMusic+".mp3 -i ./VAR-Encyclopedia/.temp/combinedVideo.mp4 -filter_complex \"[0:a][1:a]amerge,pan=stereo|c0<c0+c2|c1<c1+c3[out]\" -map 1:v -map \"[out]\" -c:v copy -shortest ./VAR-Encyclopedia/.temp/BackgroundVideo.mp4";
+        ProcessBuilder addBGMToVideoBuilder = new ProcessBuilder("bash","-c",addBGMToVideoCommand);
+        try {
+            Process addBGMToVideoProcess = addBGMToVideoBuilder.start();
+            addBGMToVideoProcess.waitFor();
+        } catch (Exception e) {
+            System.out.println("Error adding background music");
+        }
+    }
+
     public void combineVideoAndAudio(String nameOfCreation) {
         String combineVideoAndAudioCommand = "ffmpeg -y -i ./VAR-Encyclopedia/.temp/combinedVideo.mp4 -i ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav -c:a aac -strict experimental ./VAR-Encyclopedia/Creations/"+nameOfCreation+".mp4";
         ProcessBuilder combineVideoAndAudioBuilder = new ProcessBuilder("bash", "-c", combineVideoAndAudioCommand);
@@ -53,6 +64,8 @@ public class CreationFactory {
         }
 
     }
+
+
     public void deleteCreation(String creationName) {
         String[] deleteCreationCommands = { "sh", "-c", "./src/main/resources/shellscripts/deleteCreation.sh" + " \"" + creationName +"\"" };
         ProcessBuilder deleteCreationBuilder = new ProcessBuilder(deleteCreationCommands);
