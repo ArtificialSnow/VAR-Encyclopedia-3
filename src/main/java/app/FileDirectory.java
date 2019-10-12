@@ -8,6 +8,9 @@ public class FileDirectory {
     private final String makeAudioChunksFolder;
     private final String makeCreationsFolder;
     private final String makeTempFolder;
+    private final String makeRegularCreationsFolder;
+    private final String makeRedactedCreationsFolder;
+    private final String makeCurrentCreationsTextFile;
 
     public FileDirectory() {
 
@@ -16,6 +19,9 @@ public class FileDirectory {
         makeMainFolder = "mkdir VAR-Encyclopedia; ";
         makeAudioChunksFolder = "mkdir -p VAR-Encyclopedia/AudioChunks; ";
         makeCreationsFolder = "mkdir -p VAR-Encyclopedia/Creations; ";
+        makeRegularCreationsFolder = "mkdir -p VAR-Encyclopedia/Creations/RegularCreations; ";
+        makeRedactedCreationsFolder = "mkdir -p VAR-Encyclopedia/Creations/RedactedCreations; ";
+        makeCurrentCreationsTextFile = "touch VAR-Encyclopedia/Creations/CurrentCreations.txt; ";
         makeTempFolder = "mkdir -p VAR-Encyclopedia/.temp; ";
     }
 
@@ -29,7 +35,8 @@ public class FileDirectory {
             int exitStatus = checkFilesProcess.waitFor();
 
             if (exitStatus == 0) {
-                String[] createFilesCommands = { pathToBash, "-c", makeMainFolder + makeCreationsFolder + makeAudioChunksFolder + makeTempFolder };
+                String[] createFilesCommands = { pathToBash, "-c", makeMainFolder + makeCreationsFolder + makeRegularCreationsFolder + makeRedactedCreationsFolder +
+                        makeCurrentCreationsTextFile + makeAudioChunksFolder + makeTempFolder };
                 ProcessBuilder createFilesBuilder = new ProcessBuilder(createFilesCommands);
 
                 Process createFilesProcess = createFilesBuilder.start();

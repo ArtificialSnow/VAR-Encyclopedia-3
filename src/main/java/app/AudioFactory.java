@@ -56,7 +56,7 @@ public class AudioFactory {
 
     public boolean chunkAlreadyExists(String searchTerm, String chunkName) {
         boolean directoryFound = false;
-        File[] fileList = new File("VAR-Encyclopedia/AudioChunks").listFiles();
+        File[] fileList = new File(ApplicationFolder.AudioChunks.getPath()).listFiles();
 
         for (File file : fileList) {
             if (file.getName().equals(searchTerm)) {
@@ -65,7 +65,7 @@ public class AudioFactory {
         }
 
         if (directoryFound) {
-            File[] chunkList = new File("VAR-Encyclopedia/AudioChunks/" + searchTerm).listFiles();
+            File[] chunkList = new File(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTerm).listFiles();
 
             for (File chunk : chunkList) {
                 if (chunk.getName().equals(chunkName + ".wav")) {

@@ -11,10 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.media.Media;
 import javafx.stage.Stage;
-import main.java.app.AudioFactory;
-import main.java.app.CreationFactory;
-import main.java.app.FileDirectory;
-import main.java.app.SceneType;
+import main.java.app.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +41,7 @@ public class ViewExistingCreationsScene extends ApplicationScene {
     public void updateCreationsList() {
         _creationsList.getItems().clear();
 
-        File[] creationsList = new File("./VAR-Encyclopedia/Creations").listFiles();
+        File[] creationsList = new File(ApplicationFolder.RegularCreations.getPath()).listFiles();
         for (File creation : creationsList) {
             String creationName = creation.getName();
             _creationsList.getItems().add(creationName.substring(0, creationName.length() - 4));
@@ -66,11 +63,11 @@ public class ViewExistingCreationsScene extends ApplicationScene {
             createInformationAlert("No Creation Selected", "Please select a Creation");
 
         } else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/resources/scenes/CreationsViewer.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(SceneType.CreationsViewer.getPath()));
             Parent parentScene = loader.load();
             CreationsViewer viewer = loader.getController();
 
-            Media audioChunkMedia = new Media(Paths.get("./VAR-Encyclopedia/Creations/" + creation + ".mp4").toUri().toString());
+            Media audioChunkMedia = new Media(Paths.get(ApplicationFolder.RegularCreations.getPath() + File.separator + creation + ".mp4").toUri().toString());
             viewer.setMedia(audioChunkMedia);
 
             Stage mediaPlayerStage = new Stage();

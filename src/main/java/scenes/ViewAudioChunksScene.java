@@ -8,6 +8,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import main.java.app.ApplicationFolder;
 import main.java.app.AudioFactory;
 import main.java.app.FileDirectory;
 import main.java.app.SceneType;
@@ -34,14 +35,14 @@ public class ViewAudioChunksScene extends ApplicationScene {
         _audioFactory = new AudioFactory();
         _fileDirectory = new FileDirectory();
 
-        _fileDirectory.deleteAllEmptyDirectories("./VAR-Encyclopedia/AudioChunks");
+        _fileDirectory.deleteAllEmptyDirectories(ApplicationFolder.AudioChunks.getPath());
         updateSearchTermList();
     }
 
     public void updateSearchTermList() {
         _searchTermList.getItems().clear();
 
-        File[] searchTermList = new File("./VAR-Encyclopedia/AudioChunks").listFiles();
+        File[] searchTermList = new File(ApplicationFolder.AudioChunks.getPath()).listFiles();
         for (File searchTermDirectory : searchTermList) {
             _searchTermList.getItems().add(searchTermDirectory.getName());
         }
@@ -52,10 +53,10 @@ public class ViewAudioChunksScene extends ApplicationScene {
 
         String searchTermDirectory = _searchTermList.getSelectionModel().getSelectedItem();
         if (searchTermDirectory != null) {
-            File[] audioChunksList = new File("./VAR-Encyclopedia/AudioChunks/" + searchTermDirectory).listFiles();
+            File[] audioChunksList = new File(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTermDirectory).listFiles();
 
             if ( audioChunksList.length == 0) {
-                _fileDirectory.deleteAllEmptyDirectories("./VAR-Encyclopedia/AudioChunks");
+                _fileDirectory.deleteAllEmptyDirectories(ApplicationFolder.AudioChunks.getPath());
                 updateSearchTermList();
 
             } else {
@@ -87,7 +88,7 @@ public class ViewAudioChunksScene extends ApplicationScene {
                 _playButton.setText("Stop");
                 _deleteButton.setDisable(true);
 
-                Media audioChunkMedia = new Media(Paths.get("./VAR-Encyclopedia/AudioChunks/" + searchTerm + "/" + audioChunk + ".wav").toUri().toString());
+                Media audioChunkMedia = new Media(Paths.get(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTerm + File.separator + audioChunk + ".wav").toUri().toString());
                 _mediaPlayer = new MediaPlayer(audioChunkMedia);
 
                 _mediaPlayer.setOnEndOfMedia( () -> {
