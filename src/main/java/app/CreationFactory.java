@@ -1,6 +1,7 @@
 package main.java.app;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 
 public class CreationFactory {
@@ -43,6 +44,14 @@ public class CreationFactory {
     }
 
     public void addBGMToVideo(String nameOfMusic){
+        File soundFile = new File("./VAR-Encyclopedia/.temp/sound.wav");
+        if(soundFile.exists()){
+            soundFile.delete();
+        }
+        File BGMFile = new File("./VAR-Encyclopedia/.temp/BackgroundAudio.wav");
+        if(soundFile.exists()){
+            BGMFile.delete();
+        }
         String getDurationCommand = "soxi -D ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav";
         ProcessBuilder getDuration = new ProcessBuilder("bash", "-c", getDurationCommand);
 
@@ -58,7 +67,7 @@ public class CreationFactory {
             getDurationProcess.waitFor();
 
             double duration = Double.parseDouble(stdout.readLine());
-            
+
             String trimBGMCommand = "sox -m ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav ./VAR-Encyclopedia/.temp/sound.wav ./VAR-Encyclopedia/.temp/BackgroundAudio.wav trim 0 "+duration;
             ProcessBuilder trimBGMBuilder = new ProcessBuilder("bash","-c",trimBGMCommand);
             Process trimBGMProcess = trimBGMBuilder.start();
