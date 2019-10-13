@@ -44,7 +44,13 @@ public class SelectImagesScene extends ApplicationScene {
         for (File BGMDirectory : BGMList) {
             _backgroundMusicSelection.getItems().add(BGMDirectory.getName().substring(0,BGMDirectory.getName().length() - 4));
         }
-        _backgroundMusicSelection.getSelectionModel().selectFirst();
+        if (_backgroundMusicSelection.getItems().contains("7OOP3D_-_Odder_Stuff_(Duckettized)")){
+            _backgroundMusicSelection.getSelectionModel().select("7OOP3D_-_Odder_Stuff_(Duckettized)");
+        } else if (_backgroundMusicSelection.getItems().contains("septahelix_-_Triptych_of_Snippets")){
+            _backgroundMusicSelection.getSelectionModel().select("septahelix_-_Triptych_of_Snippets");
+        } else {
+            _backgroundMusicSelection.getSelectionModel().selectFirst();
+        }
 
         _nameOfMusic = _backgroundMusicSelection.getSelectionModel().getSelectedItem();
 
