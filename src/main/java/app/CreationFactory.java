@@ -49,7 +49,7 @@ public class CreationFactory {
             soundFile.delete();
         }
         File BGMFile = new File("./VAR-Encyclopedia/.temp/BackgroundAudio.wav");
-        if(soundFile.exists()){
+        if(BGMFile.exists()){
             BGMFile.delete();
         }
         String getDurationCommand = "soxi -D ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav";
