@@ -50,7 +50,7 @@ public class ViewExistingCreationsScene extends ApplicationScene {
             ArrayList<String> creations = new ArrayList<>(Files.readAllLines(Paths.get(ApplicationFolder.Creations.getPath() + File.separator + "CurrentCreations.txt")));
 
             for (String creation : creations) {
-                String[] creationData = creation.split(" ");
+                String[] creationData = creation.split(":");
 
                 _creationsTableView.getItems().add(new Creation(creationData[0], creationData[1]));
             }

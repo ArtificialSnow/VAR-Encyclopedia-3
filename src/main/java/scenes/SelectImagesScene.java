@@ -158,7 +158,7 @@ public class SelectImagesScene extends ApplicationScene {
             createInformationAlert("No Images selected", "Please select Images for your Creation");
         } else {
 
-            File[] previousCreations = new File(ApplicationFolder.Creations.getPath()).listFiles();
+            File[] previousCreations = new File(ApplicationFolder.RegularCreations.getPath()).listFiles();
             for (File previousCreation : previousCreations) {
                 String previousCreationName = previousCreation.getName();
                 if (previousCreationName.substring(0, previousCreationName.length() - 4).equals(creationName)) {
@@ -170,7 +170,7 @@ public class SelectImagesScene extends ApplicationScene {
             if (fileAlreadyExists) {
                 Alert overrideAlert = createConfirmationAlert("A Creation with that name already exists. Would you like to override " + creationName + "?");
                 if (overrideAlert.getResult() == ButtonType.YES) {
-                    _creationFactory.deleteFromCreationsFile(creationName, _searchTerm);
+                    _creationFactory.deleteFromCreationsFile(creationName, "");
                     createCreation(creationName, numberOfImages, event);
                 }
             } else {
