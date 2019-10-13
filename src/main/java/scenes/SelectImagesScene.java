@@ -32,7 +32,6 @@ public class SelectImagesScene extends ApplicationScene {
     @FXML private ListView<String> _selectedImagesListView;
 
     private String _searchTerm;
-    private String _nameOfMusic;
     private CreationFactory _creationFactory;
 
 
@@ -44,15 +43,13 @@ public class SelectImagesScene extends ApplicationScene {
         for (File BGMDirectory : BGMList) {
             _backgroundMusicSelection.getItems().add(BGMDirectory.getName().substring(0,BGMDirectory.getName().length() - 4));
         }
-        if (_backgroundMusicSelection.getItems().contains("7OOP3D_-_Odder_Stuff_(Duckettized)")){
-            _backgroundMusicSelection.getSelectionModel().select("7OOP3D_-_Odder_Stuff_(Duckettized)");
+        if (_backgroundMusicSelection.getItems().contains("cyba_-_yellow")){
+            _backgroundMusicSelection.getSelectionModel().select("cyba_-_yellow");
         } else if (_backgroundMusicSelection.getItems().contains("septahelix_-_Triptych_of_Snippets")){
             _backgroundMusicSelection.getSelectionModel().select("septahelix_-_Triptych_of_Snippets");
         } else {
-            _backgroundMusicSelection.getSelectionModel().selectFirst();
+            _backgroundMusicSelection.getSelectionModel().select("7OOP3D_-_Odder_Stuff_(Duckettized)");
         }
-
-        _nameOfMusic = _backgroundMusicSelection.getSelectionModel().getSelectedItem();
 
         File[] downloadList = new File("./VAR-Encyclopedia/.temp/Images").listFiles();
         ArrayList<String> nameOfImages = new ArrayList<String>();
@@ -203,13 +200,14 @@ public class SelectImagesScene extends ApplicationScene {
 
         String searchTerm = _searchTerm;
         String finalImageNames = imageNames;
+        String nameOfMusic = _backgroundMusicSelection.getSelectionModel().getSelectedItem();
         new Thread(new Task<Void>() {
 
             @Override
             protected Void call() throws Exception {
                 _creationFactory.combineImagesToVideo(finalImageNames, numberOfImages);
                 _creationFactory.combineVideoAndText(searchTerm);
-                _creationFactory.addBGMToVideo(_nameOfMusic);
+                _creationFactory.addBGMToVideo(nameOfMusic);
                 _creationFactory.combineVideoAndAudio(creationName);
 
                 return null;
