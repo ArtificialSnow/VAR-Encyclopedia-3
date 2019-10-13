@@ -44,6 +44,7 @@ public class CreationFactory {
     }
 
     public void addBGMToVideo(String nameOfMusic){
+        //check if file already exist to avoid crash
         File soundFile = new File("./VAR-Encyclopedia/.temp/sound.wav");
         if(soundFile.exists()){
             soundFile.delete();
@@ -52,22 +53,24 @@ public class CreationFactory {
         if(BGMFile.exists()){
             BGMFile.delete();
         }
-        String getDurationCommand = "soxi -D ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav";
-        ProcessBuilder getDuration = new ProcessBuilder("bash", "-c", getDurationCommand);
-
 
         try {
+            // create a music file (mp3 to wav)
             String createMusicFileCommand = "ffmpeg -i ./VAR-Encyclopedia/.temp/BGM/"+nameOfMusic+".mp3 -acodec pcm_u8 -ar 16000 ./VAR-Encyclopedia/.temp/sound.wav";
             ProcessBuilder createMusicFileBuilder = new ProcessBuilder("bash","-c",createMusicFileCommand);
             Process createMusicFileProcess = createMusicFileBuilder.start();
             createMusicFileProcess.waitFor();
 
+            // get duration of audio chunk
+            String getDurationCommand = "soxi -D ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav";
+            ProcessBuilder getDuration = new ProcessBuilder("bash", "-c", getDurationCommand);
             Process getDurationProcess = getDuration.start();
             BufferedReader stdout = new BufferedReader(new InputStreamReader(getDurationProcess.getInputStream()));
             getDurationProcess.waitFor();
 
             double duration = Double.parseDouble(stdout.readLine());
 
+            //trim the music file
             String trimBGMCommand = "sox -m ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav ./VAR-Encyclopedia/.temp/sound.wav ./VAR-Encyclopedia/.temp/BackgroundAudio.wav trim 0 "+duration;
             ProcessBuilder trimBGMBuilder = new ProcessBuilder("bash","-c",trimBGMCommand);
             Process trimBGMProcess = trimBGMBuilder.start();
@@ -80,7 +83,6 @@ public class CreationFactory {
 
     public void combineVideoAndAudio(String nameOfCreation) {
         String combineVideoAndAudioCommand = "ffmpeg -y -i ./VAR-Encyclopedia/.temp/combinedVideo.mp4 -i ./VAR-Encyclopedia/.temp/BackgroundAudio.wav -c:a aac -strict experimental ./VAR-Encyclopedia/Creations/"+nameOfCreation+".mp4";
-//        String combineVideoAndAudioCommand = "ffmpeg -y -i ./VAR-Encyclopedia/.temp/combinedVideo.mp4 -i ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav -c:a aac -strict experimental ./VAR-Encyclopedia/Creations/"+nameOfCreation+".mp4";
         ProcessBuilder combineVideoAndAudioBuilder = new ProcessBuilder("bash", "-c", combineVideoAndAudioCommand);
         try{
             Process combineVideoAndAudioProcess = combineVideoAndAudioBuilder.start();
