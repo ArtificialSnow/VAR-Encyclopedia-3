@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.PlayQuizScene">
+    <children>
+        <BorderPane layoutX="60.0" layoutY="75.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <MediaView fx:id="_mediaView" fitHeight="300.0" fitWidth="600.0" BorderPane.alignment="CENTER" />
+            </center>
+            <bottom>
+                <VBox prefHeight="18.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Slider fx:id="_timeBar" />
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <Button fx:id="_skipBackward" mnemonicParsing="false" onAction="#skipBackButtonHandler" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: silver;" text="Skip Backward" />
+                                <Region prefHeight="26.0" prefWidth="10.0" />
+                                <Button fx:id="_playPause" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pausePlayMethodHandler" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: silver;" text="Pause" />
+                                <Region prefHeight="26.0" prefWidth="10.0" />
+                                <Button fx:id="_skipForward" mnemonicParsing="false" onAction="#skipForwardButtonHandler" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: silver;" text="Skip Forward" />
+                                <Region prefHeight="200.0" prefWidth="10.0" />
+                                <Label fx:id="_currentTime" style="-fx-text-fill: silver;" text="00:00" />
+                            </children>
+                        </HBox>
+                  <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="_searchTermField" promptText="Enter the search term" />
+                        <Region prefHeight="200.0" prefWidth="20.0" />
+                        <Button fx:id="_submitAnswerButton" mnemonicParsing="false" onAction="#submitAnswerButtonHandler" text="Submit" />
+                        <Region prefHeight="50.0" prefWidth="116.0" />
+                     </children>
+                  </HBox>
+                    </children>
+                </VBox>
+            </bottom>
+        </BorderPane>
+    </children>
+</AnchorPane>

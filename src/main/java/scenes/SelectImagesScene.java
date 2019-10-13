@@ -198,6 +198,8 @@ public class SelectImagesScene extends ApplicationScene {
                 _creationFactory.combineVideoAndText(searchTerm);
                 _creationFactory.combineVideoAndAudio(creationName);
                 _creationFactory.writeToCreationsFile(creationName, searchTerm);
+
+
                 return null;
             }
 

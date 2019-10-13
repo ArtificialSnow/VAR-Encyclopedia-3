@@ -45,15 +45,16 @@ public class CreationFactory {
 
     public void combineVideoAndAudio(String nameOfCreation) {
         String combineVideoAndAudioCommand = "ffmpeg -y -i " + ApplicationFolder.Temp.getPath() + "/combinedVideo.mp4 -i " + ApplicationFolder.Temp.getPath() + "/tempCombinedChunks.wav -c:a aac -strict experimental " + ApplicationFolder.RegularCreations.getPath() + File.separator + nameOfCreation+ ".mp4";
-        ProcessBuilder combineVideoAndAudioBuilder = new ProcessBuilder("bash", "-c", combineVideoAndAudioCommand);
+        String createRedactedVideoCommand = "ffmpeg -y -i " + ApplicationFolder.Temp.getPath() + "/combinedImages.mp4 -i " + ApplicationFolder.Temp.getPath() + "/tempCombinedChunks.wav -c:a aac -strict experimental " + ApplicationFolder.RedactedCreations.getPath() + File.separator + nameOfCreation+ ".mp4";
+        ProcessBuilder combineVideoAndAudioBuilder = new ProcessBuilder("bash", "-c", combineVideoAndAudioCommand + "; " + createRedactedVideoCommand);
         try{
             Process combineVideoAndAudioProcess = combineVideoAndAudioBuilder.start();
             combineVideoAndAudioProcess.waitFor();
         } catch (Exception e) {
             System.out.print("Error combing Video and Audio");
         }
-
     }
+
     public void deleteCreation(String creationName) {
         String[] deleteCreationCommands = { "sh", "-c", "./src/main/resources/shellscripts/deleteCreation.sh" + " \"" + creationName +"\"" };
         ProcessBuilder deleteCreationBuilder = new ProcessBuilder(deleteCreationCommands);

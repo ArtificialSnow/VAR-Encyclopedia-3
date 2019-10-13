@@ -16,7 +16,7 @@ public enum ApplicationFolder {
     private String _path;
 
     private ApplicationFolder(String path) {
-        _path = path.replaceAll("//", File.separator);
+        _path = path.replaceAll("/", File.separator);
     }
 
     public String getPath() {

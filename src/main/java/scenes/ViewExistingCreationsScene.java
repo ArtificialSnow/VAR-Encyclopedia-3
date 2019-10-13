@@ -78,8 +78,8 @@ public class ViewExistingCreationsScene extends ApplicationScene {
             Parent parentScene = loader.load();
             CreationsViewer viewer = loader.getController();
 
-            Media audioChunkMedia = new Media(Paths.get(ApplicationFolder.RegularCreations.getPath() + File.separator + creation.getName() + ".mp4").toUri().toString());
-            viewer.setMedia(audioChunkMedia);
+            Media creationMedia = new Media(Paths.get(ApplicationFolder.RegularCreations.getPath() + File.separator + creation.getName() + ".mp4").toUri().toString());
+            viewer.setMedia(creationMedia);
 
             Stage mediaPlayerStage = new Stage();
             mediaPlayerStage.setScene(new Scene(parentScene));

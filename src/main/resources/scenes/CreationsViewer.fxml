@@ -22,11 +22,11 @@
                   <Slider fx:id="_timeBar" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="_skipBackward" mnemonicParsing="false" onAction="#skipBackButtonHandler" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: silver;" text="Rewind" />
+                        <Button fx:id="_skipBackward" mnemonicParsing="false" onAction="#skipBackButtonHandler" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: silver;" text="Skip Backward" />
                         <Region prefHeight="26.0" prefWidth="10.0" />
                         <Button fx:id="_playPause" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pausePlayMethodHandler" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: silver;" text="Pause" />
                         <Region prefHeight="26.0" prefWidth="10.0" />
-                        <Button fx:id="_skipForward" mnemonicParsing="false" onAction="#skipForwardButtonHandler" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: silver;" text="FastForward" />
+                        <Button fx:id="_skipForward" mnemonicParsing="false" onAction="#skipForwardButtonHandler" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: silver;" text="Skip Forward" />
                         <Region prefHeight="200.0" prefWidth="10.0" />
                         <Label fx:id="_currentTime" style="-fx-text-fill: silver;" text="00:00" />
                      </children>
