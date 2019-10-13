@@ -170,6 +170,7 @@ public class SelectImagesScene extends ApplicationScene {
             if (fileAlreadyExists) {
                 Alert overrideAlert = createConfirmationAlert("A Creation with that name already exists. Would you like to override " + creationName + "?");
                 if (overrideAlert.getResult() == ButtonType.YES) {
+                    _creationFactory.deleteFromCreationsFile(creationName, _searchTerm);
                     createCreation(creationName, numberOfImages, event);
                 }
             } else {
@@ -196,6 +197,7 @@ public class SelectImagesScene extends ApplicationScene {
                 _creationFactory.combineImagesToVideo(finalImageNames, numberOfImages);
                 _creationFactory.combineVideoAndText(searchTerm);
                 _creationFactory.combineVideoAndAudio(creationName);
+                _creationFactory.writeToCreationsFile(creationName, searchTerm);
                 return null;
             }
 

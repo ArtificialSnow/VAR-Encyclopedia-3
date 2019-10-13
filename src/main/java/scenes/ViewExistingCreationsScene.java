@@ -5,17 +5,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.media.Media;
 import javafx.stage.Stage;
 import main.java.app.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class ViewExistingCreationsScene extends ApplicationScene {
 
@@ -23,7 +23,9 @@ public class ViewExistingCreationsScene extends ApplicationScene {
     @FXML private Button _quitButton;
     @FXML private Button _playButton;
     @FXML private Button _deleteButton;
-    @FXML private ListView<String> _creationsList;
+    @FXML private TableView _creationsTableView;
+    @FXML private TableColumn<String, Creation> _nameColumn;
+    @FXML private TableColumn<String, Creation> _searchTermColumn;
 
     AudioFactory _audioFactory;
     FileDirectory _fileDirectory;
@@ -35,16 +37,25 @@ public class ViewExistingCreationsScene extends ApplicationScene {
         _fileDirectory = new FileDirectory();
         _creationFactory = new CreationFactory();
 
+        _nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        _searchTermColumn.setCellValueFactory(new PropertyValueFactory<>("searchTerm"));
+
         updateCreationsList();
     }
 
     public void updateCreationsList() {
-        _creationsList.getItems().clear();
+        _creationsTableView.getItems().clear();
 
-        File[] creationsList = new File(ApplicationFolder.RegularCreations.getPath()).listFiles();
-        for (File creation : creationsList) {
-            String creationName = creation.getName();
-            _creationsList.getItems().add(creationName.substring(0, creationName.length() - 4));
+        try {
+            ArrayList<String> creations = new ArrayList<>(Files.readAllLines(Paths.get(ApplicationFolder.Creations.getPath() + File.separator + "CurrentCreations.txt")));
+
+            for (String creation : creations) {
+                String[] creationData = creation.split(" ");
+
+                _creationsTableView.getItems().add(new Creation(creationData[0], creationData[1]));
+            }
+        } catch (IOException e) {
+            System.out.println("Unable to open currentCreations.txt");
         }
     }
 
@@ -57,7 +68,7 @@ public class ViewExistingCreationsScene extends ApplicationScene {
     }
 
     public void playButtonHandler() throws IOException {
-        String creation = _creationsList.getSelectionModel().getSelectedItem();
+        Creation creation = (Creation) _creationsTableView.getSelectionModel().getSelectedItem();
 
         if (creation == null) {
             createInformationAlert("No Creation Selected", "Please select a Creation");
@@ -67,13 +78,13 @@ public class ViewExistingCreationsScene extends ApplicationScene {
             Parent parentScene = loader.load();
             CreationsViewer viewer = loader.getController();
 
-            Media audioChunkMedia = new Media(Paths.get(ApplicationFolder.RegularCreations.getPath() + File.separator + creation + ".mp4").toUri().toString());
+            Media audioChunkMedia = new Media(Paths.get(ApplicationFolder.RegularCreations.getPath() + File.separator + creation.getName() + ".mp4").toUri().toString());
             viewer.setMedia(audioChunkMedia);
 
             Stage mediaPlayerStage = new Stage();
             mediaPlayerStage.setScene(new Scene(parentScene));
             mediaPlayerStage.setResizable(false);
-            mediaPlayerStage.setTitle(creation);
+            mediaPlayerStage.setTitle(creation.getName());
             mediaPlayerStage.setOnCloseRequest( closeStage -> {
                 viewer.stopMedia();
             });
@@ -82,15 +93,16 @@ public class ViewExistingCreationsScene extends ApplicationScene {
     }
 
     public void deleteButtonHandler() {
-        String creation = _creationsList.getSelectionModel().getSelectedItem();
+        Creation creation = (Creation) _creationsTableView.getSelectionModel().getSelectedItem();
 
         if (creation == null) {
             createInformationAlert("No Creation Selected", "Please select a Creation");
 
         } else {
-            Alert deleteConfirmation = createConfirmationAlert("Are you sure you want to delete " + creation + "?");
+            Alert deleteConfirmation = createConfirmationAlert("Are you sure you want to delete " + creation.getName() + "?");
             if (deleteConfirmation.getResult() == ButtonType.YES) {
-                _creationFactory.deleteCreation(creation);
+                _creationFactory.deleteCreation(creation.getName());
+                _creationFactory.deleteFromCreationsFile(creation.getName(), creation.getSearchTerm());
 
                 updateCreationsList();
             }

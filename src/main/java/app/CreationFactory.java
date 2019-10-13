@@ -65,4 +65,28 @@ public class CreationFactory {
             System.out.print("Error playing audio chunk");
         }
     }
+
+    public void writeToCreationsFile(String creationName, String searchTerm) {
+        String[] writeToCreationsFileCommands = { "sh", "-c", "./src/main/resources/shellscripts/writeToCreationsFile.sh" + " \"" + creationName +"\"" + " \"" + searchTerm +"\""};
+        ProcessBuilder writeToCreationsFileBuilder = new ProcessBuilder(writeToCreationsFileCommands);
+
+        try {
+            Process writeToCreationsFileProcess = writeToCreationsFileBuilder.start();
+            writeToCreationsFileProcess.waitFor();
+        } catch (Exception e) {
+            System.out.print("Error saving creation to file");
+        }
+    }
+
+    public void deleteFromCreationsFile(String creationName, String searchTerm) {
+        String[] deleteFromCreationsFileCommands = { "sh", "-c", "./src/main/resources/shellscripts/deleteFromCreationsFile.sh" + " \"" + creationName +"\"" + " \"" + searchTerm +"\"" };
+        ProcessBuilder deleteFromCreationsFileBuilder = new ProcessBuilder(deleteFromCreationsFileCommands);
+
+        try {
+            Process deleteFromCreationsFileProcess = deleteFromCreationsFileBuilder.start();
+            deleteFromCreationsFileProcess.waitFor();
+        } catch (Exception e) {
+            System.out.print("Error deleting from creation file");
+        }
+    }
 }
