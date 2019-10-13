@@ -46,36 +46,32 @@ public class CreationFactory {
         String getDurationCommand = "soxi -D ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav";
         ProcessBuilder getDuration = new ProcessBuilder("bash", "-c", getDurationCommand);
 
+
         try {
+            String createMusicFileCommand = "ffmpeg -i ./VAR-Encyclopedia/.temp/BGM/"+nameOfMusic+".mp3 -acodec pcm_u8 -ar 16000 ./VAR-Encyclopedia/.temp/sound.wav";
+            ProcessBuilder createMusicFileBuilder = new ProcessBuilder("bash","-c",createMusicFileCommand);
+            Process createMusicFileProcess = createMusicFileBuilder.start();
+            createMusicFileProcess.waitFor();
+
             Process getDurationProcess = getDuration.start();
             BufferedReader stdout = new BufferedReader(new InputStreamReader(getDurationProcess.getInputStream()));
             getDurationProcess.waitFor();
 
             double duration = Double.parseDouble(stdout.readLine());
-
-            String trimBGMCommand = "ffmpeg -i ./VAR-Encyclopedia/.temp/BGM/"+nameOfMusic+".mp3 -ss 0 -to "+duration+" -c copy ./VAR-Encyclopedia/.temp/"+nameOfMusic+"_trim.mp3";
+            
+            String trimBGMCommand = "sox -m ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav ./VAR-Encyclopedia/.temp/sound.wav ./VAR-Encyclopedia/.temp/BackgroundAudio.wav trim 0 "+duration;
             ProcessBuilder trimBGMBuilder = new ProcessBuilder("bash","-c",trimBGMCommand);
             Process trimBGMProcess = trimBGMBuilder.start();
             trimBGMProcess.waitFor();
+
         } catch (Exception e) {
             System.out.println("Error when trim background music");
-        }
-
-
-//        String addBGMToVideoCommand = "ffmpeg -y -i ./VAR-Encyclopedia/.temp/"+nameOfMusic+"_trim.mp3 -i ./VAR-Encyclopedia/.temp/combinedVideo.mp4 -filter_complex \"[0:a][1:a]amerge,pan=stereo|c0<c0+c2|c1<c1+c3[out]\" -map 1:v -map \"[out]\" -c:v copy -shortest ./VAR-Encyclopedia/.temp/BackgroundVideo.mp4";
-        String addBGMToVideoCommand = "ffmpeg -y -i ./VAR-Encyclopedia/.temp/"+nameOfMusic+"_trim.mp3 -i ./VAR-Encyclopedia/.temp/combinedVideo.mp4 -c:a aac -strict experimental ./VAR-Encyclopedia/.temp/BackgroundVideo.mp4";
-        ProcessBuilder addBGMToVideoBuilder = new ProcessBuilder("bash","-c",addBGMToVideoCommand);
-        try {
-            Process addBGMToVideoProcess = addBGMToVideoBuilder.start();
-            addBGMToVideoProcess.waitFor();
-        } catch (Exception e) {
-            System.out.println("Error adding background music");
         }
     }
 
     public void combineVideoAndAudio(String nameOfCreation) {
+        String combineVideoAndAudioCommand = "ffmpeg -y -i ./VAR-Encyclopedia/.temp/combinedVideo.mp4 -i ./VAR-Encyclopedia/.temp/BackgroundAudio.wav -c:a aac -strict experimental ./VAR-Encyclopedia/Creations/"+nameOfCreation+".mp4";
 //        String combineVideoAndAudioCommand = "ffmpeg -y -i ./VAR-Encyclopedia/.temp/combinedVideo.mp4 -i ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav -c:a aac -strict experimental ./VAR-Encyclopedia/Creations/"+nameOfCreation+".mp4";
-        String combineVideoAndAudioCommand = "ffmpeg -y -i ./VAR-Encyclopedia/.temp/BackgroundVideo.mp4 -i ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav -c:a aac -strict experimental ./VAR-Encyclopedia/Creations/"+nameOfCreation+".mp4";
         ProcessBuilder combineVideoAndAudioBuilder = new ProcessBuilder("bash", "-c", combineVideoAndAudioCommand);
         try{
             Process combineVideoAndAudioProcess = combineVideoAndAudioBuilder.start();
