@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 import main.java.app.*;
 
 import java.io.File;
@@ -71,6 +72,11 @@ public class ViewAudioChunksScene extends ApplicationScene {
     }
 
     public void homeButtonHandler(ActionEvent event) throws IOException {
+        if (_mediaPlayer != null) {
+            _mediaPlayer.stop();
+            _mediaPlayer = null;
+        }
+        
         changeScene(SceneType.MainMenuScene, event);
     }
 
