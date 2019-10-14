@@ -101,12 +101,12 @@ public class CreateAudioChunksScene extends ApplicationScene {
             @Override
             protected void done() {
                 Platform.runLater(() -> {
+                    _editor.clear();
+                    _wikipediaText.getItems().clear();
+
                     if (_wikipediaSearch.contentDoesNotExist()) {
                         createInformationAlert("Content does not exist", "No content on wikipedia for the search term " + _searchTerm);
                     } else {
-                        _editor.clear();
-                        _wikipediaText.getItems().clear();
-
                         _wikipediaText.getItems().addAll(_wikipediaSearch.getContent());
                     }
                 });
@@ -170,6 +170,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
         } else {
             if (validAudioChunk()) {
                 String audioChunkText = _editor.getText().replaceAll("\\s$", "");
+                audioChunkText = audioChunkText.replaceAll("\\n", " ");
 
                 if (_audioFactory.chunkAlreadyExists(_searchTerm, chunkName)) {
                     Alert overrideAlert = createConfirmationAlert("Audio Chunk " + chunkName + " already exists. Would you like to override?");
