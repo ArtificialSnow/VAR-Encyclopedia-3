@@ -9,7 +9,7 @@ public class Answer {
     public Answer(String correctAnswer, String enteredAnswer) {
         _correctAnswer = correctAnswer;
         _enteredAnswer = enteredAnswer;
-        _correct = correctAnswer.equals(enteredAnswer);
+        _correct = correctAnswer.equalsIgnoreCase(enteredAnswer);
     }
 
     public String getCorrectAnswer() {
