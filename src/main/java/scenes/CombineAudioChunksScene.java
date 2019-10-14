@@ -47,10 +47,10 @@ public class CombineAudioChunksScene extends ApplicationScene {
         if (searchTermDirectory != null) {
             _audioChunksListView.getItems().clear();
 
-            File[] audioChunksList = new File(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTermDirectory).listFiles();
+            File[] audioChunksList = new File(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTermDirectory + File.separator + "RegularAudioChunks").listFiles();
             for (File audioChunk : audioChunksList) {
-                String chunkName = audioChunk.getName();
-                _audioChunksListView.getItems().add(chunkName.substring(0,chunkName.length() - 4));
+                String audioChunkName = audioChunk.getName();
+                _audioChunksListView.getItems().add(audioChunkName.substring(0, audioChunkName.length() - 4));
             }
         }
     }
