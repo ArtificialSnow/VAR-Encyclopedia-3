@@ -53,7 +53,7 @@ public class ViewAudioChunksScene extends ApplicationScene {
 
         String searchTermDirectory = _searchTermList.getSelectionModel().getSelectedItem();
         if (searchTermDirectory != null) {
-            File[] audioChunksList = new File(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTermDirectory).listFiles();
+            File[] audioChunksList = new File(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTermDirectory + File.separator + "RegularAudioChunks" ).listFiles();
 
             if ( audioChunksList.length == 0) {
                 _fileDirectory.deleteAllEmptyDirectories(ApplicationFolder.AudioChunks.getPath());
@@ -88,7 +88,7 @@ public class ViewAudioChunksScene extends ApplicationScene {
                 _playButton.setText("Stop");
                 _deleteButton.setDisable(true);
 
-                Media audioChunkMedia = new Media(Paths.get(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTerm + File.separator + audioChunk + ".wav").toUri().toString());
+                Media audioChunkMedia = new Media(Paths.get(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTerm + File.separator + "RegularAudioChunks" + File.separator + audioChunk + ".wav").toUri().toString());
                 _mediaPlayer = new MediaPlayer(audioChunkMedia);
 
                 _mediaPlayer.setOnEndOfMedia( () -> {

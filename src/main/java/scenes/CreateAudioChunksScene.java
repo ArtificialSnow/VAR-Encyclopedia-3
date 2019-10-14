@@ -169,12 +169,13 @@ public class CreateAudioChunksScene extends ApplicationScene {
             createInformationAlert("No Chunk Name specified", "Please enter a name for the Audio Chunk");
         } else {
             if (validAudioChunk()) {
-                String audioChunkText = _editor.getText();
+                String audioChunkText = _editor.getText().replaceAll("\\s$", "");
 
                 if (_audioFactory.chunkAlreadyExists(_searchTerm, chunkName)) {
                     Alert overrideAlert = createConfirmationAlert("Audio Chunk " + chunkName + " already exists. Would you like to override?");
 
                     if (overrideAlert.getResult() == ButtonType.YES) {
+                        _audioFactory.deleteAudioChunk(_searchTerm,chunkName);
                         saveAudioChunk(chunkName, audioChunkText);
                     }
                 } else {

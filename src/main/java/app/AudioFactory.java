@@ -1,6 +1,10 @@
 package main.java.app;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AudioFactory {
@@ -65,12 +69,18 @@ public class AudioFactory {
         }
 
         if (directoryFound) {
-            File[] chunkList = new File(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTerm).listFiles();
+            try {
+                ArrayList<String> creations = new ArrayList<>(Files.readAllLines(Paths.get(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTerm + File.separator + "AudioChunks.txt")));
 
-            for (File chunk : chunkList) {
-                if (chunk.getName().equals(chunkName + ".wav")) {
-                    return true;
+                for (String creation : creations) {
+                    System.out.println(creation);
+                    System.out.println(chunkName);
+                    if (creation.matches("^" + chunkName + ":.*")){
+                        return true;
+                    }
                 }
+            } catch (IOException e) {
+                System.out.println("Error opening currentAudioChunks.txt");
             }
         }
 

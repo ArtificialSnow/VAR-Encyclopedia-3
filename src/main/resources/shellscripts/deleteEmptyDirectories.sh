@@ -3,8 +3,8 @@
 
 for directory in "${1}"/*; do
   if [ -d "$directory" ]; then
-    if [ "$(ls -h "$directory")" == "" ]; then
-      rmdir "$directory"
+    if [ "$(ls -h "${directory}/RegularAudioChunks")" == "" ]; then
+      rm -fr "$directory"
     fi
   fi
 done
