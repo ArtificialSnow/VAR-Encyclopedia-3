@@ -7,5 +7,9 @@ for audioChunk in ${2}; do
   listOfRedactedChunkNames="${listOfRedactedChunkNames}./VAR-Encyclopedia/AudioChunks/${1}/RedactedAudioChunks/${audioChunk}.wav "
 done
 
-sox ${listOfChunkNames} "./VAR-Encyclopedia/.temp/tempCombinedChunks.wav"
-sox ${listOfRedactedChunkNames} "./VAR-Encyclopedia/.temp/tempRedactedCombinedChunks.wav"
+#Remove Trailing whitespace from both lists
+listOfChunkNames="$(echo -e "${listOfChunkNames}" | sed -e 's/[[:space:]]*$//')"
+listOfRedactedChunkNames="$(echo -e "${listOfChunkNames}" | sed -e 's/[[:space:]]*$//')"
+
+sox "${listOfChunkNames}" "./VAR-Encyclopedia/.temp/tempCombinedChunks.wav"
+sox "${listOfRedactedChunkNames}" "./VAR-Encyclopedia/.temp/tempRedactedCombinedChunks.wav"

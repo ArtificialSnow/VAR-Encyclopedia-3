@@ -172,13 +172,13 @@ public class CreateAudioChunksScene extends ApplicationScene {
         } else {
             if (validAudioChunk()) {
                 String audioChunkText = _editor.getText().replaceAll("\\s$", "");
-                audioChunkText = audioChunkText.replaceAll("\\n", " ");
+                audioChunkText = audioChunkText.replaceAll("\n", " ");
 
                 if (_audioFactory.chunkAlreadyExists(_searchTerm, chunkName)) {
                     Alert overrideAlert = createConfirmationAlert("Audio Chunk " + chunkName + " already exists. Would you like to override?");
 
                     if (overrideAlert.getResult() == ButtonType.YES) {
-                        _audioFactory.deleteAudioChunk(_searchTerm,chunkName);
+                            _audioFactory.deleteAudioChunk(_searchTerm,chunkName);
                         saveAudioChunk(chunkName, audioChunkText);
                     }
                 } else {
