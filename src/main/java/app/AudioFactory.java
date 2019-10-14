@@ -73,8 +73,6 @@ public class AudioFactory {
                 ArrayList<String> creations = new ArrayList<>(Files.readAllLines(Paths.get(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTerm + File.separator + "AudioChunks.txt")));
 
                 for (String creation : creations) {
-                    System.out.println(creation);
-                    System.out.println(chunkName);
                     if (creation.matches("^" + chunkName + ":.*")){
                         return true;
                     }

@@ -2,20 +2,17 @@ package main.java.scenes;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import main.java.app.ApplicationFolder;
-import main.java.app.AudioFactory;
-import main.java.app.FileDirectory;
-import main.java.app.SceneType;
+import main.java.app.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class ViewAudioChunksScene extends ApplicationScene {
 
@@ -24,7 +21,11 @@ public class ViewAudioChunksScene extends ApplicationScene {
     @FXML private Button _playButton;
     @FXML private Button _deleteButton;
     @FXML private ListView<String> _searchTermList;
-    @FXML private ListView<String> _audioChunksList;
+    @FXML private TableView _audioChunksTableView;
+
+    @FXML private TableColumn<String, AudioChunk> _nameColumn;
+    @FXML private TableColumn<String, AudioChunk> _voiceColumn;
+    @FXML private TableColumn<String, AudioChunk> _textColumn;
 
     AudioFactory _audioFactory;
     FileDirectory _fileDirectory;
@@ -34,6 +35,10 @@ public class ViewAudioChunksScene extends ApplicationScene {
     public void initialize() {
         _audioFactory = new AudioFactory();
         _fileDirectory = new FileDirectory();
+
+        _nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        _voiceColumn.setCellValueFactory(new PropertyValueFactory<>("voice"));
+        _textColumn.setCellValueFactory(new PropertyValueFactory<>("text"));
 
         _fileDirectory.deleteAllEmptyDirectories(ApplicationFolder.AudioChunks.getPath());
         updateSearchTermList();
@@ -49,22 +54,19 @@ public class ViewAudioChunksScene extends ApplicationScene {
     }
 
     public void updateAudioChunksList() {
-        _audioChunksList.getItems().clear();
+        _audioChunksTableView.getItems().clear();
 
         String searchTermDirectory = _searchTermList.getSelectionModel().getSelectedItem();
-        if (searchTermDirectory != null) {
-            File[] audioChunksList = new File(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTermDirectory + File.separator + "RegularAudioChunks" ).listFiles();
 
-            if ( audioChunksList.length == 0) {
-                _fileDirectory.deleteAllEmptyDirectories(ApplicationFolder.AudioChunks.getPath());
-                updateSearchTermList();
+        try {
+            ArrayList<String> audioChunks = new ArrayList<>(Files.readAllLines(Paths.get(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTermDirectory + File.separator+ "AudioChunks.txt")));
+            for (String audioChunk : audioChunks){
+                String[] audioChunkInformation = audioChunk.split(":");
 
-            } else {
-                for (File audioChunk : audioChunksList) {
-                    String chunkName = audioChunk.getName();
-                    _audioChunksList.getItems().add(chunkName.substring(0,chunkName.length() - 4));
-                }
+                _audioChunksTableView.getItems().add(new AudioChunk(audioChunkInformation[0], audioChunkInformation[1], audioChunkInformation[2], audioChunkInformation[3]));
             }
+        } catch (IOException e) {
+            System.out.println("Error updating audio chunks list");
         }
     }
 
@@ -78,7 +80,7 @@ public class ViewAudioChunksScene extends ApplicationScene {
 
     public void playButtonHandler() {
         String searchTerm = _searchTermList.getSelectionModel().getSelectedItem();
-        String audioChunk = _audioChunksList.getSelectionModel().getSelectedItem();
+        AudioChunk audioChunk = (AudioChunk) _audioChunksTableView.getSelectionModel().getSelectedItem();
 
         if (audioChunk == null || searchTerm == null) {
             createInformationAlert("No Audio Chunk Selected", "Please select an audio chunk");
@@ -88,7 +90,7 @@ public class ViewAudioChunksScene extends ApplicationScene {
                 _playButton.setText("Stop");
                 _deleteButton.setDisable(true);
 
-                Media audioChunkMedia = new Media(Paths.get(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTerm + File.separator + "RegularAudioChunks" + File.separator + audioChunk + ".wav").toUri().toString());
+                Media audioChunkMedia = new Media(Paths.get(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTerm + File.separator + "RegularAudioChunks" + File.separator + audioChunk.getName() + ".wav").toUri().toString());
                 _mediaPlayer = new MediaPlayer(audioChunkMedia);
 
                 _mediaPlayer.setOnEndOfMedia( () -> {
@@ -112,15 +114,15 @@ public class ViewAudioChunksScene extends ApplicationScene {
 
     public void deleteButtonHandler() {
         String searchTerm = _searchTermList.getSelectionModel().getSelectedItem();
-        String audioChunk = _audioChunksList.getSelectionModel().getSelectedItem();
+        AudioChunk audioChunk = (AudioChunk) _audioChunksTableView.getSelectionModel().getSelectedItem();
 
         if (searchTerm == null || audioChunk == null) {
             createInformationAlert("No Audio Chunk Selected", "Please select an audio chunk");
 
         } else {
-            Alert deleteConfirmation = createConfirmationAlert("Are you sure you want to delete " + audioChunk + "?");
+            Alert deleteConfirmation = createConfirmationAlert("Are you sure you want to delete " + audioChunk.getName() + "?");
             if (deleteConfirmation.getResult() == ButtonType.YES) {
-                _audioFactory.deleteAudioChunk(searchTerm, audioChunk);
+                _audioFactory.deleteAudioChunk(searchTerm, audioChunk.getName());
                 updateAudioChunksList();
             }
         }
