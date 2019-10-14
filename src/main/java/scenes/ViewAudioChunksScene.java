@@ -58,16 +58,17 @@ public class ViewAudioChunksScene extends ApplicationScene {
         _audioChunksTableView.getItems().clear();
 
         String searchTermDirectory = _searchTermList.getSelectionModel().getSelectedItem();
+        if (searchTermDirectory != null) {
+            try {
+                ArrayList<String> audioChunks = new ArrayList<>(Files.readAllLines(Paths.get(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTermDirectory + File.separator + "AudioChunks.txt")));
+                for (String audioChunk : audioChunks) {
+                    String[] audioChunkInformation = audioChunk.split(":");
 
-        try {
-            ArrayList<String> audioChunks = new ArrayList<>(Files.readAllLines(Paths.get(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTermDirectory + File.separator+ "AudioChunks.txt")));
-            for (String audioChunk : audioChunks){
-                String[] audioChunkInformation = audioChunk.split(":");
-
-                _audioChunksTableView.getItems().add(new AudioChunk(audioChunkInformation[0], audioChunkInformation[1], audioChunkInformation[2], audioChunkInformation[3]));
+                    _audioChunksTableView.getItems().add(new AudioChunk(audioChunkInformation[0], audioChunkInformation[1], audioChunkInformation[2], audioChunkInformation[3]));
+                }
+            } catch (IOException e) {
+                System.out.println("Error updating audio chunks list");
             }
-        } catch (IOException e) {
-            System.out.println("Error updating audio chunks list");
         }
     }
 
@@ -76,7 +77,7 @@ public class ViewAudioChunksScene extends ApplicationScene {
             _mediaPlayer.stop();
             _mediaPlayer = null;
         }
-        
+
         changeScene(SceneType.MainMenuScene, event);
     }
 

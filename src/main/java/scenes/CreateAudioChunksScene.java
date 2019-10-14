@@ -143,6 +143,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
     public void previewAudioChunkButtonHandler() {
         if (validAudioChunk()) {
             _previewAudioChunk.setDisable(true);
+            _homeButton.setDisable(true);
 
             new Thread( new Task<Void>() {
 
@@ -156,6 +157,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
                 protected void done() {
                     Platform.runLater( () -> {
                         _previewAudioChunk.setDisable(false);
+                        _homeButton.setDisable(false);
                     });
                 }
             }).start();
