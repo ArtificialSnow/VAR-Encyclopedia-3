@@ -11,11 +11,39 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.PlayQuizScene">
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.PlayQuizScene">
     <children>
         <BorderPane layoutX="60.0" layoutY="75.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <ToolBar maxHeight="-Infinity" minHeight="-Infinity" opacity="0.85" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                    <items>
+                        <Button fx:id="_homeButton" minHeight="-Infinity" mnemonicParsing="false" onAction="#homeButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: silver;">
+                            <graphic>
+                                <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/HomeButton.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Region prefHeight="22.0" prefWidth="917.0" />
+                        <Button fx:id="_quitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#quitButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: silver;">
+                            <graphic>
+                                <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/CloseButton.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </items>
+                </ToolBar>
+            </top>
             <center>
-                <MediaView fx:id="_mediaView" fitHeight="300.0" fitWidth="600.0" BorderPane.alignment="CENTER" />
+                <MediaView fx:id="_mediaView" fitHeight="400.0" fitWidth="1000.0" BorderPane.alignment="CENTER" />
             </center>
             <bottom>
                 <VBox prefHeight="18.0" prefWidth="600.0" BorderPane.alignment="CENTER">
@@ -24,20 +52,20 @@
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
                                 <Button fx:id="_skipBackward" mnemonicParsing="false" onAction="#skipBackButtonHandler" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: silver;" text="Skip Backward" />
-                                <Region prefHeight="26.0" prefWidth="10.0" />
+                                <Region prefHeight="26.0" prefWidth="20.0" />
                                 <Button fx:id="_playPause" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pausePlayMethodHandler" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: silver;" text="Pause" />
-                                <Region prefHeight="26.0" prefWidth="10.0" />
+                                <Region prefHeight="26.0" prefWidth="20.0" />
                                 <Button fx:id="_skipForward" mnemonicParsing="false" onAction="#skipForwardButtonHandler" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: silver;" text="Skip Forward" />
                                 <Region prefHeight="200.0" prefWidth="10.0" />
                                 <Label fx:id="_currentTime" style="-fx-text-fill: silver;" text="00:00" />
                             </children>
                         </HBox>
-                  <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="39.0" prefWidth="1000.0">
                      <children>
                         <TextField fx:id="_searchTermField" promptText="Enter the search term" />
                         <Region prefHeight="200.0" prefWidth="20.0" />
                         <Button fx:id="_submitAnswerButton" mnemonicParsing="false" onAction="#submitAnswerButtonHandler" text="Submit" />
-                        <Region prefHeight="50.0" prefWidth="116.0" />
+                        <Region prefHeight="50.0" prefWidth="20.0" />
                      </children>
                   </HBox>
                     </children>

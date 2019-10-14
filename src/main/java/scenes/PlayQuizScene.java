@@ -4,10 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -54,10 +51,10 @@ public class PlayQuizScene extends ApplicationScene {
         index = 0;
 
         _mediaPlayer = new MediaPlayer(new Media(Paths.get(ApplicationFolder.RedactedCreations.getPath() + File.separator + _selectedCreations.get(index) + ".mp4").toUri().toString()));
-        setNewMediaPlayer(_mediaPlayer);
+        setUpNewMediaPlayer();
     }
 
-    public void setNewMediaPlayer(MediaPlayer mediaplayer) {
+    public void setUpNewMediaPlayer() {
         _mediaPlayer.setAutoPlay(true);
         _mediaPlayer.setOnReady( () -> {
             _timeBar.setMin(0);
@@ -122,14 +119,27 @@ public class PlayQuizScene extends ApplicationScene {
         String playerAnswer = _searchTermField.getText();
         _answerList.add(new Answer(_correctAnswers.get(index), playerAnswer));
 
+        _mediaPlayer.stop();
+        _searchTermField.clear();
+
         if (++index < _selectedCreations.size()) {
             Media creationMedia = new Media(Paths.get(ApplicationFolder.RedactedCreations.getPath() + File.separator + _selectedCreations.get(index) + ".mp4").toUri().toString());
             _mediaPlayer = new MediaPlayer(creationMedia);
-            setNewMediaPlayer(_mediaPlayer);
+            setUpNewMediaPlayer();
         } else {
-
             ApplicationScene displayQuizResultsScene = changeScene(SceneType.DisplayQuizResultsScene, event);
             ((DisplayQuizResultsScene) displayQuizResultsScene).setResults(_answerList);
         }
+    }
+
+    public void homeButtonHandler(ActionEvent event) throws IOException {
+        Alert homeAlert = createConfirmationAlert("Are you sure you want to exit the quiz? Your progress will be lost.");
+        if (homeAlert.getResult() == ButtonType.YES) {
+            changeScene(SceneType.MainMenuScene, event);
+        }
+    }
+
+    public void quitButtonHandler() {
+        System.exit(0);
     }
 }

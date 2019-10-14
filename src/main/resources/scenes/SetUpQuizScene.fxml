@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Region?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.SetUpQuizScene">
+<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.SetUpQuizScene">
     <children>
         <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-                <ToolBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" opacity="0.85" prefHeight="34.0" prefWidth="600.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                <ToolBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" opacity="0.85" prefHeight="34.0" prefWidth="1000.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                     <items>
                         <Button fx:id="_homeButton" minHeight="-Infinity" mnemonicParsing="false" onAction="#homeButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: silver;">
                             <graphic>
@@ -25,7 +25,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                  <Region prefHeight="22.0" prefWidth="190.0" />
+                  <Region prefHeight="22.0" prefWidth="590.0" />
                   <Label text="Number of Questions" />
                   <Region prefHeight="22.0" prefWidth="10.0" />
                   <ChoiceBox fx:id="_numberOfQuestions" prefWidth="150.0" />
