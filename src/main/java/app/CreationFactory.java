@@ -45,24 +45,24 @@ public class CreationFactory {
 
     public void addBGMToVideo(String nameOfMusic){
         //check if file already exist to avoid crash
-        File soundFile = new File("./VAR-Encyclopedia/.temp/sound.wav");
+        File soundFile = new File(ApplicationFolder.Temp.getPath() +"/sound.wav");
         if(soundFile.exists()){
             soundFile.delete();
         }
-        File BGMFile = new File("./VAR-Encyclopedia/.temp/BackgroundAudio.wav");
+        File BGMFile = new File(ApplicationFolder.Temp.getPath() +"/BackgroundAudio.wav");
         if(BGMFile.exists()){
             BGMFile.delete();
         }
 
         try {
             // create a music file (mp3 to wav)
-            String createMusicFileCommand = "ffmpeg -i ./VAR-Encyclopedia/.temp/BGM/"+nameOfMusic+".mp3 -acodec pcm_u8 -ar 16000 ./VAR-Encyclopedia/.temp/sound.wav";
+            String createMusicFileCommand = "ffmpeg -i " + ApplicationFolder.Temp.getPath() + "/BGM/"+nameOfMusic+".mp3 -acodec pcm_u8 -ar 16000 " + ApplicationFolder.Temp.getPath() +"/sound.wav";
             ProcessBuilder createMusicFileBuilder = new ProcessBuilder("bash","-c",createMusicFileCommand);
             Process createMusicFileProcess = createMusicFileBuilder.start();
             createMusicFileProcess.waitFor();
 
             // get duration of audio chunk
-            String getDurationCommand = "soxi -D ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav";
+            String getDurationCommand = "soxi -D " + ApplicationFolder.Temp.getPath() + "/tempCombinedChunks.wav";
             ProcessBuilder getDuration = new ProcessBuilder("bash", "-c", getDurationCommand);
             Process getDurationProcess = getDuration.start();
             BufferedReader stdout = new BufferedReader(new InputStreamReader(getDurationProcess.getInputStream()));
@@ -71,7 +71,7 @@ public class CreationFactory {
             double duration = Double.parseDouble(stdout.readLine());
 
             //trim the music file
-            String trimBGMCommand = "sox -m ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav ./VAR-Encyclopedia/.temp/sound.wav ./VAR-Encyclopedia/.temp/BackgroundAudio.wav trim 0 "+duration;
+            String trimBGMCommand = "sox -m "+ ApplicationFolder.Temp.getPath() +"/tempCombinedChunks.wav "+ ApplicationFolder.Temp.getPath() +"/sound.wav " + ApplicationFolder.Temp.getPath() + "/BackgroundAudio.wav trim 0 "+duration;
             ProcessBuilder trimBGMBuilder = new ProcessBuilder("bash","-c",trimBGMCommand);
             Process trimBGMProcess = trimBGMBuilder.start();
             trimBGMProcess.waitFor();
