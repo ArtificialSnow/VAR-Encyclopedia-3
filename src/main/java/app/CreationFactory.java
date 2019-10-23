@@ -43,6 +43,44 @@ public class CreationFactory {
 
     }
 
+    public void addBGMToVideo(String nameOfMusic){
+        //check if file already exist to avoid crash
+        File soundFile = new File("./VAR-Encyclopedia/.temp/sound.wav");
+        if(soundFile.exists()){
+            soundFile.delete();
+        }
+        File BGMFile = new File("./VAR-Encyclopedia/.temp/BackgroundAudio.wav");
+        if(BGMFile.exists()){
+            BGMFile.delete();
+        }
+
+        try {
+            // create a music file (mp3 to wav)
+            String createMusicFileCommand = "ffmpeg -i ./VAR-Encyclopedia/.temp/BGM/"+nameOfMusic+".mp3 -acodec pcm_u8 -ar 16000 ./VAR-Encyclopedia/.temp/sound.wav";
+            ProcessBuilder createMusicFileBuilder = new ProcessBuilder("bash","-c",createMusicFileCommand);
+            Process createMusicFileProcess = createMusicFileBuilder.start();
+            createMusicFileProcess.waitFor();
+
+            // get duration of audio chunk
+            String getDurationCommand = "soxi -D ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav";
+            ProcessBuilder getDuration = new ProcessBuilder("bash", "-c", getDurationCommand);
+            Process getDurationProcess = getDuration.start();
+            BufferedReader stdout = new BufferedReader(new InputStreamReader(getDurationProcess.getInputStream()));
+            getDurationProcess.waitFor();
+
+            double duration = Double.parseDouble(stdout.readLine());
+
+            //trim the music file
+            String trimBGMCommand = "sox -m ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav ./VAR-Encyclopedia/.temp/sound.wav ./VAR-Encyclopedia/.temp/BackgroundAudio.wav trim 0 "+duration;
+            ProcessBuilder trimBGMBuilder = new ProcessBuilder("bash","-c",trimBGMCommand);
+            Process trimBGMProcess = trimBGMBuilder.start();
+            trimBGMProcess.waitFor();
+
+        } catch (Exception e) {
+            System.out.println("Error when trim background music");
+        }
+    }
+
     public void combineVideoAndAudio(String nameOfCreation) {
         String combineVideoAndAudioCommand = "ffmpeg -y -i " + ApplicationFolder.Temp.getPath() + "/combinedVideo.mp4 -i " + ApplicationFolder.Temp.getPath() + "/tempCombinedChunks.wav -c:a aac -strict experimental \"" + ApplicationFolder.RegularCreations.getPath() + File.separator + nameOfCreation+ ".mp4\"";
         String createRedactedVideoCommand = "ffmpeg -y -i " + ApplicationFolder.Temp.getPath() + "/combinedImages.mp4 -i " + ApplicationFolder.Temp.getPath() + "/tempRedactedCombinedChunks.wav -c:a aac -strict experimental \"" + ApplicationFolder.RedactedCreations.getPath() + File.separator + nameOfCreation+ ".mp4\"";
