@@ -112,7 +112,7 @@
                      <children>
                         <Label fx:id="_wordLimit" prefHeight="26.0" prefWidth="104.0" style="-fx-text-fill: #4c7450; -fx-background-color: silver; -fx-font-weight: bold;" text="40 word limit" textFill="WHITE" />
                         <Region prefHeight="30.0" prefWidth="182.0" />
-                        <Button fx:id="_previewAudioChunk" mnemonicParsing="false" onAction="#previewAudioChunkButtonHandler" style="-fx-background-color: silver;" text="Preview Audio Chunk" />
+                        <Button fx:id="_previewAudioChunk" mnemonicParsing="false" onAction="#previewAudioChunkButtonHandler" style="-fx-background-color: silver;" text="Preview Audio Chunk" textFill="#cc8800" />
                      </children>
                   </HBox>
                   <Region maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="11.0" prefWidth="275.0" />
@@ -124,7 +124,7 @@
                         <Region maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="49.0" />
                         <TextField fx:id="_fileNameTextArea" prefHeight="26.0" prefWidth="221.0" promptText="File Name" />
                         <Region maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="13.0" />
-                        <Button fx:id="_saveButton" mnemonicParsing="false" onAction="#saveButtonHandler" style="-fx-background-color: silver;" text="Save" />
+                        <Button fx:id="_saveButton" mnemonicParsing="false" onAction="#saveButtonHandler" style="-fx-background-color: silver;" text="Save" textFill="#cc8800" />
                      </children>
                   </HBox>
                </children>

@@ -15,7 +15,6 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.ViewExistingCreationsScene">
     <children>
-        <ImageView fitHeight="500.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true" />
         <BorderPane layoutX="200.0" layoutY="89.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #fff7e6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
                 <ToolBar maxHeight="-Infinity" minHeight="-Infinity" opacity="0.85" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
@@ -45,7 +44,7 @@
             <left>
                 <VBox alignment="TOP_CENTER" prefHeight="466.0" prefWidth="357.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Label text="Creations" />
+                        <Label text="Creations" textFill="#cc8800" />
                   <TableView fx:id="_creationsTableView" maxWidth="-Infinity" prefHeight="428.0" prefWidth="300.0">
                     <columns>
                       <TableColumn fx:id="_nameColumn" prefWidth="150.0" text="Creation" />
@@ -68,9 +67,9 @@
                 <VBox maxWidth="-Infinity" prefHeight="466.0" prefWidth="659.0" BorderPane.alignment="CENTER">
                     <children>
                         <Region prefHeight="16.0" prefWidth="185.0" />
-                        <Button fx:id="_playButton" mnemonicParsing="false" onAction="#playButtonHandler" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: silver;" text="Play" />
+                        <Button fx:id="_playButton" mnemonicParsing="false" onAction="#playButtonHandler" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: silver;" text="Play" textFill="#cc8800" />
                         <Region prefHeight="13.0" prefWidth="185.0" />
-                        <Button fx:id="_deleteButton" mnemonicParsing="false" onAction="#deleteButtonHandler" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: silver;" text="Delete" />
+                        <Button fx:id="_deleteButton" mnemonicParsing="false" onAction="#deleteButtonHandler" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: silver;" text="Delete" textFill="#cc8800" />
                     </children>
                <padding>
                   <Insets left="15.0" />
@@ -78,5 +77,6 @@
                 </VBox>
          </center>
         </BorderPane>
+        <ImageView fitHeight="155.0" fitWidth="148.0" focusTraversable="true" layoutY="345.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="345.0" />
     </children>
 </AnchorPane>

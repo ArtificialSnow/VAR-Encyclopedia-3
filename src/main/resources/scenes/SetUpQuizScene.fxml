@@ -43,7 +43,7 @@
                 </ToolBar>
          </top>
          <center>
-            <Button fx:id="_startQuizButton" mnemonicParsing="false" onAction="#startQuizButtonHandler" text="Start Quiz" BorderPane.alignment="CENTER" />
+            <Button fx:id="_startQuizButton" mnemonicParsing="false" onAction="#startQuizButtonHandler" text="Start Quiz" textFill="#cc8800" BorderPane.alignment="CENTER" />
          </center>
         </BorderPane>
     </children>

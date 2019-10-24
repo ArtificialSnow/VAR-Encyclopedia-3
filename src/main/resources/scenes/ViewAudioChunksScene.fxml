@@ -47,16 +47,16 @@
             <VBox prefHeight="466.0" prefWidth="106.0" BorderPane.alignment="CENTER">
                <children>
                   <Region prefHeight="16.0" prefWidth="185.0" />
-                  <Button fx:id="_playButton" mnemonicParsing="false" onAction="#playButtonHandler" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: silver;" text="Play" />
+                  <Button fx:id="_playButton" mnemonicParsing="false" onAction="#playButtonHandler" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: silver;" text="Play" textFill="#cc8800" />
                   <Region prefHeight="13.0" prefWidth="185.0" />
-                  <Button fx:id="_deleteButton" mnemonicParsing="false" onAction="#deleteButtonHandler" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: silver;" text="Delete" />
+                  <Button fx:id="_deleteButton" mnemonicParsing="false" onAction="#deleteButtonHandler" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: silver;" text="Delete" textFill="#cc8800" />
                </children>
             </VBox>
          </right>
          <left>
             <VBox alignment="TOP_CENTER" prefHeight="466.0" prefWidth="238.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Search Term" />
+                  <Label text="Search Term" textFill="#cc8800" />
                   <ListView fx:id="_searchTermList" onMouseClicked="#updateAudioChunksList" prefHeight="402.0" prefWidth="135.0" />
                </children>
                <BorderPane.margin>
@@ -67,7 +67,7 @@
          <center>
             <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="567.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Audio Chunks" />
+                  <Label text="Audio Chunks" textFill="#cc8800" />
                   <TableView fx:id="_audioChunksTableView" maxWidth="-Infinity" prefHeight="402.0" prefWidth="560.0">
                     <columns>
                       <TableColumn fx:id="_nameColumn" prefWidth="100.0" text="Name" />

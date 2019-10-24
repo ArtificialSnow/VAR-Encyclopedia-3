@@ -51,11 +51,11 @@
                         <Slider fx:id="_timeBar" />
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <Button fx:id="_skipBackward" mnemonicParsing="false" onAction="#skipBackButtonHandler" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: silver;" text="Skip Backward" />
+                                <Button fx:id="_skipBackward" mnemonicParsing="false" onAction="#skipBackButtonHandler" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: silver;" text="Skip Backward" textFill="#cc8800" />
                                 <Region prefHeight="26.0" prefWidth="20.0" />
-                                <Button fx:id="_playPause" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pausePlayMethodHandler" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: silver;" text="Pause" />
+                                <Button fx:id="_playPause" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pausePlayMethodHandler" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: silver;" text="Pause" textFill="#cc8800" />
                                 <Region prefHeight="26.0" prefWidth="20.0" />
-                                <Button fx:id="_skipForward" mnemonicParsing="false" onAction="#skipForwardButtonHandler" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: silver;" text="Skip Forward" />
+                                <Button fx:id="_skipForward" mnemonicParsing="false" onAction="#skipForwardButtonHandler" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: silver;" text="Skip Forward" textFill="#cc8800" />
                                 <Region prefHeight="200.0" prefWidth="10.0" />
                                 <Label fx:id="_currentTime" style="-fx-text-fill: silver;" text="00:00" />
                             </children>
@@ -64,7 +64,7 @@
                      <children>
                         <TextField fx:id="_searchTermField" promptText="Enter the search term" />
                         <Region prefHeight="200.0" prefWidth="20.0" />
-                        <Button fx:id="_submitAnswerButton" mnemonicParsing="false" onAction="#submitAnswerButtonHandler" text="Submit" />
+                        <Button fx:id="_submitAnswerButton" mnemonicParsing="false" onAction="#submitAnswerButtonHandler" text="Submit" textFill="#cc8800" />
                         <Region prefHeight="50.0" prefWidth="20.0" />
                      </children>
                   </HBox>

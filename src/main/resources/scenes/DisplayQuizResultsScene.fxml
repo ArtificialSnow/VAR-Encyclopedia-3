@@ -23,9 +23,9 @@
          <right>
             <VBox alignment="CENTER" prefHeight="400.0" prefWidth="150.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="_scoreLabel" text="Total Score:" />
-                  <Button fx:id="_homeButton" mnemonicParsing="false" onAction="#homeButtonHandler" text="Home" />
-                  <Button fx:id="_anotherQuizButton" mnemonicParsing="false" onAction="#anotherQuizButtonHandler" text="Another Quiz" />
+                  <Label fx:id="_scoreLabel" text="Total Score:" textFill="#cc8800" />
+                  <Button fx:id="_homeButton" mnemonicParsing="false" onAction="#homeButtonHandler" text="Home" textFill="#cc8800" />
+                  <Button fx:id="_anotherQuizButton" mnemonicParsing="false" onAction="#anotherQuizButtonHandler" text="Another Quiz" textFill="#cc8800" />
                </children>
             </VBox>
          </right>

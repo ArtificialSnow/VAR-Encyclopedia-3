@@ -111,7 +111,7 @@
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Region prefHeight="49.0" prefWidth="77.0" />
-                              <Button fx:id="_nextSceneButton" mnemonicParsing="false" onAction="#nextSceneButtonHandler" style="-fx-background-color: silver;" text="Continue to Image Selection" />
+                              <Button fx:id="_nextSceneButton" mnemonicParsing="false" onAction="#nextSceneButtonHandler" style="-fx-background-color: silver;" text="Continue to Image Selection" textFill="#fff7e6" />
                            </children>
                         </HBox>
                      </children>
