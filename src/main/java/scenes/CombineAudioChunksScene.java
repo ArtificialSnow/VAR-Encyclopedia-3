@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import main.java.app.ApplicationFolder;
 import main.java.app.AudioFactory;
 import main.java.app.DownloadImage;
 import main.java.app.SceneType;
@@ -34,7 +35,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
     public void initialize() {
         _audioFactory = new AudioFactory();
 
-        File[] searchTermList = new File("./VAR-Encyclopedia/AudioChunks").listFiles();
+        File[] searchTermList = new File(ApplicationFolder.AudioChunks.getPath()).listFiles();
         for (File searchTermDirectory : searchTermList) {
             _searchTermsListView.getItems().add(searchTermDirectory.getName());
         }
@@ -45,11 +46,12 @@ public class CombineAudioChunksScene extends ApplicationScene {
 
         if (searchTermDirectory != null) {
             _audioChunksListView.getItems().clear();
+            _selectedAudioChunksListView.getItems().clear();
 
-            File[] audioChunksList = new File("./VAR-Encyclopedia/AudioChunks/" + searchTermDirectory).listFiles();
+            File[] audioChunksList = new File(ApplicationFolder.AudioChunks.getPath() + File.separator + searchTermDirectory + File.separator + "RegularAudioChunks").listFiles();
             for (File audioChunk : audioChunksList) {
-                String chunkName = audioChunk.getName();
-                _audioChunksListView.getItems().add(chunkName.substring(0,chunkName.length() - 4));
+                String audioChunkName = audioChunk.getName();
+                _audioChunksListView.getItems().add(audioChunkName.substring(0, audioChunkName.length() - 4));
             }
         }
     }
@@ -77,7 +79,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
         if (selectedChunk == -1) {
             createInformationAlert("No Audio Chunk selected", "Please select an Audio Chunk");
         } else if (selectedChunk == 0){
-            createInformationAlert("Cannot shift chunk up further", "Cannot shift chunk up further");
+            //createInformationAlert("Cannot shift chunk up further", "Cannot shift chunk up further");
         } else {
             String audioChunk = _selectedAudioChunksListView.getItems().get(selectedChunk);
             _selectedAudioChunksListView.getItems().remove(selectedChunk);
@@ -91,7 +93,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
         if (selectedChunk == -1) {
             createInformationAlert("No Audio Chunk selected", "Please select an Audio Chunk");
         } else if (selectedChunk == (_selectedAudioChunksListView.getItems().size() - 1)){
-            createInformationAlert("Cannot shift chunk down further", "Cannot shift chunk down further");
+            //createInformationAlert("Cannot shift chunk down further", "Cannot shift chunk down further");
         } else {
             String audioChunk = _selectedAudioChunksListView.getItems().get(selectedChunk);
             _selectedAudioChunksListView.getItems().remove(selectedChunk);

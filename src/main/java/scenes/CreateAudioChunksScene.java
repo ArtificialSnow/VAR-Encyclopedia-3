@@ -101,12 +101,12 @@ public class CreateAudioChunksScene extends ApplicationScene {
             @Override
             protected void done() {
                 Platform.runLater(() -> {
+                    _editor.clear();
+                    _wikipediaText.getItems().clear();
+
                     if (_wikipediaSearch.contentDoesNotExist()) {
                         createInformationAlert("Content does not exist", "No content on wikipedia for the search term " + _searchTerm);
                     } else {
-                        _editor.clear();
-                        _wikipediaText.getItems().clear();
-
                         _wikipediaText.getItems().addAll(_wikipediaSearch.getContent());
                     }
                 });
@@ -143,6 +143,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
     public void previewAudioChunkButtonHandler() {
         if (validAudioChunk()) {
             _previewAudioChunk.setDisable(true);
+            _homeButton.setDisable(true);
 
             new Thread( new Task<Void>() {
 
@@ -156,6 +157,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
                 protected void done() {
                     Platform.runLater( () -> {
                         _previewAudioChunk.setDisable(false);
+                        _homeButton.setDisable(false);
                     });
                 }
             }).start();
@@ -169,12 +171,14 @@ public class CreateAudioChunksScene extends ApplicationScene {
             createInformationAlert("No Chunk Name specified", "Please enter a name for the Audio Chunk");
         } else {
             if (validAudioChunk()) {
-                String audioChunkText = _editor.getText();
+                String audioChunkText = _editor.getText().replaceAll("\\s$", "");
+                audioChunkText = audioChunkText.replaceAll("\n", " ");
 
                 if (_audioFactory.chunkAlreadyExists(_searchTerm, chunkName)) {
                     Alert overrideAlert = createConfirmationAlert("Audio Chunk " + chunkName + " already exists. Would you like to override?");
 
                     if (overrideAlert.getResult() == ButtonType.YES) {
+                            _audioFactory.deleteAudioChunk(_searchTerm,chunkName);
                         saveAudioChunk(chunkName, audioChunkText);
                     }
                 } else {

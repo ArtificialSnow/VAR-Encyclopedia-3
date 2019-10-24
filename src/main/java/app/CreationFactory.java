@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class CreationFactory {
 
     public void combineImagesToVideo(String imageNames, int numberOfImages) {
-        String getDurationCommand = "soxi -D ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav";
+        String getDurationCommand = "soxi -D " + ApplicationFolder.Temp.getPath() + "/tempCombinedChunks.wav";
         ProcessBuilder getDuration = new ProcessBuilder("bash", "-c", getDurationCommand);
 
         try {
@@ -17,7 +17,7 @@ public class CreationFactory {
 
             double duration = Double.parseDouble(stdout.readLine());
 
-            String combineImageFile = "cat " + imageNames + " | " + "ffmpeg -y -framerate "+ numberOfImages/duration + " -i -"+ " -c:v libx264 -vf fps=25 -pix_fmt yuv420p ./VAR-Encyclopedia/.temp/combinedImages.mp4";
+            String combineImageFile = "cat " + imageNames + " | " + "ffmpeg -y -framerate "+ numberOfImages/duration + " -i -"+ " -c:v libx264 -vf fps=25 -pix_fmt yuv420p " + ApplicationFolder.Temp.getPath() + "/combinedImages.mp4";
             ProcessBuilder combineImagesToVideoBuilder = new ProcessBuilder("bash", "-c", combineImageFile);
 
             Process combineImagesToVideoProcess = combineImagesToVideoBuilder.start();
@@ -31,7 +31,7 @@ public class CreationFactory {
     }
 
     public void combineVideoAndText(String searchTerm) {
-        String addTermToFile = "ffmpeg -y -i \"./VAR-Encyclopedia/.temp/combinedImages.mp4\" -vf drawtext=\"fontfile=/path/to/font.ttf: text="+searchTerm+": fontcolor=white: fontsize=24: box=1: boxcolor=black@0.5: boxborderw=5: x=(w-text_w)/2: y=(h-text_h)/2\" -codec:a copy ./VAR-Encyclopedia/.temp/combinedVideo.mp4" ;
+        String addTermToFile = "ffmpeg -y -i \"" + ApplicationFolder.Temp.getPath() + "/combinedImages.mp4\" -vf drawtext=\"fontfile=/path/to/font.ttf: text="+searchTerm+": fontcolor=white: fontsize=24: box=1: boxcolor=black@0.5: boxborderw=5: x=(w-text_w)/2: y=(h-text_h)/2\" -codec:a copy " + ApplicationFolder.Temp.getPath() + "/combinedVideo.mp4" ;
         ProcessBuilder combineVideoAndTextBuilder = new ProcessBuilder("bash", "-c", addTermToFile);
 
         try {
@@ -45,24 +45,24 @@ public class CreationFactory {
 
     public void addBGMToVideo(String nameOfMusic){
         //check if file already exist to avoid crash
-        File soundFile = new File("./VAR-Encyclopedia/.temp/sound.wav");
+        File soundFile = new File(ApplicationFolder.Temp.getPath() +"/sound.wav");
         if(soundFile.exists()){
             soundFile.delete();
         }
-        File BGMFile = new File("./VAR-Encyclopedia/.temp/BackgroundAudio.wav");
+        File BGMFile = new File(ApplicationFolder.Temp.getPath() +"/BackgroundAudio.wav");
         if(BGMFile.exists()){
             BGMFile.delete();
         }
 
         try {
             // create a music file (mp3 to wav)
-            String createMusicFileCommand = "ffmpeg -i ./VAR-Encyclopedia/.temp/BGM/"+nameOfMusic+".mp3 -acodec pcm_u8 -ar 16000 ./VAR-Encyclopedia/.temp/sound.wav";
+            String createMusicFileCommand = "ffmpeg -i " + ApplicationFolder.Temp.getPath() + "/BGM/"+nameOfMusic+".mp3 -acodec pcm_u8 -ar 16000 " + ApplicationFolder.Temp.getPath() +"/sound.wav";
             ProcessBuilder createMusicFileBuilder = new ProcessBuilder("bash","-c",createMusicFileCommand);
             Process createMusicFileProcess = createMusicFileBuilder.start();
             createMusicFileProcess.waitFor();
 
             // get duration of audio chunk
-            String getDurationCommand = "soxi -D ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav";
+            String getDurationCommand = "soxi -D " + ApplicationFolder.Temp.getPath() + "/tempCombinedChunks.wav";
             ProcessBuilder getDuration = new ProcessBuilder("bash", "-c", getDurationCommand);
             Process getDurationProcess = getDuration.start();
             BufferedReader stdout = new BufferedReader(new InputStreamReader(getDurationProcess.getInputStream()));
@@ -71,7 +71,7 @@ public class CreationFactory {
             double duration = Double.parseDouble(stdout.readLine());
 
             //trim the music file
-            String trimBGMCommand = "sox -m ./VAR-Encyclopedia/.temp/tempCombinedChunks.wav ./VAR-Encyclopedia/.temp/sound.wav ./VAR-Encyclopedia/.temp/BackgroundAudio.wav trim 0 "+duration;
+            String trimBGMCommand = "sox -m "+ ApplicationFolder.Temp.getPath() +"/tempCombinedChunks.wav "+ ApplicationFolder.Temp.getPath() +"/sound.wav " + ApplicationFolder.Temp.getPath() + "/BackgroundAudio.wav trim 0 "+duration;
             ProcessBuilder trimBGMBuilder = new ProcessBuilder("bash","-c",trimBGMCommand);
             Process trimBGMProcess = trimBGMBuilder.start();
             trimBGMProcess.waitFor();
@@ -82,17 +82,16 @@ public class CreationFactory {
     }
 
     public void combineVideoAndAudio(String nameOfCreation) {
-        String combineVideoAndAudioCommand = "ffmpeg -y -i ./VAR-Encyclopedia/.temp/combinedVideo.mp4 -i ./VAR-Encyclopedia/.temp/BackgroundAudio.wav -c:a aac -strict experimental ./VAR-Encyclopedia/Creations/"+nameOfCreation+".mp4";
-        ProcessBuilder combineVideoAndAudioBuilder = new ProcessBuilder("bash", "-c", combineVideoAndAudioCommand);
+        String combineVideoAndAudioCommand = "ffmpeg -y -i " + ApplicationFolder.Temp.getPath() + "/combinedVideo.mp4 -i " + ApplicationFolder.Temp.getPath() + "/BackgroundAudio.wav -c:a aac -strict experimental \"" + ApplicationFolder.RegularCreations.getPath() + File.separator + nameOfCreation+ ".mp4\"";
+        String createRedactedVideoCommand = "ffmpeg -y -i " + ApplicationFolder.Temp.getPath() + "/combinedImages.mp4 -i " + ApplicationFolder.Temp.getPath() + "/tempRedactedCombinedChunks.wav -c:a aac -strict experimental \"" + ApplicationFolder.RedactedCreations.getPath() + File.separator + nameOfCreation+ ".mp4\"";
+        ProcessBuilder combineVideoAndAudioBuilder = new ProcessBuilder("bash", "-c", combineVideoAndAudioCommand + "; " + createRedactedVideoCommand);
         try{
             Process combineVideoAndAudioProcess = combineVideoAndAudioBuilder.start();
             combineVideoAndAudioProcess.waitFor();
         } catch (Exception e) {
             System.out.print("Error combing Video and Audio");
         }
-
     }
-
 
     public void deleteCreation(String creationName) {
         String[] deleteCreationCommands = { "sh", "-c", "./src/main/resources/shellscripts/deleteCreation.sh" + " \"" + creationName +"\"" };
@@ -103,6 +102,30 @@ public class CreationFactory {
             deleteCreationProcess.waitFor();
         } catch (Exception e) {
             System.out.print("Error playing audio chunk");
+        }
+    }
+
+    public void writeToCreationsFile(String creationName, String searchTerm) {
+        String[] writeToCreationsFileCommands = { "sh", "-c", "./src/main/resources/shellscripts/writeToCreationsFile.sh" + " \"" + creationName +"\"" + " \"" + searchTerm +"\""};
+        ProcessBuilder writeToCreationsFileBuilder = new ProcessBuilder(writeToCreationsFileCommands);
+
+        try {
+            Process writeToCreationsFileProcess = writeToCreationsFileBuilder.start();
+            writeToCreationsFileProcess.waitFor();
+        } catch (Exception e) {
+            System.out.print("Error saving creation to file");
+        }
+    }
+
+    public void deleteFromCreationsFile(String creationName, String searchTerm) {
+        String[] deleteFromCreationsFileCommands = { "sh", "-c", "./src/main/resources/shellscripts/deleteFromCreationsFile.sh" + " \"" + creationName +"\"" + " \"" + searchTerm +"\"" };
+        ProcessBuilder deleteFromCreationsFileBuilder = new ProcessBuilder(deleteFromCreationsFileCommands);
+
+        try {
+            Process deleteFromCreationsFileProcess = deleteFromCreationsFileBuilder.start();
+            deleteFromCreationsFileProcess.waitFor();
+        } catch (Exception e) {
+            System.out.print("Error deleting from creation file");
         }
     }
 }

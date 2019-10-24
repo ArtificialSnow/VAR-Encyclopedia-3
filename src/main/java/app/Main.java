@@ -16,7 +16,7 @@ public class Main extends Application {
         _fileDirectory = new FileDirectory();
         _fileDirectory.create();
 
-        Parent root = FXMLLoader.load(getClass().getResource("/main/resources/scenes/MainMenuScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource(SceneType.MainMenuScene.getPath()));
         primaryStage.setScene(new Scene(root, 1000, 500));
         primaryStage.setResizable(false);
         //primaryStage.initStyle(StageStyle.UNDECORATED);

@@ -8,7 +8,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import main.java.app.ApplicationFolder;
 import main.java.app.CreationFactory;
+import main.java.app.FileDirectory;
 import main.java.app.SceneType;
 
 import javax.swing.*;
@@ -39,7 +41,7 @@ public class SelectImagesScene extends ApplicationScene {
     public void initialize() {
         _creationFactory = new CreationFactory();
 
-        File[] BGMList = new File("./VAR-Encyclopedia/.temp/BGM").listFiles();
+        File[] BGMList = new File(ApplicationFolder.Temp.getPath() +"/BGM").listFiles();
         for (File BGMDirectory : BGMList) {
             _backgroundMusicSelection.getItems().add(BGMDirectory.getName().substring(0,BGMDirectory.getName().length() - 4));
         }
@@ -52,7 +54,7 @@ public class SelectImagesScene extends ApplicationScene {
 //        }
         _backgroundMusicSelection.getSelectionModel().selectFirst();
 
-        File[] downloadList = new File("./VAR-Encyclopedia/.temp/Images").listFiles();
+        File[] downloadList = new File(ApplicationFolder.TempImages.getPath()).listFiles();
         ArrayList<String> nameOfImages = new ArrayList<String>();
         for (File searchTermDirectory : downloadList) {
             nameOfImages.add(searchTermDirectory.getName());
@@ -69,7 +71,7 @@ public class SelectImagesScene extends ApplicationScene {
                     setGraphic(null);
                 }
                 else {
-                    File image = new File("./VAR-Encyclopedia/.temp/Images/" + name);
+                    File image = new File(ApplicationFolder.TempImages.getPath() + File.separator + name);
                     imageView.setImage(new Image(image.toURI().toString()));
                     setAlignment(Pos.CENTER);
                     setGraphic(imageView);
@@ -87,7 +89,7 @@ public class SelectImagesScene extends ApplicationScene {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    File image = new File("./VAR-Encyclopedia/.temp/Images/" + name);
+                    File image = new File(ApplicationFolder.TempImages.getPath() + File.separator + name);
                     imageView.setImage(new Image(image.toURI().toString()));
                     setAlignment(Pos.CENTER);
                     setGraphic(imageView);
@@ -170,7 +172,7 @@ public class SelectImagesScene extends ApplicationScene {
             createInformationAlert("No Images selected", "Please select Images for your Creation");
         } else {
 
-            File[] previousCreations = new File("./VAR-Encyclopedia/Creations").listFiles();
+            File[] previousCreations = new File(ApplicationFolder.RegularCreations.getPath()).listFiles();
             for (File previousCreation : previousCreations) {
                 String previousCreationName = previousCreation.getName();
                 if (previousCreationName.substring(0, previousCreationName.length() - 4).equals(creationName)) {
@@ -182,6 +184,7 @@ public class SelectImagesScene extends ApplicationScene {
             if (fileAlreadyExists) {
                 Alert overrideAlert = createConfirmationAlert("A Creation with that name already exists. Would you like to override " + creationName + "?");
                 if (overrideAlert.getResult() == ButtonType.YES) {
+                    _creationFactory.deleteFromCreationsFile(creationName, "");
                     createCreation(creationName, numberOfImages, event);
                 }
             } else {
@@ -193,7 +196,7 @@ public class SelectImagesScene extends ApplicationScene {
     public void createCreation(String creationName, int numberOfImages, ActionEvent event) {
         String imageNames = "";
         for (String imageName : _selectedImagesListView.getItems()) {
-            imageNames += "./VAR-Encyclopedia/.temp/Images/" + imageName + " ";
+            imageNames += ApplicationFolder.TempImages.getPath() + File.separator + imageName + " ";
         }
         imageNames = imageNames.trim();
 
@@ -210,7 +213,7 @@ public class SelectImagesScene extends ApplicationScene {
                 _creationFactory.combineVideoAndText(searchTerm);
                 _creationFactory.addBGMToVideo(nameOfMusic);
                 _creationFactory.combineVideoAndAudio(creationName);
-
+                _creationFactory.writeToCreationsFile(creationName, searchTerm);
                 return null;
             }
 

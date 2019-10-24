@@ -46,6 +46,8 @@
                      </rotationAxis></Button>
                   <Region prefHeight="25.0" prefWidth="200.0" />
                   <Button fx:id="_viewAudioChunksButton" mnemonicParsing="false" onAction="#viewAudioChunksButtonHandler" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: silver;" text="View Audio Chunks" />
+                  <Region prefHeight="25.0" prefWidth="461.0" />
+                  <Button fx:id="_playQuizButton" mnemonicParsing="false" onAction="#playQuizButtonHandler" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: silver;" text="Play Quiz" />
                </children>
             </VBox>
          </left>

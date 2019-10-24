@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.DisplayQuizResultsScene">
+   <children>
+      <BorderPane layoutX="200.0" layoutY="124.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <TableView fx:id="_resultsTableView" prefHeight="200.0" prefWidth="553.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="_correctAnswerColumn" prefWidth="150.0" text="Correct Answer" />
+                <TableColumn fx:id="_theirAnswerColumn" prefWidth="150.0" text="Your Answer" />
+                  <TableColumn fx:id="_resultColumn" prefWidth="150.0" text="Result" />
+              </columns>
+            </TableView>
+         </center>
+         <right>
+            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="_scoreLabel" text="Total Score:" />
+                  <Button fx:id="_homeButton" mnemonicParsing="false" onAction="#homeButtonHandler" text="Home" />
+                  <Button fx:id="_anotherQuizButton" mnemonicParsing="false" onAction="#anotherQuizButtonHandler" text="Another Quiz" />
+               </children>
+            </VBox>
+         </right>
+      </BorderPane>
+   </children>
+</AnchorPane>

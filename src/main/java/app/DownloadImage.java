@@ -27,7 +27,7 @@ public class DownloadImage extends Task<Object> {
 	@Override
 	protected Object call() throws Exception {
 		// delete previous images
-		String removePreviousImagesCommands = "rm -f ./VAR-Encyclopedia/.temp/Images/*.jpg";
+		String removePreviousImagesCommands = "rm -f " + ApplicationFolder.TempImages.getPath() + File.separator + "*.jpg";
 		ProcessBuilder pb = new ProcessBuilder("bash", "-c", removePreviousImagesCommands);
 		Process process = pb.start();
 		process.waitFor();

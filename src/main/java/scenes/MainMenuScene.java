@@ -35,4 +35,8 @@ public class MainMenuScene extends ApplicationScene {
     public void viewAudioChunksButtonHandler(ActionEvent event) throws IOException {
         changeScene(SceneType.ViewAudioChunksScene, event);
     }
+
+    public void playQuizButtonHandler(ActionEvent event) throws IOException {
+        changeScene(SceneType.SetUpQuizScene, event);
+    }
 }
