@@ -41,7 +41,7 @@ public class SelectImagesScene extends ApplicationScene {
     public void initialize() {
         _creationFactory = new CreationFactory();
 
-        File[] BGMList = new File(ApplicationFolder.Temp.getPath() +"/BGM").listFiles();
+        File[] BGMList = new File("./BGM").listFiles();
         for (File BGMDirectory : BGMList) {
             _backgroundMusicSelection.getItems().add(BGMDirectory.getName().substring(0,BGMDirectory.getName().length() - 4));
         }

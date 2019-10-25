@@ -56,7 +56,7 @@ public class CreationFactory {
 
         try {
             // create a music file (mp3 to wav)
-            String createMusicFileCommand = "ffmpeg -i " + ApplicationFolder.Temp.getPath() + "/BGM/"+nameOfMusic+".mp3 -acodec pcm_u8 -ar 16000 " + ApplicationFolder.Temp.getPath() +"/sound.wav";
+            String createMusicFileCommand = "ffmpeg -i ./BGM/"+nameOfMusic+".mp3 -acodec pcm_u8 -ar 16000 " + ApplicationFolder.Temp.getPath() +"/sound.wav";
             ProcessBuilder createMusicFileBuilder = new ProcessBuilder("bash","-c",createMusicFileCommand);
             Process createMusicFileProcess = createMusicFileBuilder.start();
             createMusicFileProcess.waitFor();
