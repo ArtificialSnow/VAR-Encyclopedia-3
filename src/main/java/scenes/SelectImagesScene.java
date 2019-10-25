@@ -45,13 +45,7 @@ public class SelectImagesScene extends ApplicationScene {
         for (File BGMDirectory : BGMList) {
             _backgroundMusicSelection.getItems().add(BGMDirectory.getName().substring(0,BGMDirectory.getName().length() - 4));
         }
-//        if (_backgroundMusicSelection.getItems().contains("cyba_-_yellow")){
-//            _backgroundMusicSelection.getSelectionModel().select("cyba_-_yellow");
-//        } else if (_backgroundMusicSelection.getItems().contains("septahelix_-_Triptych_of_Snippets")){
-//            _backgroundMusicSelection.getSelectionModel().select("septahelix_-_Triptych_of_Snippets");
-//        } else {
-//            _backgroundMusicSelection.getSelectionModel().select("7OOP3D_-_Odder_Stuff_(Duckettized)");
-//        }
+
         _backgroundMusicSelection.getSelectionModel().selectFirst();
 
         File[] downloadList = new File(ApplicationFolder.TempImages.getPath()).listFiles();
