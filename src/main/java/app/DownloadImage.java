@@ -14,6 +14,9 @@ import javafx.concurrent.Task;
 import com.flickr4java.flickr.*;
 import com.flickr4java.flickr.photos.*;
 
+/**
+ * This class is made to download images from Flickr API
+ */
 public class DownloadImage extends Task<Object> {
 	private String _searchTerm;
 	private int _numOfImage;
@@ -49,13 +52,16 @@ public class DownloadImage extends Task<Object> {
 	        PhotoList<Photo> results = photos.search(params, _numOfImage, page);
 	        for (Photo photo: results) {
 	        	try {
+	        		// Get images
 	        		Image image = photos.getImage(photo,Size.LARGE);
 		        	String filename = _searchTerm.trim().replace(' ', '-')+"-"+System.currentTimeMillis()+"-"+photo.getId()+".jpg";
 
+					// create folder to save images
 		        	File outputFile = new File("VAR-Encyclopedia/.temp/Images",filename);
 					outputFile.getParentFile().mkdir();
 					outputFile.createNewFile();
 
+					// Write image to image file
 		        	BufferedImage resizedImage = resizeImage(image,200,200);// need to edit
 		        	ImageIO.write(resizedImage, "jpg", outputFile);
 	        	} catch (FlickrException fe) {
@@ -67,13 +73,24 @@ public class DownloadImage extends Task<Object> {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * This method is used to get API key from text file
+	 * @param key
+	 * @return
+	 * @throws Exception
+	 */
 	public static String getAPIKey(String key) throws Exception {
+		// Get path for config file
 		String config = System.getProperty("user.dir") + System.getProperty("file.separator") + "flickr-api-keys.txt";
-		
-		File file = new File(config); 
+
+		// Read file
+		File file = new File(config);
+
+		// use BufferedReader
 		BufferedReader br = new BufferedReader(new FileReader(file)); 
-		
+
+		// get key in config file
 		String line;
 		while ( (line = br.readLine()) != null ) {
 			if (line.trim().startsWith(key)) {
@@ -84,13 +101,21 @@ public class DownloadImage extends Task<Object> {
 		br.close();
 		throw new RuntimeException("Couldn't find " + key + " in config file "+ file.getName());
 	}
-	
+
+	/**
+	 * This method is used to resize the image downloaded from Flickr API
+	 * @param image original image
+	 * @param width width of the image
+	 * @param height height of the image
+	 * @return a resized BufferedImage
+	 */
 	public static BufferedImage resizeImage(final Image image, int width, int height) {
+		// create a buffered image with given dimension
 		final BufferedImage BI = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
 		final Graphics2D g = BI.createGraphics();
 		g.setComposite(AlphaComposite.Src);
-		
-		g.drawImage(image, 0, 0, width, height, null);//need to edit
+		// draw new image
+		g.drawImage(image, 0, 0, width, height, null);
 		g.dispose();
 		return BI;
 	}
