@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * This class uses ProcessBuilders and the wikit command-line command to search terms on wikipedia and obtain the search results.
+ */
 public class WikipediaSearch {
 
     private String _pathToBash;

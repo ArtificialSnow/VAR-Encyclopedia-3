@@ -4,8 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 
+/**
+ * This class encapsulates all methods for creating a creation.
+ */
 public class CreationFactory {
 
+    //Combines all selected images into a video
     public void combineImagesToVideo(String imageNames, int numberOfImages) {
         String getDurationCommand = "soxi -D " + ApplicationFolder.Temp.getPath() + "/tempCombinedChunks.wav";
         ProcessBuilder getDuration = new ProcessBuilder("bash", "-c", getDurationCommand);
@@ -30,6 +34,7 @@ public class CreationFactory {
 
     }
 
+    //Combines the video containing only images with the search term
     public void combineVideoAndText(String searchTerm) {
         String addTermToFile = "ffmpeg -y -i \"" + ApplicationFolder.Temp.getPath() + "/combinedImages.mp4\" -vf drawtext=\"fontfile=/path/to/font.ttf: text="+searchTerm+": fontcolor=white: fontsize=24: box=1: boxcolor=black@0.5: boxborderw=5: x=(w-text_w)/2: y=(h-text_h)/2\" -codec:a copy " + ApplicationFolder.Temp.getPath() + "/combinedVideo.mp4" ;
         ProcessBuilder combineVideoAndTextBuilder = new ProcessBuilder("bash", "-c", addTermToFile);
@@ -43,6 +48,7 @@ public class CreationFactory {
 
     }
 
+    //Adds background music to the video
     public void addBGMToVideo(String nameOfMusic){
         //check if file already exist to avoid crash
         File soundFile = new File(ApplicationFolder.Temp.getPath() +"/sound.wav");
@@ -81,6 +87,7 @@ public class CreationFactory {
         }
     }
 
+    //Combines the fully created visual only video, with the audio of festival reading the audio chunks (wikipedia content).
     public void combineVideoAndAudio(String nameOfCreation) {
         String combineVideoAndAudioCommand = "ffmpeg -y -i " + ApplicationFolder.Temp.getPath() + "/combinedVideo.mp4 -i " + ApplicationFolder.Temp.getPath() + "/BackgroundAudio.wav -c:a aac -strict experimental \"" + ApplicationFolder.RegularCreations.getPath() + File.separator + nameOfCreation+ ".mp4\"";
         String createRedactedVideoCommand = "ffmpeg -y -i " + ApplicationFolder.Temp.getPath() + "/combinedImages.mp4 -i " + ApplicationFolder.Temp.getPath() + "/tempRedactedCombinedChunks.wav -c:a aac -strict experimental \"" + ApplicationFolder.RedactedCreations.getPath() + File.separator + nameOfCreation+ ".mp4\"";
@@ -93,6 +100,7 @@ public class CreationFactory {
         }
     }
 
+    //Deletes the creation (.mp3)
     public void deleteCreation(String creationName) {
         String[] deleteCreationCommands = { "sh", "-c", "./src/main/resources/shellscripts/deleteCreation.sh" + " \"" + creationName +"\"" };
         ProcessBuilder deleteCreationBuilder = new ProcessBuilder(deleteCreationCommands);
@@ -105,6 +113,7 @@ public class CreationFactory {
         }
     }
 
+    //Adds the creation data to the file
     public void writeToCreationsFile(String creationName, String searchTerm) {
         String[] writeToCreationsFileCommands = { "sh", "-c", "./src/main/resources/shellscripts/writeToCreationsFile.sh" + " \"" + creationName +"\"" + " \"" + searchTerm +"\""};
         ProcessBuilder writeToCreationsFileBuilder = new ProcessBuilder(writeToCreationsFileCommands);
@@ -117,6 +126,7 @@ public class CreationFactory {
         }
     }
 
+    //Removes the creation data from the CurrentCreations file
     public void deleteFromCreationsFile(String creationName, String searchTerm) {
         String[] deleteFromCreationsFileCommands = { "sh", "-c", "./src/main/resources/shellscripts/deleteFromCreationsFile.sh" + " \"" + creationName +"\"" + " \"" + searchTerm +"\"" };
         ProcessBuilder deleteFromCreationsFileBuilder = new ProcessBuilder(deleteFromCreationsFileCommands);

@@ -7,6 +7,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * This Class is the main class of the application. It starts the application by calling launch(args) and sets the scene to the Main Menu.
+ * It also makes a call to the FileDirectory class which checks if the necessary file structure has been created, and creates the files if they do not exist.
+ */
 public class Main extends Application {
 
     FileDirectory _fileDirectory;

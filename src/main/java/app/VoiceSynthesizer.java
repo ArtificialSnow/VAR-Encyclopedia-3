@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class obtains the selection of voices to be used in creating audio.
+ */
 public class VoiceSynthesizer {
 
     private String _voicesUnformatted;
@@ -15,6 +18,10 @@ public class VoiceSynthesizer {
         runGetSynthVoicesBashScript();
     }
 
+    /**
+     * Splits the voices obtained into a list, where each entry represents one available voice.
+     * @return The list (String representation) of all festival voices.
+     */
     public List<String> getVoices() {
         _voicesList = new ArrayList<String>();
         for (String voice : _voicesUnformatted.split(" ")){
@@ -24,6 +31,9 @@ public class VoiceSynthesizer {
         return _voicesList;
     }
 
+    /**
+     * Runs a bash script to get all the festival voices available.
+     */
     private void runGetSynthVoicesBashScript() {
         BufferedReader stdout = null;
 

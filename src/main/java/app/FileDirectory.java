@@ -1,5 +1,8 @@
 package main.java.app;
 
+/**
+ * This class creates the files necessary to run the program, if they do not exist.
+ */
 public class FileDirectory {
 
     private final String pathToBash;

@@ -7,8 +7,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class encapsulates all methods for creating Audio Chunks.
+ */
 public class AudioFactory {
 
+    //Plays an Audio Chunk via the command line
     public void playAudioChunk(String searchTerm, String audioChunkName) {
         String[] playAudioChunkCommands = { "sh", "-c", "./src/main/resources/shellscripts/playAudioChunk.sh" + " \"" + searchTerm + "\" \"" + audioChunkName +"\"" };
         ProcessBuilder playAudioChunkBuilder = new ProcessBuilder(playAudioChunkCommands);
@@ -21,6 +25,7 @@ public class AudioFactory {
         }
     }
 
+    //Deletes an audio chunk (.wav)
     public void deleteAudioChunk(String searchTerm, String audioChunkName) {
         String[] deleteAudioChunkCommands = { "sh", "-c", "./src/main/resources/shellscripts/deleteAudioChunk.sh" + " \"" + searchTerm + "\" \"" + audioChunkName +"\"" };
         ProcessBuilder deleteAudioChunkBuilder = new ProcessBuilder(deleteAudioChunkCommands);
@@ -33,6 +38,7 @@ public class AudioFactory {
         }
     }
 
+    //Previews an audio chunk (without saving) via the command line
     public void previewAudioChunk(String audioChunk, String voiceSynthesizerType) {
         String[] previewAudioCommands = { "sh", "-c", "./src/main/resources/shellscripts/previewAudioChunk.sh" + " \"" + voiceSynthesizerType + "\" \"" + audioChunk +"\"" };
         ProcessBuilder previewAudioBuilder = new ProcessBuilder(previewAudioCommands);
@@ -45,6 +51,7 @@ public class AudioFactory {
         }
     }
 
+    //Saves an audio chunk so it can later be used to create a creation
     public void saveAudioChunk(String audioChunk, String voiceSynthesizerType, String searchTerm, String chunkName) {
         String[] saveAudioCommands = { "sh", "-c", "./src/main/resources/shellscripts/saveAudioChunk.sh"
                 + " \"" + chunkName + "\" \"" + searchTerm + "\" \"" + voiceSynthesizerType + "\" \"" + audioChunk +"\"" };
@@ -58,6 +65,7 @@ public class AudioFactory {
         }
     }
 
+    //Checks whether an Audio Chunk with that search term and name already exists
     public boolean chunkAlreadyExists(String searchTerm, String chunkName) {
         boolean directoryFound = false;
         File[] fileList = new File(ApplicationFolder.AudioChunks.getPath()).listFiles();
@@ -85,6 +93,7 @@ public class AudioFactory {
         return false;
     }
 
+    //Combines multiple audio chunks, to create the final audio for a creation.
     public void combineAudioChunks(String searchTerm, String audioChunksString) {
         String[] combineAudioChunkCommands = { "sh", "-c", "./src/main/resources/shellscripts/combineAudioChunks.sh" + " \"" + searchTerm + "\" \"" + audioChunksString +"\"" };
         ProcessBuilder combineAudioChunkBuilder = new ProcessBuilder(combineAudioChunkCommands);

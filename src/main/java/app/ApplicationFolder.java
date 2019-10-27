@@ -2,6 +2,9 @@ package main.java.app;
 
 import java.io.File;
 
+/**
+ * An enum which represents folders created by the application. Used to obtain the path to these files.
+ */
 public enum ApplicationFolder {
 
     Main("VAR-Encyclopedia"),

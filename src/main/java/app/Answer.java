@@ -1,5 +1,8 @@
 package main.java.app;
 
+/**
+ * This class represents the information of a Quiz Answer.
+ */
 public class Answer {
 
     String _correctAnswer;

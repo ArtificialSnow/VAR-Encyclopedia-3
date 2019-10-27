@@ -1,5 +1,8 @@
 package main.java.app;
 
+/**
+ * Encapsulates the information which represents a creation
+ */
 public class Creation {
 
     String _name;

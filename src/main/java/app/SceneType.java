@@ -5,6 +5,10 @@ import main.java.scenes.CreationsViewer;
 
 import java.io.File;
 
+/**
+ * This is an enum representing all of the fxml scenes in the application.
+ * The main purpose of this enum is to easily be able to obtain the path to the fxml file of a particular scene.
+ */
 public enum SceneType {
 
     MainMenuScene("/main/resources/scenes/MainMenuScene.fxml"),

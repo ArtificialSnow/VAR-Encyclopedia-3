@@ -1,5 +1,8 @@
 package main.java.app;
 
+/**
+ * Encapsulates the information representing an Audio Chunk.
+ */
 public class AudioChunk {
 
     String _name;
