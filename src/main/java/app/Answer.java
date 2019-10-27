@@ -12,7 +12,10 @@ public class Answer {
     public Answer(String correctAnswer, String enteredAnswer) {
         _correctAnswer = correctAnswer;
         _enteredAnswer = enteredAnswer;
-        _correct = correctAnswer.equalsIgnoreCase(enteredAnswer);
+
+        //Non-case sensitive, also does not differentiate between answers with an s or es on the end, to try and make as many plurals correct as possible.
+        _correct = (correctAnswer.equalsIgnoreCase(enteredAnswer) || (correctAnswer + "s").equalsIgnoreCase(enteredAnswer) || correctAnswer.equalsIgnoreCase(enteredAnswer + "s")
+                || (correctAnswer + "es").equalsIgnoreCase(enteredAnswer) || correctAnswer.equalsIgnoreCase(enteredAnswer + "es"));
     }
 
     public String getCorrectAnswer() {
