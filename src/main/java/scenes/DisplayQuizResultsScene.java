@@ -32,6 +32,7 @@ public class DisplayQuizResultsScene extends ApplicationScene {
         _resultColumn.setCellValueFactory(new PropertyValueFactory<>("correct"));
     }
 
+    //Enters the results of the quiz into the TableView
     public void setResults(List<Answer> answerList) {
         int numberCorrect = 0;
 
@@ -46,10 +47,12 @@ public class DisplayQuizResultsScene extends ApplicationScene {
         _scoreLabel.setText("Total Correct: " + numberCorrect + "/" + answerList.size());
     }
 
+    //Returns to main menu
     public void homeButtonHandler(ActionEvent event) throws IOException {
         changeScene(SceneType.MainMenuScene, event);
     }
 
+    //Starts another quiz
     public void anotherQuizButtonHandler(ActionEvent event) throws IOException  {
         changeScene(SceneType.SetUpQuizScene, event);
     }

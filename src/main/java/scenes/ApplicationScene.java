@@ -12,8 +12,19 @@ import main.java.app.SceneType;
 
 import java.io.IOException;
 
+/**
+ * This class is an abstract class which provides shared functionality to all Scene classes in this Application.
+ * The shared functionality includes changing scenes, and creating alerts.
+ */
 public abstract class ApplicationScene {
 
+    /**
+     * Changes the current scene to a Scene specified by a SceneType enum which provides the path to that Scene.
+     * @param sceneType
+     * @param event
+     * @return The controller object of that scene.
+     * @throws IOException
+     */
     public ApplicationScene changeScene(SceneType sceneType, ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneType.getPath()));
         Parent parent = loader.load();

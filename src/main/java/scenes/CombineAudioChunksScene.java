@@ -29,6 +29,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
 
     AudioFactory _audioFactory;
 
+    //Sets up the scene: adds all Search Terms which the user has created audio chunks for into a ListView
     @FXML
     public void initialize() {
         _audioFactory = new AudioFactory();
@@ -39,6 +40,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
         }
     }
 
+    //Disables all buttons
     public void setDisableAllButtons(Boolean disable) {
         _homeButton.setDisable(disable);
         _nextSceneButton.setDisable(disable);
@@ -49,6 +51,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
         _quitButton.setDisable(disable);
     }
 
+    //Updates the ListView which displays all the audio chunks for a selected search term
     public void updateAudioChunksList() {
         String searchTermDirectory = _searchTermsListView.getSelectionModel().getSelectedItem();
 
@@ -64,6 +67,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
         }
     }
 
+    //Adds an audio chunk to the 'Selected Audio Chunks' ListView
     public void addChunkButtonHandler() {
         String audioChunkToAdd = _audioChunksListView.getSelectionModel().getSelectedItem();
 
@@ -82,6 +86,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
         }
     }
 
+    //Changes the queue of audio chunks to be read so that the selected audio chunk is one position earlier than what it was previously (if possible)
     public void shiftChunkUpButtonHandler() {
         int selectedChunk = _selectedAudioChunksListView.getSelectionModel().getSelectedIndex();
         if (selectedChunk == -1) {
@@ -96,6 +101,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
         }
     }
 
+    //Changes the queue of audio chunks to be read so that the selected audio chunk is one position later than what it was previously (if possible)
     public void shiftChunkDownButtonHandler() {
         int selectedChunk = _selectedAudioChunksListView.getSelectionModel().getSelectedIndex();
         if (selectedChunk == -1) {
@@ -110,6 +116,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
         }
     }
 
+    //Removes an audio chunk from the 'Selected Audio Chunks' ListView
     public void removeChunkButtonHandler() {
         String audioChunkToRemove = _selectedAudioChunksListView.getSelectionModel().getSelectedItem();
 
@@ -124,6 +131,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
         }
     }
 
+    //Changes the current scene to the main menu
     public void homeButtonHandler(ActionEvent event) throws IOException {
         if (_selectedAudioChunksListView.getItems().size() != 0) {
             Alert returnToMenuAlert = createConfirmationAlert("Are you sure you want to quit to the main menu? All progress will be lost.");
@@ -144,6 +152,8 @@ public class CombineAudioChunksScene extends ApplicationScene {
         }
     }
 
+    //Combines all the selected audio chunks to create the audio for the creation, Searches for 10 images via the flickr api on the selected search term,
+    //then changes the scene to the SelectImagesScene
     public void nextSceneButtonHandler(ActionEvent event) throws IOException {
         String searchTerm = _searchTermsListView.getSelectionModel().getSelectedItem();
 

@@ -56,6 +56,7 @@ public class CreationsViewer {
         _mediaPlayer.setAutoPlay(true);
     }
 
+    //Resets the values of the display to the initial values.
     public void resetValues() {
         _mediaPlayer.seek(Duration.ZERO);
         _timeBar.adjustValue(0);
@@ -74,6 +75,7 @@ public class CreationsViewer {
         }
     }
 
+    //Skips forward 10 seconds
     public void skipForwardButtonHandler() {
         if (_mediaPlayer.getCurrentTime().add(Duration.seconds(10)).lessThan(_mediaPlayer.getTotalDuration())) {
             _mediaPlayer.seek(_mediaPlayer.getCurrentTime().add(Duration.seconds(10)));
@@ -84,6 +86,7 @@ public class CreationsViewer {
         }
     }
 
+        //Skips back 10 seconds
     public void skipBackButtonHandler() {
         if (_mediaPlayer.getCurrentTime().add(Duration.seconds(-10)).greaterThan(Duration.ZERO)) {
             _mediaPlayer.seek(_mediaPlayer.getCurrentTime().add(Duration.seconds(-10)));

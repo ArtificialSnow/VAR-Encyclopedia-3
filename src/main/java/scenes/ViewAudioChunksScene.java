@@ -45,6 +45,7 @@ public class ViewAudioChunksScene extends ApplicationScene {
         updateSearchTermList();
     }
 
+    //Updates the list of search terms which have audio chunks
     public void updateSearchTermList() {
         _searchTermList.getItems().clear();
 
@@ -54,6 +55,7 @@ public class ViewAudioChunksScene extends ApplicationScene {
         }
     }
 
+    //Updates the list of audio chunks based on which search term is selected
     public void updateAudioChunksList() {
         _audioChunksTableView.getItems().clear();
 
@@ -85,6 +87,7 @@ public class ViewAudioChunksScene extends ApplicationScene {
         System.exit(0);
     }
 
+    //Plays a selected audio chunk
     public void playButtonHandler() {
         String searchTerm = _searchTermList.getSelectionModel().getSelectedItem();
         AudioChunk audioChunk = (AudioChunk) _audioChunksTableView.getSelectionModel().getSelectedItem();
@@ -119,6 +122,7 @@ public class ViewAudioChunksScene extends ApplicationScene {
         }
     }
 
+    //deletes a selected audio chunk
     public void deleteButtonHandler() {
         String searchTerm = _searchTermList.getSelectionModel().getSelectedItem();
         AudioChunk audioChunk = (AudioChunk) _audioChunksTableView.getSelectionModel().getSelectedItem();

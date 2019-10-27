@@ -37,7 +37,7 @@ public class SelectImagesScene extends ApplicationScene {
     private String _searchTerm;
     private CreationFactory _creationFactory;
 
-
+    //Adds background music selection to the drop down menu, loads images into the listView
     @FXML
     public void initialize() {
         _creationFactory = new CreationFactory();
@@ -107,6 +107,7 @@ public class SelectImagesScene extends ApplicationScene {
         _searchTerm = searchTerm;
     }
 
+    //Adds an image to the Selected Images ListView
     public void addImageButtonHandler() {
         String imageToAdd = _downloadedImagesListView.getSelectionModel().getSelectedItem();
 
@@ -125,6 +126,7 @@ public class SelectImagesScene extends ApplicationScene {
         }
     }
 
+    //Removes and image from the selected images ListView
     public void removeImageButtonHandler() {
         String imageToRemove = _selectedImagesListView.getSelectionModel().getSelectedItem();
         if (imageToRemove == null) {
@@ -138,6 +140,7 @@ public class SelectImagesScene extends ApplicationScene {
         }
     }
 
+    //Repositions the selected image to come one image earlier in the creation (if possible)
     public void shiftImageUpButtonHandler() {
         int selectedImage = _selectedImagesListView.getSelectionModel().getSelectedIndex();
         if (selectedImage == -1) {
@@ -152,6 +155,7 @@ public class SelectImagesScene extends ApplicationScene {
         }
     }
 
+    //Repositions the selected image to come one image later in the creation (if possible)
     public void shiftImageDownButtonHandler() {
         int selectedImage = _selectedImagesListView.getSelectionModel().getSelectedIndex();
         if (selectedImage == -1) {
@@ -166,6 +170,7 @@ public class SelectImagesScene extends ApplicationScene {
         }
     }
 
+    //Calls all script files involved in creating a creation in a new thread - and passes all relevant data into them
     public void createCreationButtonHandler(ActionEvent event) throws IOException {
         boolean fileAlreadyExists = false;
         String creationName = _creationName.getText().replaceAll("(^\\s+)|(\\s+$)", "");
@@ -204,6 +209,7 @@ public class SelectImagesScene extends ApplicationScene {
         }
     }
 
+    //Helper function for creating a new creation
     public void createCreation(String creationName, int numberOfImages, ActionEvent event) {
         String imageNames = "";
         for (String imageName : _selectedImagesListView.getItems()) {

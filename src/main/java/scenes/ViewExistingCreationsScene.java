@@ -43,6 +43,7 @@ public class ViewExistingCreationsScene extends ApplicationScene {
         updateCreationsList();
     }
 
+    //Updates the table view of creations
     public void updateCreationsList() {
         _creationsTableView.getItems().clear();
 
@@ -67,6 +68,7 @@ public class ViewExistingCreationsScene extends ApplicationScene {
         System.exit(0);
     }
 
+    //Plays the selected creation
     public void playButtonHandler() throws IOException {
         Creation creation = (Creation) _creationsTableView.getSelectionModel().getSelectedItem();
 
@@ -92,6 +94,7 @@ public class ViewExistingCreationsScene extends ApplicationScene {
         }
     }
 
+    //deletes the selected creation
     public void deleteButtonHandler() {
         Creation creation = (Creation) _creationsTableView.getSelectionModel().getSelectedItem();
 

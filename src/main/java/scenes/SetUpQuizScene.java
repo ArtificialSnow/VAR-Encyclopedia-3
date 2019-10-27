@@ -23,6 +23,7 @@ public class SetUpQuizScene extends ApplicationScene {
 
     private int _numberOfCreations;
 
+    //Allows the user to select a quiz with a certain number of questions, based on how many creations they have played
     @FXML
     public void initialize() throws IOException {
 
@@ -49,6 +50,7 @@ public class SetUpQuizScene extends ApplicationScene {
         System.exit(0);
     }
 
+    //Starts the quiz by changing to the PlayQuizScene
     public void startQuizButtonHandler(ActionEvent event) throws IOException {
         int numberOfQuestions = _numberOfQuestions.getSelectionModel().getSelectedItem();
 

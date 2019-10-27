@@ -45,6 +45,7 @@ public class PlayQuizScene extends ApplicationScene {
         _answerList = new ArrayList<>();
     }
 
+    //Initializes quiz data
     public void setQuiz(Quiz quiz) {
         _selectedCreations = quiz.getMedia();
         _correctAnswers = quiz.getAnswers();
@@ -87,6 +88,7 @@ public class PlayQuizScene extends ApplicationScene {
         _mediaView.setMediaPlayer(_mediaPlayer);
     }
 
+    //Resets display values to initial values
     public void resetValues() {
         _mediaPlayer.seek(Duration.ZERO);
         _timeBar.adjustValue(0);
@@ -105,6 +107,7 @@ public class PlayQuizScene extends ApplicationScene {
         }
     }
 
+    //Skips forward 10 seconds
     public void skipForwardButtonHandler() {
         if (_mediaPlayer.getCurrentTime().add(Duration.seconds(10)).lessThan(_mediaPlayer.getTotalDuration())) {
             _mediaPlayer.seek(_mediaPlayer.getCurrentTime().add(Duration.seconds(10)));
@@ -113,6 +116,7 @@ public class PlayQuizScene extends ApplicationScene {
         }
     }
 
+    //Skips back 10 seconds
     public void skipBackButtonHandler() {
         if (_mediaPlayer.getCurrentTime().add(Duration.seconds(10)).lessThan(_mediaPlayer.getTotalDuration())) {
             _mediaPlayer.seek(_mediaPlayer.getCurrentTime().add(Duration.seconds(10)));
@@ -123,6 +127,7 @@ public class PlayQuizScene extends ApplicationScene {
         }
     }
 
+    //Submits an answer for the quiz
     public void submitAnswerButtonHandler(ActionEvent event) throws IOException {
         String playerAnswer = _searchTermField.getText();
         _answerList.add(new Answer(_correctAnswers.get(index), playerAnswer));

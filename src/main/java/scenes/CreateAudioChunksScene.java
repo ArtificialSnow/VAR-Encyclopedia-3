@@ -31,6 +31,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
     private AudioFactory _audioFactory;
     private VoiceSynthesizer _voiceSynthesizer;
 
+    //Sets up the scene: adds all available voice synthesizer voices to the drop down menu
     @FXML
     public void initialize() {
         _audioFactory = new AudioFactory();
@@ -48,6 +49,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
         }
     }
 
+    //Disables all buttons
     public void setDisableAllButtons(Boolean disable) {
         _homeButton.setDisable(disable);
         _searchButton.setDisable(disable);
@@ -57,6 +59,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
         _saveButton.setDisable(disable);
     }
 
+    //Changes the scene to the main menu
     public void homeButtonHandler(ActionEvent event) throws IOException {
         if (_editor.getText().length() != 0) {
             Alert searchAlert = createConfirmationAlert("Are you sure you wish to go back to the main menu? You will lose your existing progress.");
@@ -77,6 +80,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
         }
     }
 
+    //Gets the Wikipedia Content for a wikipedia search
     public void searchButtonHandler() {
         _searchTerm = _searchBar.getText().replaceAll("(^\\s+)|(\\s+$)", "");
 
@@ -105,6 +109,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
         }
     }
 
+    //Helper method for getting wikipedia Content
     private void searchWikipedia() {
         setDisableAllButtons(true);
         _progressIndicator.setVisible(true);
@@ -137,6 +142,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
         }).start();
     }
 
+    //Adds the selected text in the list view to the text editor
     public void addTextToEditorButtonHandler() {
         String wikipediaLine = _wikipediaText.getSelectionModel().getSelectedItem();
 
@@ -149,6 +155,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
         checkTextLength();
     }
 
+    //Checks whether the text in the editor is more than 40 words
     public void checkTextLength() {
         Platform.runLater( () -> {
             if (_editor.getText().split("\\s").length > 40) {
@@ -163,6 +170,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
         });
     }
 
+    //Previews the audio of the text in the editor
     public void previewAudioChunkButtonHandler() {
         if (validAudioChunk()) {
             setDisableAllButtons(true);
@@ -185,6 +193,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
         }
     }
 
+    //Saves an audio chunk to be used to create creations
     public void saveButtonHandler() {
         String chunkName = _fileNameTextArea.getText().replaceAll("(^\\s+)|(\\s+$)", "");;
 
@@ -215,6 +224,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
         }
     }
 
+    //Helper method for saving audio chunks
     private void saveAudioChunk(String chunkName, String audioChunkText) {
         setDisableAllButtons(true);
 
@@ -239,6 +249,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
         }).start();
     }
 
+    //Checks whether an audio chunk is valid or not
     private boolean validAudioChunk() {
         if (_editor.getText().split("\\s").length > 40) {
             createInformationAlert("Audio chunk too long", "Maximum if 40 words per audio chunk");
