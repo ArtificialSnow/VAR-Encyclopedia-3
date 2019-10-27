@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 
-<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.PlayQuizScene">
+<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.PlayQuizScene">
     <children>
         <BorderPane layoutX="60.0" layoutY="75.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #fff7e6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
@@ -62,7 +62,7 @@
                         </HBox>
                   <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="39.0" prefWidth="1000.0">
                      <children>
-                        <TextField fx:id="_searchTermField" promptText="Enter the search term" />
+                        <TextField fx:id="_searchTermField" onAction="#submitAnswerButtonHandler" promptText="Enter the search term" />
                         <Region prefHeight="200.0" prefWidth="20.0" />
                         <Button fx:id="_submitAnswerButton" mnemonicParsing="false" onAction="#submitAnswerButtonHandler" text="Submit" textFill="#cc8800" />
                         <Region prefHeight="50.0" prefWidth="20.0" />

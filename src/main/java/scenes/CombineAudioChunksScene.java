@@ -41,6 +41,16 @@ public class CombineAudioChunksScene extends ApplicationScene {
         }
     }
 
+    public void setDisableAllButtons(Boolean disable) {
+        _homeButton.setDisable(disable);
+        _nextSceneButton.setDisable(disable);
+        _addChunkButton.setDisable(disable);
+        _removeChunkButton.setDisable(disable);
+        _shiftChunkDown.setDisable(disable);
+        _shiftChunkUp.setDisable(disable);
+        _quitButton.setDisable(disable);
+    }
+
     public void updateAudioChunksList() {
         String searchTermDirectory = _searchTermsListView.getSelectionModel().getSelectedItem();
 
@@ -60,7 +70,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
         String audioChunkToAdd = _audioChunksListView.getSelectionModel().getSelectedItem();
 
         if (audioChunkToAdd == null) {
-            createInformationAlert("No Audio Chunk Selected", "Please select an Audio Chunk");
+            //createInformationAlert("No Audio Chunk Selected", "Please select an Audio Chunk");
         } else {
             if (_selectedAudioChunksListView.getItems().contains(audioChunkToAdd)) {
                 createInformationAlert("Audio Chunk already added", "Audio Chunk " + audioChunkToAdd + " already added");
@@ -77,7 +87,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
     public void shiftChunkUpButtonHandler() {
         int selectedChunk = _selectedAudioChunksListView.getSelectionModel().getSelectedIndex();
         if (selectedChunk == -1) {
-            createInformationAlert("No Audio Chunk selected", "Please select an Audio Chunk");
+            //createInformationAlert("No Audio Chunk selected", "Please select an Audio Chunk");
         } else if (selectedChunk == 0){
             //createInformationAlert("Cannot shift chunk up further", "Cannot shift chunk up further");
         } else {
@@ -91,7 +101,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
     public void shiftChunkDownButtonHandler() {
         int selectedChunk = _selectedAudioChunksListView.getSelectionModel().getSelectedIndex();
         if (selectedChunk == -1) {
-            createInformationAlert("No Audio Chunk selected", "Please select an Audio Chunk");
+            //createInformationAlert("No Audio Chunk selected", "Please select an Audio Chunk");
         } else if (selectedChunk == (_selectedAudioChunksListView.getItems().size() - 1)){
             //createInformationAlert("Cannot shift chunk down further", "Cannot shift chunk down further");
         } else {
@@ -106,7 +116,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
         String audioChunkToRemove = _selectedAudioChunksListView.getSelectionModel().getSelectedItem();
 
         if (audioChunkToRemove == null) {
-            createInformationAlert("No Audio Chunk Selected", "Please select an Audio Chunk");
+            //createInformationAlert("No Audio Chunk Selected", "Please select an Audio Chunk");
         } else {
             int index = _selectedAudioChunksListView.getItems().indexOf(audioChunkToRemove);
             _selectedAudioChunksListView.getItems().remove(audioChunkToRemove);
@@ -142,7 +152,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
         if (_selectedAudioChunksListView.getItems().size() == 0) {
             createInformationAlert("No Audio Chunks selected", "Please select Audio Chunks to combine for creation");
         } else {
-            _nextSceneButton.setDisable(true);
+            setDisableAllButtons(true);
 
             new Thread( new Task<Void>() {
 
@@ -165,10 +175,10 @@ public class CombineAudioChunksScene extends ApplicationScene {
                 protected void done() {
                     Platform.runLater( () -> {
                         try {
-                            _nextSceneButton.setDisable(true);
-
                             ApplicationScene selectImagesSceneController = changeScene(SceneType.SelectImagesScene, event);
                             ((SelectImagesScene) selectImagesSceneController).setSearchTerm(searchTerm);
+
+                            setDisableAllButtons(false);
                         } catch (Exception e) {
                             System.out.println("Error changing to SelectImagesScene");
                         }

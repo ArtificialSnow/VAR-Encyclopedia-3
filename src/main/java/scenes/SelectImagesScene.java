@@ -92,6 +92,16 @@ public class SelectImagesScene extends ApplicationScene {
         });
     }
 
+    public void setDisableAllButtons(Boolean disable) {
+        _homeButton.setDisable(disable);
+        _quitButton.setDisable(disable);
+        _addImageButton.setDisable(disable);
+        _removeImageButton.setDisable(disable);
+        _shiftImageDownButton.setDisable(disable);
+        _shiftImageUpButton.setDisable(disable);
+        _createCreationButton.setDisable(disable);
+    }
+
     public void setSearchTerm(String searchTerm) {
         _searchTerm = searchTerm;
     }
@@ -100,7 +110,7 @@ public class SelectImagesScene extends ApplicationScene {
         String imageToAdd = _downloadedImagesListView.getSelectionModel().getSelectedItem();
 
         if (imageToAdd == null) {
-            createInformationAlert("No Image Selected", "Please select a Image");
+            //createInformationAlert("No Image Selected", "Please select a Image");
         } else {
             if (_selectedImagesListView.getItems().contains(imageToAdd)) {
                 createInformationAlert("Image already added", "Image " + imageToAdd + " already added");
@@ -117,7 +127,7 @@ public class SelectImagesScene extends ApplicationScene {
     public void removeImageButtonHandler() {
         String imageToRemove = _selectedImagesListView.getSelectionModel().getSelectedItem();
         if (imageToRemove == null) {
-            createInformationAlert("No Image Selected", "Please select an Image");
+            //createInformationAlert("No Image Selected", "Please select an Image");
         } else {
             int index = _selectedImagesListView.getItems().indexOf(imageToRemove);
             _selectedImagesListView.getItems().remove(imageToRemove);
@@ -130,9 +140,9 @@ public class SelectImagesScene extends ApplicationScene {
     public void shiftImageUpButtonHandler() {
         int selectedImage = _selectedImagesListView.getSelectionModel().getSelectedIndex();
         if (selectedImage == -1) {
-            createInformationAlert("No Image selected", "Please select a Image");
+            //createInformationAlert("No Image selected", "Please select a Image");
         } else if (selectedImage == 0){
-            createInformationAlert("Cannot shift Image up further", "Cannot shift Image up further");
+            //createInformationAlert("Cannot shift Image up further", "Cannot shift Image up further");
         } else {
             String audioChunk = _selectedImagesListView.getItems().get(selectedImage);
             _selectedImagesListView.getItems().remove(selectedImage);
@@ -144,9 +154,9 @@ public class SelectImagesScene extends ApplicationScene {
     public void shiftImageDownButtonHandler() {
         int selectedImage = _selectedImagesListView.getSelectionModel().getSelectedIndex();
         if (selectedImage == -1) {
-            createInformationAlert("No Image selected", "Please select a Image");
+            //createInformationAlert("No Image selected", "Please select a Image");
         } else if (selectedImage == _selectedImagesListView.getItems().size() - 1){
-            createInformationAlert("Cannot shift Image down further", "Cannot shift Image down further");
+            //createInformationAlert("Cannot shift Image down further", "Cannot shift Image down further");
         } else {
             String audioChunk = _selectedImagesListView.getItems().get(selectedImage);
             _selectedImagesListView.getItems().remove(selectedImage);
@@ -187,6 +197,12 @@ public class SelectImagesScene extends ApplicationScene {
         }
     }
 
+    public void createCreationOnEnter(ActionEvent event) throws IOException {
+        if (! _createCreationButton.isDisabled()) {
+            createCreationButtonHandler(event);
+        }
+    }
+
     public void createCreation(String creationName, int numberOfImages, ActionEvent event) {
         String imageNames = "";
         for (String imageName : _selectedImagesListView.getItems()) {
@@ -194,7 +210,7 @@ public class SelectImagesScene extends ApplicationScene {
         }
         imageNames = imageNames.trim();
 
-        _createCreationButton.setDisable(true);
+        setDisableAllButtons(true);
 
         String searchTerm = _searchTerm;
         String finalImageNames = imageNames;
@@ -215,7 +231,7 @@ public class SelectImagesScene extends ApplicationScene {
             protected void done() {
                 Platform.runLater( () -> {
                     try {
-                        _createCreationButton.setDisable(false);
+                        setDisableAllButtons(false);
                         changeScene(SceneType.MainMenuScene, event);
                     } catch (Exception e){
                         System.out.println("Error changing back to MainMenu Scene");

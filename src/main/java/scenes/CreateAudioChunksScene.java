@@ -46,6 +46,15 @@ public class CreateAudioChunksScene extends ApplicationScene {
         }
     }
 
+    public void setDisableAllButtons(Boolean disable) {
+        _homeButton.setDisable(disable);
+        _searchButton.setDisable(disable);
+        _quitButton.setDisable(disable);
+        _addTextToEditorButton.setDisable(disable);
+        _previewAudioChunk.setDisable(disable);
+        _saveButton.setDisable(disable);
+    }
+
     public void homeButtonHandler(ActionEvent event) throws IOException {
         if (_editor.getText().length() != 0) {
             Alert searchAlert = createConfirmationAlert("Are you sure you wish to go back to the main menu? You will lose your existing progress.");
@@ -88,7 +97,15 @@ public class CreateAudioChunksScene extends ApplicationScene {
         }
     }
 
+    public void searchBarOnEnter() {
+        if (! _searchButton.isDisabled()) {
+            searchButtonHandler();
+        }
+    }
+
     private void searchWikipedia() {
+        setDisableAllButtons(true);
+
         new Thread(new Task<Void>() {
 
             @Override
@@ -109,6 +126,8 @@ public class CreateAudioChunksScene extends ApplicationScene {
                     } else {
                         _wikipediaText.getItems().addAll(_wikipediaSearch.getContent());
                     }
+
+                    setDisableAllButtons(false);
                 });
             }
         }).start();
@@ -142,8 +161,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
 
     public void previewAudioChunkButtonHandler() {
         if (validAudioChunk()) {
-            _previewAudioChunk.setDisable(true);
-            _homeButton.setDisable(true);
+            setDisableAllButtons(true);
 
             new Thread( new Task<Void>() {
 
@@ -156,8 +174,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
                 @Override
                 protected void done() {
                     Platform.runLater( () -> {
-                        _previewAudioChunk.setDisable(false);
-                        _homeButton.setDisable(false);
+                        setDisableAllButtons(false);
                     });
                 }
             }).start();
@@ -188,8 +205,14 @@ public class CreateAudioChunksScene extends ApplicationScene {
         }
     }
 
+    public void saveButtonOnEnter() {
+        if (! _saveButton.isDisabled()) {
+            saveButtonHandler();
+        }
+    }
+
     private void saveAudioChunk(String chunkName, String audioChunkText) {
-        _saveButton.setDisable(true);
+        setDisableAllButtons(true);
 
         new Thread( new Task<Void>() {
 
@@ -204,7 +227,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
                 Platform.runLater( () -> {
                     _editor.clear();
                     _fileNameTextArea.clear();
-                    _saveButton.setDisable(false);
+                    setDisableAllButtons(false);
 
                     createInformationAlert("New Audio Chunk Created", "Audio Chunk " + chunkName + " has been created.");
                 });
