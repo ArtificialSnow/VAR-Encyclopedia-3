@@ -36,10 +36,7 @@ public class CreationsViewer {
         });
 
         _mediaPlayer.setOnEndOfMedia( () -> {
-            _mediaPlayer.seek(Duration.ZERO);
-            _timeBar.adjustValue(0);
-            _mediaPlayer.pause();
-            _playPause.setText("Play");
+            resetValues();
         });
 
         _mediaPlayer.currentTimeProperty().addListener( new ChangeListener<Duration>() {
@@ -59,6 +56,14 @@ public class CreationsViewer {
         _mediaPlayer.setAutoPlay(true);
     }
 
+    public void resetValues() {
+        _mediaPlayer.seek(Duration.ZERO);
+        _timeBar.adjustValue(0);
+        _currentTime.setText("00:00");
+        _mediaPlayer.pause();
+        _playPause.setText("Play");
+    }
+
     public void pausePlayMethodHandler() {
         if (_mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
             _mediaPlayer.pause();
@@ -73,7 +78,7 @@ public class CreationsViewer {
         if (_mediaPlayer.getCurrentTime().add(Duration.seconds(10)).lessThan(_mediaPlayer.getTotalDuration())) {
             _mediaPlayer.seek(_mediaPlayer.getCurrentTime().add(Duration.seconds(10)));
         } else if (! _mediaPlayer.getCurrentTime().add(Duration.millis(100)).lessThan(_mediaPlayer.getTotalDuration())) {
-            //If it is 0.1 seconds from the end, do nothing
+            resetValues();
         } else {
             _mediaPlayer.seek(_mediaPlayer.getTotalDuration().add(Duration.millis(-100)));
         }
