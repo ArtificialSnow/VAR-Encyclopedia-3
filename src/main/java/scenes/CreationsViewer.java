@@ -24,14 +24,20 @@ public class CreationsViewer {
 
     public void setMedia(Media media) {
         _mediaPlayer = new MediaPlayer(media);
-        _mediaPlayer.setAutoPlay(true);
         _mediaPlayer.setOnReady( () -> {
             _timeBar.setMin(0);
             _timeBar.setMax(_mediaPlayer.getTotalDuration().toMillis());
+
+            _timeBar.valueProperty().addListener( observable -> {
+                if (_timeBar.isPressed()) {
+                    _mediaPlayer.seek(new Duration(_timeBar.getValue()));
+                }
+            });
         });
 
         _mediaPlayer.setOnEndOfMedia( () -> {
             _mediaPlayer.seek(Duration.ZERO);
+            _timeBar.adjustValue(0);
             _mediaPlayer.pause();
             _playPause.setText("Play");
         });
@@ -43,19 +49,14 @@ public class CreationsViewer {
                 time += String.format("%02d", ((int)newValue.toMinutes()));;
                 time += ":";
                 time += String.format("%02d", ((int)newValue.toSeconds() % 60));
-
                 _currentTime.setText(time);
-            }
-        });
 
-        _mediaPlayer.currentTimeProperty().addListener( new ChangeListener<Duration>() {
-            @Override
-            public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
                 _timeBar.adjustValue(newValue.toMillis());
             }
         });
 
         _mediaView.setMediaPlayer(_mediaPlayer);
+        _mediaPlayer.setAutoPlay(true);
     }
 
     public void pausePlayMethodHandler() {
@@ -71,8 +72,10 @@ public class CreationsViewer {
     public void skipForwardButtonHandler() {
         if (_mediaPlayer.getCurrentTime().add(Duration.seconds(10)).lessThan(_mediaPlayer.getTotalDuration())) {
             _mediaPlayer.seek(_mediaPlayer.getCurrentTime().add(Duration.seconds(10)));
+        } else if (! _mediaPlayer.getCurrentTime().add(Duration.millis(100)).lessThan(_mediaPlayer.getTotalDuration())) {
+            //If it is 0.1 seconds from the end, do nothing
         } else {
-            _mediaPlayer.seek(_mediaPlayer.getTotalDuration());
+            _mediaPlayer.seek(_mediaPlayer.getTotalDuration().add(Duration.millis(-100)));
         }
     }
 
