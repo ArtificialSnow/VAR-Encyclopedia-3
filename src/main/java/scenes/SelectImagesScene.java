@@ -32,6 +32,7 @@ public class SelectImagesScene extends ApplicationScene {
     @FXML private ChoiceBox<String> _backgroundMusicSelection;
     @FXML private ListView<String> _downloadedImagesListView;
     @FXML private ListView<String> _selectedImagesListView;
+    @FXML private ProgressIndicator _progressIndicator;
 
     private String _searchTerm;
     private CreationFactory _creationFactory;
@@ -211,6 +212,7 @@ public class SelectImagesScene extends ApplicationScene {
         imageNames = imageNames.trim();
 
         setDisableAllButtons(true);
+        _progressIndicator.setVisible(true);
 
         String searchTerm = _searchTerm;
         String finalImageNames = imageNames;
@@ -232,6 +234,7 @@ public class SelectImagesScene extends ApplicationScene {
                 Platform.runLater( () -> {
                     try {
                         setDisableAllButtons(false);
+                        _progressIndicator.setVisible(false);
                         changeScene(SceneType.MainMenuScene, event);
                     } catch (Exception e){
                         System.out.println("Error changing back to MainMenu Scene");

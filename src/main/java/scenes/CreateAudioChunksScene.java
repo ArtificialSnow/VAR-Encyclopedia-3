@@ -1,5 +1,6 @@
 package main.java.scenes;
 
+import com.sun.javaws.progress.Progress;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -23,6 +24,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
     @FXML private Button _previewAudioChunk;
     @FXML private TextField _fileNameTextArea;
     @FXML private Button _saveButton;
+    @FXML private ProgressIndicator _progressIndicator;
 
     private String _searchTerm;
     private WikipediaSearch _wikipediaSearch;
@@ -105,6 +107,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
 
     private void searchWikipedia() {
         setDisableAllButtons(true);
+        _progressIndicator.setVisible(true);
 
         new Thread(new Task<Void>() {
 
@@ -127,6 +130,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
                         _wikipediaText.getItems().addAll(_wikipediaSearch.getContent());
                     }
 
+                    _progressIndicator.setVisible(false);
                     setDisableAllButtons(false);
                 });
             }

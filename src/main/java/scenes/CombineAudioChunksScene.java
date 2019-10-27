@@ -4,10 +4,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import main.java.app.ApplicationFolder;
 import main.java.app.AudioFactory;
 import main.java.app.DownloadImage;
@@ -28,6 +25,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
     @FXML private ListView<String> _searchTermsListView;
     @FXML private ListView<String> _audioChunksListView;
     @FXML private ListView<String> _selectedAudioChunksListView;
+    @FXML private ProgressIndicator _progressIndicator;
 
     AudioFactory _audioFactory;
 
@@ -153,6 +151,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
             createInformationAlert("No Audio Chunks selected", "Please select Audio Chunks to combine for creation");
         } else {
             setDisableAllButtons(true);
+            _progressIndicator.setVisible(true);
 
             new Thread( new Task<Void>() {
 
@@ -179,6 +178,7 @@ public class CombineAudioChunksScene extends ApplicationScene {
                             ((SelectImagesScene) selectImagesSceneController).setSearchTerm(searchTerm);
 
                             setDisableAllButtons(false);
+                            _progressIndicator.setVisible(false);
                         } catch (Exception e) {
                             System.out.println("Error changing to SelectImagesScene");
                         }

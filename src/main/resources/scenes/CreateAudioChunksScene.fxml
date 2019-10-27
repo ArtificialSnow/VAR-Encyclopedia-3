@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
@@ -137,5 +138,6 @@
             </VBox>
          </right>
       </BorderPane>
+      <ProgressIndicator fx:id="_progressIndicator" layoutX="325.0" layoutY="75.0" maxWidth="-Infinity" minWidth="-Infinity" opacity="0.5" prefHeight="350.0" prefWidth="350.0" visible="false" />
    </children>
 </AnchorPane>
