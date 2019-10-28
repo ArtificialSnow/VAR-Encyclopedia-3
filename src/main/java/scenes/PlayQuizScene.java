@@ -148,6 +148,8 @@ public class PlayQuizScene extends ApplicationScene {
     public void homeButtonHandler(ActionEvent event) throws IOException {
         Alert homeAlert = createConfirmationAlert("Are you sure you want to exit the quiz? Your progress will be lost.");
         if (homeAlert.getResult() == ButtonType.YES) {
+            _mediaPlayer.stop();
+            _mediaPlayer = null;
             changeScene(SceneType.MainMenuScene, event);
         }
     }
