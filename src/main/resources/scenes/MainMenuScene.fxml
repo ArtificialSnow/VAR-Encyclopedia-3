@@ -9,8 +9,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.MainMenuScene">
+<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.MainMenuScene">
    <children>
       <ImageView fitHeight="460.0" fitWidth="637.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
          <image>
@@ -21,7 +22,7 @@
             <ToolBar maxHeight="-Infinity" minHeight="-Infinity" opacity="0.85" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <items>
                   <Region prefHeight="22.0" prefWidth="954.0" />
-                  <Button fx:id="_quitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#quitButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: silver;">
+                  <Button fx:id="_quitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#quitButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -36,18 +37,33 @@
          <left>
             <VBox alignment="CENTER" prefHeight="466.0" prefWidth="426.0" style="-fx-background-color: #fff7e6;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="_createCreationButton" mnemonicParsing="false" onAction="#createCreationButtonHandler" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: silver;" text="Create New Creation" textFill="#cc8800" />
+                  <Button fx:id="_createCreationButton" mnemonicParsing="false" onAction="#createCreationButtonHandler" prefHeight="26.0" prefWidth="193.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Create New Creation" textFill="#cc8800">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
                   <Region prefHeight="25.0" prefWidth="461.0" />
-                  <Button fx:id="_viewCreationsButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#viewCreationsButtonHandler" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: silver;" text="View Existing Creations" textFill="#cc8800" />
+                  <Button fx:id="_viewCreationsButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#viewCreationsButtonHandler" prefHeight="26.0" prefWidth="193.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="View Existing Creations" textFill="#cc8800">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
                   <Region prefHeight="25.0" prefWidth="461.0" />
-                  <Button fx:id="_createAudioChunksButton" mnemonicParsing="false" onAction="#createAudioChunkButtonHandler" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: silver;" text="Create Audio Chunks" textFill="#cc8800">
+                  <Button fx:id="_createAudioChunksButton" mnemonicParsing="false" onAction="#createAudioChunkButtonHandler" prefHeight="26.0" prefWidth="193.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Create Audio Chunks" textFill="#cc8800">
                      <rotationAxis>
                         <Point3D x="1.0" />
-                     </rotationAxis></Button>
+                     </rotationAxis>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
                   <Region prefHeight="25.0" prefWidth="200.0" />
-                  <Button fx:id="_viewAudioChunksButton" mnemonicParsing="false" onAction="#viewAudioChunksButtonHandler" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: silver;" text="View Audio Chunks" textFill="#cc8800" />
+                  <Button fx:id="_viewAudioChunksButton" mnemonicParsing="false" onAction="#viewAudioChunksButtonHandler" prefHeight="26.0" prefWidth="193.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="View Audio Chunks" textFill="#cc8800">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
                   <Region prefHeight="25.0" prefWidth="461.0" />
-                  <Button fx:id="_playQuizButton" mnemonicParsing="false" onAction="#playQuizButtonHandler" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: silver;" text="Play Quiz" textFill="#cc8800" />
+                  <Button fx:id="_playQuizButton" mnemonicParsing="false" onAction="#playQuizButtonHandler" prefHeight="26.0" prefWidth="193.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Play Quiz" textFill="#cc8800">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
                </children>
             </VBox>
          </left>

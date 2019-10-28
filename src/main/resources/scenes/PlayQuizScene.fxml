@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.PlayQuizScene">
     <children>
@@ -20,7 +21,7 @@
             <top>
                 <ToolBar maxHeight="-Infinity" minHeight="-Infinity" opacity="0.85" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                     <items>
-                        <Button fx:id="_homeButton" minHeight="-Infinity" mnemonicParsing="false" onAction="#homeButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: silver;">
+                        <Button fx:id="_homeButton" minHeight="-Infinity" mnemonicParsing="false" onAction="#homeButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
                             <graphic>
                                 <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -30,7 +31,7 @@
                             </graphic>
                         </Button>
                         <Region prefHeight="22.0" prefWidth="917.0" />
-                        <Button fx:id="_quitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#quitButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: silver;">
+                        <Button fx:id="_quitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#quitButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
                             <graphic>
                                 <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -51,11 +52,20 @@
                         <Slider fx:id="_timeBar" />
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <Button fx:id="_skipBackward" mnemonicParsing="false" onAction="#skipBackButtonHandler" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: silver;" text="Skip Backward" textFill="#cc8800" />
+                                <Button fx:id="_skipBackward" mnemonicParsing="false" onAction="#skipBackButtonHandler" prefHeight="26.0" prefWidth="126.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Skip Backward" textFill="#cc8800">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
                                 <Region prefHeight="26.0" prefWidth="20.0" />
-                                <Button fx:id="_playPause" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pausePlayMethodHandler" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: silver;" text="Pause" textFill="#cc8800" />
+                                <Button fx:id="_playPause" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pausePlayMethodHandler" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Pause" textFill="#cc8800">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
                                 <Region prefHeight="26.0" prefWidth="20.0" />
-                                <Button fx:id="_skipForward" mnemonicParsing="false" onAction="#skipForwardButtonHandler" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: silver;" text="Skip Forward" textFill="#cc8800" />
+                                <Button fx:id="_skipForward" mnemonicParsing="false" onAction="#skipForwardButtonHandler" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Skip Forward" textFill="#cc8800">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
                                 <Region prefHeight="200.0" prefWidth="10.0" />
                                 <Label fx:id="_currentTime" style="-fx-text-fill: silver;" text="00:00" />
                             </children>
@@ -64,7 +74,10 @@
                      <children>
                         <TextField fx:id="_searchTermField" onAction="#submitAnswerButtonHandler" promptText="Enter the search term" />
                         <Region prefHeight="200.0" prefWidth="20.0" />
-                        <Button fx:id="_submitAnswerButton" mnemonicParsing="false" onAction="#submitAnswerButtonHandler" text="Submit" textFill="#cc8800" />
+                        <Button fx:id="_submitAnswerButton" mnemonicParsing="false" onAction="#submitAnswerButtonHandler" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #99e7ff;" text="Submit" textFill="#cc8800">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
                         <Region prefHeight="50.0" prefWidth="20.0" />
                      </children>
                   </HBox>

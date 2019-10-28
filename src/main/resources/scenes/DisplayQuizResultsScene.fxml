@@ -6,9 +6,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.DisplayQuizResultsScene">
+<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.DisplayQuizResultsScene">
    <children>
       <BorderPane layoutX="200.0" layoutY="124.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #fff7e6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -23,9 +25,20 @@
          <right>
             <VBox alignment="CENTER" prefHeight="400.0" prefWidth="150.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="_scoreLabel" text="Total Score:" textFill="#cc8800" />
-                  <Button fx:id="_homeButton" mnemonicParsing="false" onAction="#homeButtonHandler" text="Home" textFill="#cc8800" />
-                  <Button fx:id="_anotherQuizButton" mnemonicParsing="false" onAction="#anotherQuizButtonHandler" text="Another Quiz" textFill="#cc8800" />
+                  <Label fx:id="_scoreLabel" text="Total Score:" textFill="#cc8800">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <Region prefHeight="12.0" prefWidth="150.0" />
+                  <Button fx:id="_homeButton" mnemonicParsing="false" onAction="#homeButtonHandler" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Home" textFill="#cc8800">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
+                  <Region prefHeight="12.0" prefWidth="150.0" />
+                  <Button fx:id="_anotherQuizButton" mnemonicParsing="false" onAction="#anotherQuizButtonHandler" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Another Quiz" textFill="#cc8800">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
                </children>
             </VBox>
          </right>

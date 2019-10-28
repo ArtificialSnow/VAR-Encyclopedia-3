@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.CombineAudioChunksScene">
    <children>
@@ -21,7 +22,7 @@
          <top>
             <ToolBar maxHeight="-Infinity" minHeight="-Infinity" opacity="0.85" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <items>
-                  <Button fx:id="_homeButton" minHeight="-Infinity" mnemonicParsing="false" onAction="#homeButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: silver;">
+                  <Button fx:id="_homeButton" minHeight="-Infinity" mnemonicParsing="false" onAction="#homeButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -31,7 +32,7 @@
                      </graphic>
                   </Button>
                   <Region prefHeight="22.0" prefWidth="917.0" />
-                  <Button fx:id="_quitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#quitButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: silver;" textFill="#dd0303">
+                  <Button fx:id="_quitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#quitButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" textFill="#dd0303">
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -46,7 +47,10 @@
          <left>
             <VBox alignment="CENTER" opacity="0.85" prefHeight="49.0" prefWidth="273.0" BorderPane.alignment="TOP_CENTER">
                <children>
-                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="207.0" text="Select a Search Term" textFill="#cc8800" />
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="207.0" text="Select a Search Term" textFill="#cc8800">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
                   <ListView fx:id="_searchTermsListView" maxWidth="-Infinity" onMouseClicked="#updateAudioChunksList" prefHeight="365.0" prefWidth="270.0" />
                </children>
                <BorderPane.margin>
@@ -59,7 +63,10 @@
                <children>
                   <VBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" opacity="0.85" prefHeight="466.0" prefWidth="305.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="207.0" text="Select Audio Chunks" textFill="#cc8800" />
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="207.0" text="Select Audio Chunks" textFill="#cc8800">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Label>
                         <ListView fx:id="_audioChunksListView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefWidth="270.0" />
                      </children>
                      <padding>
@@ -68,7 +75,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="466.0" prefWidth="41.0">
                      <children>
-                        <Button fx:id="_addChunkButton" mnemonicParsing="false" onAction="#addChunkButtonHandler" style="-fx-background-color: silver;">
+                        <Button fx:id="_addChunkButton" mnemonicParsing="false" onAction="#addChunkButtonHandler" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -78,7 +85,7 @@
                            </graphic>
                         </Button>
                         <Region prefHeight="20.0" prefWidth="77.0" />
-                        <Button fx:id="_removeChunkButton" mnemonicParsing="false" onAction="#removeChunkButtonHandler" style="-fx-background-color: silver;">
+                        <Button fx:id="_removeChunkButton" mnemonicParsing="false" onAction="#removeChunkButtonHandler" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                                  <image>
@@ -98,10 +105,13 @@
                   <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.85" prefHeight="466.0" prefWidth="289.0">
                      <children>
                         <Region prefHeight="200.0" prefWidth="290.0" />
-                        <Label alignment="CENTER" prefHeight="26.0" prefWidth="150.0" text="Selected Audio Chunks" textFill="#cc8800">
+                        <Label alignment="CENTER" prefHeight="23.0" prefWidth="172.0" text="Selected Audio Chunks" textFill="#cc8800">
                            <padding>
                               <Insets bottom="7.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
                         </Label>
                         <ListView fx:id="_selectedAudioChunksListView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="355.0" prefWidth="270.0">
                            <VBox.margin>
@@ -112,7 +122,10 @@
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Region prefHeight="49.0" prefWidth="77.0" />
-                              <Button fx:id="_nextSceneButton" mnemonicParsing="false" onAction="#nextSceneButtonHandler" style="-fx-background-color: silver;" text="Continue to Image Selection" textFill="#fff7e6" />
+                              <Button fx:id="_nextSceneButton" mnemonicParsing="false" onAction="#nextSceneButtonHandler" prefHeight="26.0" prefWidth="249.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Continue to Image Selection" textFill="#cc8800">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Button>
                            </children>
                         </HBox>
                      </children>
@@ -122,7 +135,7 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="466.0" prefWidth="49.0">
                      <children>
-                        <Button fx:id="_shiftChunkUp" mnemonicParsing="false" onAction="#shiftChunkUpButtonHandler" rotate="180.0" style="-fx-background-color: silver;">
+                        <Button fx:id="_shiftChunkUp" mnemonicParsing="false" onAction="#shiftChunkUpButtonHandler" rotate="180.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                                  <image>
@@ -132,7 +145,7 @@
                            </graphic>
                         </Button>
                         <Region prefHeight="20.0" prefWidth="200.0" />
-                        <Button fx:id="_shiftChunkDown" mnemonicParsing="false" onAction="#shiftChunkDownButtonHandler" style="-fx-background-color: silver;">
+                        <Button fx:id="_shiftChunkDown" mnemonicParsing="false" onAction="#shiftChunkDownButtonHandler" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                                  <image>

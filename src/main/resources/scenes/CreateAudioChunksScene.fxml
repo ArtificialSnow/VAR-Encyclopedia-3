@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.scenes.CreateAudioChunksScene">
    <children>
@@ -26,7 +27,7 @@
               <items>
                   <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="986.0">
                      <children>
-                      <Button fx:id="_homeButton" mnemonicParsing="false" onAction="#homeButtonHandler" style="-fx-background-color: silver;">
+                      <Button fx:id="_homeButton" mnemonicParsing="false" onAction="#homeButtonHandler" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
                            <graphic>
                               <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -36,11 +37,14 @@
                            </graphic>
                         </Button>
                         <Region opacity="0.85" prefHeight="28.0" prefWidth="584.0" />
-                        <Label alignment="CENTER" text="Select Audio Synthesizer" />
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="209.0" text="Select Audio Synthesizer:">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Label>
                         <Region prefHeight="30.0" prefWidth="7.0" />
-                        <ChoiceBox fx:id="_voiceSynthesizerSelection" prefWidth="150.0" style="-fx-background-color: silver;" />
+                        <ChoiceBox fx:id="_voiceSynthesizerSelection" prefWidth="150.0" />
                         <Region prefHeight="28.0" prefWidth="19.0" />
-                        <Button fx:id="_quitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#quitButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: silver;">
+                        <Button fx:id="_quitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#quitButtonHandler" prefHeight="24.0" prefWidth="28.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
                            <graphic>
                               <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -64,7 +68,7 @@
                   <HBox prefHeight="30.0" prefWidth="235.0">
                      <children>
                         <TextField fx:id="_searchBar" onAction="#searchBarOnEnter" prefHeight="30.0" prefWidth="362.0" promptText="Search Wikipedia" />
-                        <Button fx:id="_searchButton" mnemonicParsing="false" onAction="#searchButtonHandler" style="-fx-background-color: silver;">
+                        <Button fx:id="_searchButton" mnemonicParsing="false" onAction="#searchButtonHandler" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -95,7 +99,7 @@
          <center>
             <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" opacity="0.85" prefHeight="458.0" prefWidth="129.0" BorderPane.alignment="TOP_LEFT">
                <children>
-                  <Button fx:id="_addTextToEditorButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addTextToEditorButtonHandler" style="-fx-background-color: silver;">
+                  <Button fx:id="_addTextToEditorButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addTextToEditorButtonHandler" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -111,9 +115,12 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="457.0">
                      <children>
-                        <Label fx:id="_wordLimit" prefHeight="26.0" prefWidth="104.0" style="-fx-text-fill: #4c7450; -fx-background-color: silver; -fx-font-weight: bold;" text="40 word limit" textFill="WHITE" />
+                        <Label fx:id="_wordLimit" prefHeight="26.0" prefWidth="104.0" style="-fx-text-fill: #4c7450; -fx-background-color: #99e7ff; -fx-font-weight: bold;" text="40 word limit" textFill="WHITE" />
                         <Region prefHeight="30.0" prefWidth="182.0" />
-                        <Button fx:id="_previewAudioChunk" mnemonicParsing="false" onAction="#previewAudioChunkButtonHandler" style="-fx-background-color: silver;" text="Preview Audio Chunk" textFill="#cc8800" />
+                        <Button fx:id="_previewAudioChunk" mnemonicParsing="false" onAction="#previewAudioChunkButtonHandler" prefHeight="26.0" prefWidth="181.0" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Preview Audio Chunk" textFill="#cc8800">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
                      </children>
                   </HBox>
                   <Region maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="11.0" prefWidth="275.0" />
@@ -125,7 +132,10 @@
                         <Region maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="49.0" />
                         <TextField fx:id="_fileNameTextArea" onAction="#saveButtonOnEnter" prefHeight="26.0" prefWidth="221.0" promptText="File Name" />
                         <Region maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="13.0" />
-                        <Button fx:id="_saveButton" mnemonicParsing="false" onAction="#saveButtonHandler" style="-fx-background-color: silver;" text="Save" textFill="#cc8800" />
+                        <Button fx:id="_saveButton" mnemonicParsing="false" onAction="#saveButtonHandler" style="-fx-background-color: #99e7ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Save" textFill="#cc8800">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
                      </children>
                   </HBox>
                </children>
