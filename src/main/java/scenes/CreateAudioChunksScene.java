@@ -243,7 +243,7 @@ public class CreateAudioChunksScene extends ApplicationScene {
                     _fileNameTextArea.clear();
                     setDisableAllButtons(false);
 
-                    createInformationAlert("New Audio Chunk Created", "Audio Chunk " + chunkName + " has been created.");
+                    //createInformationAlert("New Audio Chunk Created", "Audio Chunk " + chunkName + " has been created.");
                 });
             }
         }).start();

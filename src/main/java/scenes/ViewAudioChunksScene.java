@@ -47,6 +47,7 @@ public class ViewAudioChunksScene extends ApplicationScene {
 
     //Updates the list of search terms which have audio chunks
     public void updateSearchTermList() {
+        _fileDirectory.deleteAllEmptyDirectories(ApplicationFolder.AudioChunks.getPath());
         _searchTermList.getItems().clear();
 
         File[] searchTermList = new File(ApplicationFolder.AudioChunks.getPath()).listFiles();
@@ -134,7 +135,12 @@ public class ViewAudioChunksScene extends ApplicationScene {
             Alert deleteConfirmation = createConfirmationAlert("Are you sure you want to delete " + audioChunk.getName() + "?");
             if (deleteConfirmation.getResult() == ButtonType.YES) {
                 _audioFactory.deleteAudioChunk(searchTerm, audioChunk.getName());
-                updateAudioChunksList();
+                if (_audioChunksTableView.getItems().size() != 1) {
+                    updateAudioChunksList();
+                } else {
+                    updateSearchTermList();
+                    _audioChunksTableView.getItems().clear();
+                }
             }
         }
     }
